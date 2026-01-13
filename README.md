@@ -6,10 +6,15 @@ A package that simplifies the creation of dynamic, class-based Laravel component
 
 This package allows you to build complex, reusable UI components in PHP, making your backend and frontend integration seamless.
 
+> [!NOTE]
+> 
+> #### About this fork.
+> 
+> This repository is a fork of [Chat-Agency/laravel-backend-component](https://github.com/Chat-Agency/laravel-backend-component). I worked on this repository while I was working with that company. I asked for permission to take ownership and to continue working on it.
+
 View the full documentation (In Progress)
 
 Install the package via Composer:
-
 ```bash
 composer require juaniquillo/laravel-backend-component
 ```
@@ -71,10 +76,10 @@ Components can be composed with other components:
 use Juaniquillo\BackendComponents\Builders\ComponentBuilder;
 use Juaniquillo\BackendComponents\Enums\ComponentEnum;
 
-$divWithButton = $button = ComponentBuilder::make(ComponentEnum::DIV)
+$divWithButton = ComponentBuilder::make(ComponentEnum::DIV)
     ->setContent(
         ComponentBuilder::make(ComponentEnum::BUTTON)
-            ->seContent('Click me!')
+            ->setContent('Click me!')
     );
 ```
 
