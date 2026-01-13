@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace ChatAgency\BackendComponents\Components;
+namespace Juaniquillo\BackendComponents\Components;
 
-use ChatAgency\BackendComponents\Contracts\BackendComponent;
-use ChatAgency\BackendComponents\Contracts\CompoundComponent;
-use ChatAgency\BackendComponents\Contracts\ContentsComponent;
 use Illuminate\Contracts\Support\Htmlable;
+use Juaniquillo\BackendComponents\Contracts\BackendComponent;
+use Juaniquillo\BackendComponents\Contracts\CompoundComponent;
+use Juaniquillo\BackendComponents\Contracts\ContentsComponent;
 
-use function ChatAgency\BackendComponents\backendComponentNamespace;
-use function ChatAgency\BackendComponents\isComponent;
+use function Juaniquillo\BackendComponents\backendComponentNamespace;
+use function Juaniquillo\BackendComponents\isComponent;
 
 final class DefaultContentsComponent implements ContentsComponent, Htmlable
 {

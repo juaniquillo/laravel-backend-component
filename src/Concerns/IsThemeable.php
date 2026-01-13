@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace ChatAgency\BackendComponents\Concerns;
+namespace Juaniquillo\BackendComponents\Concerns;
 
-use ChatAgency\BackendComponents\Contracts\ThemeManager;
+use Juaniquillo\BackendComponents\Contracts\ThemeManager;
 
 trait IsThemeable
 {

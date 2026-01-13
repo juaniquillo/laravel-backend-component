@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace ChatAgency\BackendComponents\Cache;
+namespace Juaniquillo\BackendComponents\Cache;
 
-use ChatAgency\BackendComponents\Contracts\Cache;
+use Juaniquillo\BackendComponents\Contracts\Cache;
 
 /**
  * @template T

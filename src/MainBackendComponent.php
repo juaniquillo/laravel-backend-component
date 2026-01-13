@@ -2,23 +2,23 @@
 
 declare(strict_types=1);
 
-namespace ChatAgency\BackendComponents;
+namespace Juaniquillo\BackendComponents;
 
 use BackedEnum;
-use ChatAgency\BackendComponents\Components\DefaultAttributeBag;
-use ChatAgency\BackendComponents\Concerns\HasContent;
-use ChatAgency\BackendComponents\Concerns\HasPath;
-use ChatAgency\BackendComponents\Concerns\HasSettings;
-use ChatAgency\BackendComponents\Concerns\HasSlots;
-use ChatAgency\BackendComponents\Concerns\IsBackendComponent;
-use ChatAgency\BackendComponents\Concerns\IsLivewireComponent;
-use ChatAgency\BackendComponents\Concerns\IsThemeable;
-use ChatAgency\BackendComponents\Contracts\AttributeBag;
-use ChatAgency\BackendComponents\Contracts\BackendComponent;
-use ChatAgency\BackendComponents\Contracts\CompoundComponent;
-use ChatAgency\BackendComponents\Contracts\ThemeManager;
-use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
 use Illuminate\Contracts\Support\Htmlable;
+use Juaniquillo\BackendComponents\Components\DefaultAttributeBag;
+use Juaniquillo\BackendComponents\Concerns\HasContent;
+use Juaniquillo\BackendComponents\Concerns\HasPath;
+use Juaniquillo\BackendComponents\Concerns\HasSettings;
+use Juaniquillo\BackendComponents\Concerns\HasSlots;
+use Juaniquillo\BackendComponents\Concerns\IsBackendComponent;
+use Juaniquillo\BackendComponents\Concerns\IsLivewireComponent;
+use Juaniquillo\BackendComponents\Concerns\IsThemeable;
+use Juaniquillo\BackendComponents\Contracts\AttributeBag;
+use Juaniquillo\BackendComponents\Contracts\BackendComponent;
+use Juaniquillo\BackendComponents\Contracts\CompoundComponent;
+use Juaniquillo\BackendComponents\Contracts\ThemeManager;
+use Juaniquillo\BackendComponents\Themes\DefaultThemeManager;
 
 final class MainBackendComponent implements CompoundComponent, Htmlable
 {

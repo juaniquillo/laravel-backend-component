@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Components;
 
-use ChatAgency\BackendComponents\Builders\LocalThemeComponentBuilder;
+use Juaniquillo\BackendComponents\Builders\LocalThemeComponentBuilder;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
-use function ChatAgency\BackendComponents\backendComponentNamespace;
+use function Juaniquillo\BackendComponents\backendComponentNamespace;
 
 class LocalThemeComponentBuilderTest extends TestCase
 {

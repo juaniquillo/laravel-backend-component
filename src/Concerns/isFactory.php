@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace ChatAgency\BackendComponents\Concerns;
+namespace Juaniquillo\BackendComponents\Concerns;
 
-use ChatAgency\BackendComponents\Contracts\BackendComponent;
-use ChatAgency\BackendComponents\Contracts\CompoundComponent;
-use ChatAgency\BackendComponents\Contracts\ThemeManager;
+use Juaniquillo\BackendComponents\Contracts\BackendComponent;
+use Juaniquillo\BackendComponents\Contracts\CompoundComponent;
+use Juaniquillo\BackendComponents\Contracts\ThemeManager;
 
 trait isFactory
 {

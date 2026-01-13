@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace ChatAgency\BackendComponents\Contracts;
+namespace Juaniquillo\BackendComponents\Contracts;
 
-use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use Illuminate\Contracts\Support\Htmlable;
+use Juaniquillo\BackendComponents\Enums\ComponentEnum;
 
 interface StaticBuilder
 {

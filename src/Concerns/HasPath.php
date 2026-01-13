@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace ChatAgency\BackendComponents\Concerns;
+namespace Juaniquillo\BackendComponents\Concerns;
 
-use function ChatAgency\BackendComponents\backendComponentNamespace;
-use function ChatAgency\BackendComponents\isBackedEnum;
+use function Juaniquillo\BackendComponents\backendComponentNamespace;
+use function Juaniquillo\BackendComponents\isBackedEnum;
 
 trait HasPath
 {

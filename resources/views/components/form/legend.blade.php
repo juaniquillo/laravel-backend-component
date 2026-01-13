@@ -3,7 +3,7 @@
 ])
 
 <?php
-    /** @var \ChatAgency\BackendComponents\Components\DefaultAttributeBag $attrs */
+    /** @var \Juaniquillo\BackendComponents\Components\DefaultAttributeBag $attrs */
 ?>
 
 @php

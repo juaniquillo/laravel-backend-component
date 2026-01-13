@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace ChatAgency\BackendComponents\Factories;
+namespace Juaniquillo\BackendComponents\Factories;
 
-use ChatAgency\BackendComponents\Concerns\isFactory;
-use ChatAgency\BackendComponents\Contracts\BackendComponent;
-use ChatAgency\BackendComponents\Contracts\CompoundComponent;
-use ChatAgency\BackendComponents\Contracts\IndividualComponent;
+use Juaniquillo\BackendComponents\Concerns\isFactory;
+use Juaniquillo\BackendComponents\Contracts\BackendComponent;
+use Juaniquillo\BackendComponents\Contracts\CompoundComponent;
+use Juaniquillo\BackendComponents\Contracts\IndividualComponent;
 
 final class IndividualComponentFactory
 {

@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Components\Form;
 
-use ChatAgency\BackendComponents\Builders\ComponentBuilder;
-use ChatAgency\BackendComponents\Enums\ComponentEnum;
+use Juaniquillo\BackendComponents\Builders\ComponentBuilder;
+use Juaniquillo\BackendComponents\Enums\ComponentEnum;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
-use function ChatAgency\BackendComponents\processThemes;
+use function Juaniquillo\BackendComponents\processThemes;
 
 class LegendTest extends TestCase
 {

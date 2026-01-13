@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace ChatAgency\BackendComponents\Contracts;
+namespace Juaniquillo\BackendComponents\Contracts;
 
-use ChatAgency\BackendComponents\Exceptions\IncorrectThemePathException;
-use ChatAgency\BackendComponents\Exceptions\ThemeDoesNotExistsException;
+use Juaniquillo\BackendComponents\Exceptions\IncorrectThemePathException;
+use Juaniquillo\BackendComponents\Exceptions\ThemeDoesNotExistsException;
 
 interface ThemeManager
 {

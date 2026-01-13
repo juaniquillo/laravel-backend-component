@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace ChatAgency\BackendComponents\Factories;
+namespace Juaniquillo\BackendComponents\Factories;
 
-use ChatAgency\BackendComponents\Concerns\isFactory;
+use Juaniquillo\BackendComponents\Concerns\isFactory;
 
 final class ComponentFactory
 {

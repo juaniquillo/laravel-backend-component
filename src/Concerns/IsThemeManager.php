@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace ChatAgency\BackendComponents\Concerns;
+namespace Juaniquillo\BackendComponents\Concerns;
 
-use ChatAgency\BackendComponents\Exceptions\IncorrectThemePathException;
-use ChatAgency\BackendComponents\Exceptions\ThemeDoesNotExistsException;
 use Exception;
+use Juaniquillo\BackendComponents\Exceptions\IncorrectThemePathException;
+use Juaniquillo\BackendComponents\Exceptions\ThemeDoesNotExistsException;
 
-use function ChatAgency\BackendComponents\cache;
+use function Juaniquillo\BackendComponents\cache;
 
 trait IsThemeManager
 {
