@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ChatAgency\BackendComponents;
+namespace Juaniquillo\BackendComponents;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;

@@ -4,7 +4,7 @@
 ])
 
 <?php
-    /** @var \ChatAgency\BackendComponents\Components\DefaultAttributeBag $attrs */
+    /** @var \Juaniquillo\BackendComponents\Components\DefaultAttributeBag $attrs */
 ?>
 
 @php
@@ -14,10 +14,10 @@
      * Dialog component
      * https://github.com/laravel/jetstream/blob/5.x/stubs/livewire/resources/views/components/modal.blade.php
      */
-    use ChatAgency\BackendComponents\Builders\ComponentBuilder;
-    use ChatAgency\BackendComponents\Enums\ComponentEnum;
+    use Juaniquillo\BackendComponents\Builders\ComponentBuilder;
+    use Juaniquillo\BackendComponents\Enums\ComponentEnum;
 
-    use function ChatAgency\BackendComponents\getThemes;
+    use function Juaniquillo\BackendComponents\getThemes;
     
     $serverAttrs = [
         'x-show' => 'showModal',

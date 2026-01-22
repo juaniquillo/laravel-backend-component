@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Unit\Components;
 
-use ChatAgency\BackendComponents\Components\DefaultLivewireComponent;
-use ChatAgency\BackendComponents\Contracts\LivewireComponent;
+use Juaniquillo\BackendComponents\Components\DefaultLivewireComponent;
+use Juaniquillo\BackendComponents\Contracts\LivewireComponent;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 

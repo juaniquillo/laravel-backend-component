@@ -2,23 +2,23 @@
 
 declare(strict_types=1);
 
-namespace ChatAgency\BackendComponents\Components\Individual;
+namespace Juaniquillo\BackendComponents\Components\Individual;
 
-use ChatAgency\BackendComponents\Components\DefaultAttributeBag;
-use ChatAgency\BackendComponents\Concerns\HasContent;
-use ChatAgency\BackendComponents\Concerns\IsBackendComponent;
-use ChatAgency\BackendComponents\Concerns\IsThemeable;
-use ChatAgency\BackendComponents\Contracts\AttributeBag;
-use ChatAgency\BackendComponents\Contracts\BackendComponent;
-use ChatAgency\BackendComponents\Contracts\ContentsComponent;
-use ChatAgency\BackendComponents\Contracts\IndividualComponent;
-use ChatAgency\BackendComponents\Contracts\ThemeComponent;
-use ChatAgency\BackendComponents\Contracts\ThemeManager;
-use ChatAgency\BackendComponents\Enums\ComponentEnum;
-use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
 use Illuminate\Contracts\Support\Htmlable;
+use Juaniquillo\BackendComponents\Components\DefaultAttributeBag;
+use Juaniquillo\BackendComponents\Concerns\HasContent;
+use Juaniquillo\BackendComponents\Concerns\IsBackendComponent;
+use Juaniquillo\BackendComponents\Concerns\IsThemeable;
+use Juaniquillo\BackendComponents\Contracts\AttributeBag;
+use Juaniquillo\BackendComponents\Contracts\BackendComponent;
+use Juaniquillo\BackendComponents\Contracts\ContentsComponent;
+use Juaniquillo\BackendComponents\Contracts\IndividualComponent;
+use Juaniquillo\BackendComponents\Contracts\ThemeComponent;
+use Juaniquillo\BackendComponents\Contracts\ThemeManager;
+use Juaniquillo\BackendComponents\Enums\ComponentEnum;
+use Juaniquillo\BackendComponents\Themes\DefaultThemeManager;
 
-use function ChatAgency\BackendComponents\backendComponentNamespace;
+use function Juaniquillo\BackendComponents\backendComponentNamespace;
 
 final class DivComponent implements BackendComponent, ContentsComponent, Htmlable, IndividualComponent, ThemeComponent
 {

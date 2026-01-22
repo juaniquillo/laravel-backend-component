@@ -1,18 +1,18 @@
 {
-    "name": "chat-agency/laravel-backend-component",
+    "name": "juaniquillo/laravel-backend-component",
     "description": "Use Laravel component using php classes",
     "keywords": [
-        "Chat Agency",
+        "Juaniquillo",
         "Laravel",
         "component",
         "laravel-backend-component"
     ],
-    "homepage": "https://github.com/chat-agency/laravel-backend-component",
+    "homepage": "https://github.com/juaniquillo/laravel-backend-component",
     "license": "MIT",
     "authors": [
         {
             "name": "Victor Sánchez",
-            "email": "victor@chatagency.com",
+            "email": "juaniquillo@gmail.com",
             "role": "Developer"
         }
     ],
@@ -33,7 +33,7 @@
     },
     "autoload": {
         "psr-4": {
-            "ChatAgency\\BackendComponents\\": "src/"
+            "Juaniquillo\\BackendComponents\\": "src/"
         }
     },
     "autoload-dev": {
@@ -75,7 +75,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "ChatAgency\\BackendComponents\\BackendComponentsServiceProvider"
+                "Juaniquillo\\BackendComponents\\BackendComponentsServiceProvider"
             ]
         }
     },

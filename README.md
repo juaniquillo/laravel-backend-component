@@ -1,17 +1,22 @@
 # Laravel Backend Component
 
-[![Tests](https://github.com/Chat-Agency/laravel-backend-component/actions/workflows/run-tests.yml/badge.svg)](https://github.com/Chat-Agency/laravel-backend-component/actions/workflows/run-tests.yml) [![PHPStan](https://github.com/Chat-Agency/laravel-backend-component/actions/workflows/phpstan.yml/badge.svg)](https://github.com/Chat-Agency/laravel-backend-component/actions/workflows/phpstan.yml) [![Laravel Pint](https://github.com/Chat-Agency/laravel-backend-component/actions/workflows/fix-php-code-style-issues.yml/badge.svg)](https://github.com/Chat-Agency/laravel-backend-component/actions/workflows/fix-php-code-style-issues.yml)
+[![Tests](https://github.com/juaniquillo/laravel-backend-component/actions/workflows/run-tests.yml/badge.svg)](https://github.com/juaniquillo/laravel-backend-component/actions/workflows/run-tests.yml) [![PHPStan](https://github.com/juaniquillo/laravel-backend-component/actions/workflows/phpstan.yml/badge.svg)](https://github.com/juaniquillo/laravel-backend-component/actions/workflows/phpstan.yml) [![Laravel Pint](https://github.com/juaniquillo/laravel-backend-component/actions/workflows/fix-php-code-style-issues.yml/badge.svg)](https://github.com/juaniquillo/laravel-backend-component/actions/workflows/fix-php-code-style-issues.yml)
 
 A package that simplifies the creation of dynamic, class-based Laravel components.
 
 This package allows you to build complex, reusable UI components in PHP, making your backend and frontend integration seamless.
 
-[View the full documentation](https://github.com/Chat-Agency/backend-component-docs)
+> [!NOTE]
+> 
+> #### About this fork.
+> 
+> This repository is a fork of [Chat-Agency/laravel-backend-component](https://github.com/Chat-Agency/laravel-backend-component). I worked on this repository while I was working with that company and decided to fork it and take ownership of it.
+
+View the full documentation (In Progress)
 
 Install the package via Composer:
-
 ```bash
-composer require chat-agency/laravel-backend-component
+composer require juaniquillo/laravel-backend-component
 ```
 To use the package’s [Tailwind](https://tailwindcss.com/) themes, configure Tailwind to scan the package's Blade files. The method differs slightly between Tailwind versions:
 
@@ -23,7 +28,7 @@ Add the package's view path to the content array in your tailwind.config.js file
 // tailwind.config.js
 export default {
     content: [
-        './vendor/chat-agency/laravel-backend-component/resources/views/**/*.blade.php', // <- Add this line
+        './vendor/juaniquillo/laravel-backend-component/resources/views/**/*.blade.php', // <- Add this line
         // other paths
     ],
     // ...
@@ -38,7 +43,7 @@ In your main CSS file (e.g., resources/css/app.css), use the @source at-rule to 
 @import 'tailwindcss';
 
 /* Add the path for the package's views */
-@source '../../vendor/chat-agency/laravel-backend-component/resources/views/**/*.blade.php';
+@source '../../vendor/juaniquillo/laravel-backend-component/resources/views/**/*.blade.php';
 ```
 
 ## Basic use
@@ -46,15 +51,15 @@ In your main CSS file (e.g., resources/css/app.css), use the @source at-rule to 
 Use the MainBackendComponent class to construct your component. Pass the component name/path as the first parameter:
 
 ```php
-use ChatAgency\BackendComponents\MainBackendComponent;
+use Juaniquillo\BackendComponents\MainBackendComponent;
 
 $button = new MainBackendComponent('inline.button');
 ```
 Alternatively, builders and an enum are available to streamline instance creation:
 
 ```php
-use ChatAgency\BackendComponents\Builders\ComponentBuilder;
-use ChatAgency\BackendComponents\Enums\ComponentEnum;
+use Juaniquillo\BackendComponents\Builders\ComponentBuilder;
+use Juaniquillo\BackendComponents\Enums\ComponentEnum;
 
 $button = ComponentBuilder::make(ComponentEnum::BUTTON);
 ```
@@ -68,13 +73,13 @@ Since the main component class implements Laravel’s [Htmlable](https://laravel
 Components can be composed with other components:
 
 ```php
-use ChatAgency\BackendComponents\Builders\ComponentBuilder;
-use ChatAgency\BackendComponents\Enums\ComponentEnum;
+use Juaniquillo\BackendComponents\Builders\ComponentBuilder;
+use Juaniquillo\BackendComponents\Enums\ComponentEnum;
 
-$divWithButton = $button = ComponentBuilder::make(ComponentEnum::DIV)
+$divWithButton = ComponentBuilder::make(ComponentEnum::DIV)
     ->setContent(
         ComponentBuilder::make(ComponentEnum::BUTTON)
-            ->seContent('Click me!')
+            ->setContent('Click me!')
     );
 ```
 
@@ -85,8 +90,8 @@ The package supports theming, primarily designed for use with Tailwind CSS class
 You can apply a theme using the `setTheme` method:
 
 ```php
-use ChatAgency\BackendComponents\Builders\ComponentBuilder;
-use ChatAgency\BackendComponents\Enums\ComponentEnum;
+use Juaniquillo\BackendComponents\Builders\ComponentBuilder;
+use Juaniquillo\BackendComponents\Enums\ComponentEnum;
 
 $button = ComponentBuilder::make(ComponentEnum::BUTTON)
     ->setTheme('theme_file', 'theme_name');

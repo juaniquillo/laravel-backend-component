@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ChatAgency\BackendComponents\Concerns;
+namespace Juaniquillo\BackendComponents\Concerns;
 
 trait HasSettings
 {

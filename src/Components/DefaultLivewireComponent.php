@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace ChatAgency\BackendComponents\Components;
+namespace Juaniquillo\BackendComponents\Components;
 
-use ChatAgency\BackendComponents\Concerns\IsLivewireComponent;
-use ChatAgency\BackendComponents\Contracts\LivewireComponent;
 use Illuminate\Contracts\Support\Htmlable;
+use Juaniquillo\BackendComponents\Concerns\IsLivewireComponent;
+use Juaniquillo\BackendComponents\Contracts\LivewireComponent;
 
-use function ChatAgency\BackendComponents\backendComponentNamespace;
+use function Juaniquillo\BackendComponents\backendComponentNamespace;
 
 final class DefaultLivewireComponent implements Htmlable, LivewireComponent
 {

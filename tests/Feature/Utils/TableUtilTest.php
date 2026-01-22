@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Utils;
 
-use ChatAgency\BackendComponents\Builders\ComponentBuilder;
-use ChatAgency\BackendComponents\Enums\ComponentEnum;
-use ChatAgency\BackendComponents\Utils\CellBag;
-use ChatAgency\BackendComponents\Utils\TableUtil;
+use Juaniquillo\BackendComponents\Builders\ComponentBuilder;
+use Juaniquillo\BackendComponents\Enums\ComponentEnum;
+use Juaniquillo\BackendComponents\Utils\CellBag;
+use Juaniquillo\BackendComponents\Utils\TableUtil;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
-use function ChatAgency\BackendComponents\processThemes;
+use function Juaniquillo\BackendComponents\processThemes;
 
 final class TableUtilTest extends TestCase
 {
@@ -203,21 +203,21 @@ final class TableUtilTest extends TestCase
 
         $this->assertEquals($component->getThemes(), $tableThemes);
 
-        /** @var \ChatAgency\BackendComponents\Contracts\CompoundComponent $thead */
+        /** @var \Juaniquillo\BackendComponents\Contracts\CompoundComponent $thead */
         $thead = $component->getContent(0);
-        /** @var \ChatAgency\BackendComponents\Contracts\CompoundComponent $trHead */
+        /** @var \Juaniquillo\BackendComponents\Contracts\CompoundComponent $trHead */
         $trHead = $thead->getContent(0);
-        /** @var \ChatAgency\BackendComponents\Contracts\CompoundComponent $th */
+        /** @var \Juaniquillo\BackendComponents\Contracts\CompoundComponent $th */
         $th = $trHead->getContent(0);
         $this->assertEquals($th->getThemes(), $thThemes);
 
-        /** @var \ChatAgency\BackendComponents\Contracts\CompoundComponent $tBody */
+        /** @var \Juaniquillo\BackendComponents\Contracts\CompoundComponent $tBody */
         $tBody = $component->getContent(1);
-        /** @var \ChatAgency\BackendComponents\Contracts\CompoundComponent $trBody */
+        /** @var \Juaniquillo\BackendComponents\Contracts\CompoundComponent $trBody */
         $trBody = $tBody->getContent(0);
         $this->assertEquals($trBody->getThemes(), $trThemes);
 
-        /** @var \ChatAgency\BackendComponents\Contracts\CompoundComponent $td */
+        /** @var \Juaniquillo\BackendComponents\Contracts\CompoundComponent $td */
         $td = $trBody->getContent(0);
         $this->assertEquals($td->getThemes(), $tdThemes);
     }

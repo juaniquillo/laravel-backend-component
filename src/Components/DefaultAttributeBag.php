@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace ChatAgency\BackendComponents\Components;
+namespace Juaniquillo\BackendComponents\Components;
 
-use ChatAgency\BackendComponents\Contracts\AttributeBag;
-use ChatAgency\BackendComponents\Contracts\BackendComponent;
-use ChatAgency\BackendComponents\Contracts\CompoundComponent;
-use ChatAgency\BackendComponents\Contracts\ContentsComponent;
+use Juaniquillo\BackendComponents\Contracts\AttributeBag;
+use Juaniquillo\BackendComponents\Contracts\BackendComponent;
+use Juaniquillo\BackendComponents\Contracts\CompoundComponent;
+use Juaniquillo\BackendComponents\Contracts\ContentsComponent;
 
 readonly class DefaultAttributeBag implements AttributeBag
 {

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Themes\Managers;
 
-use ChatAgency\BackendComponents\Concerns\IsThemeManager;
+use Juaniquillo\BackendComponents\Concerns\IsThemeManager;
 
 class TestThemeManager
 {

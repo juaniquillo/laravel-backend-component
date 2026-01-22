@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ChatAgency\BackendComponents\Contracts;
+namespace Juaniquillo\BackendComponents\Contracts;
 
 interface ThemeComponent
 {

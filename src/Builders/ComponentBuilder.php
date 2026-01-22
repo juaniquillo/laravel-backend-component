@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace ChatAgency\BackendComponents\Builders;
+namespace Juaniquillo\BackendComponents\Builders;
 
 use BackedEnum;
-use ChatAgency\BackendComponents\Contracts\CompoundComponent;
-use ChatAgency\BackendComponents\Contracts\StaticBuilder;
-use ChatAgency\BackendComponents\MainBackendComponent;
 use Illuminate\Contracts\Support\Htmlable;
+use Juaniquillo\BackendComponents\Contracts\CompoundComponent;
+use Juaniquillo\BackendComponents\Contracts\StaticBuilder;
+use Juaniquillo\BackendComponents\MainBackendComponent;
 
 class ComponentBuilder implements StaticBuilder
 {

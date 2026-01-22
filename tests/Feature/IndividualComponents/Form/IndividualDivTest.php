@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Feature\IndividualComponents\Form;
 
-use ChatAgency\BackendComponents\Builders\ComponentBuilder;
-use ChatAgency\BackendComponents\Components\Individual\DivComponent;
-use ChatAgency\BackendComponents\Enums\ComponentEnum;
-use ChatAgency\BackendComponents\Factories\IndividualComponentFactory;
+use Juaniquillo\BackendComponents\Builders\ComponentBuilder;
+use Juaniquillo\BackendComponents\Components\Individual\DivComponent;
+use Juaniquillo\BackendComponents\Enums\ComponentEnum;
+use Juaniquillo\BackendComponents\Factories\IndividualComponentFactory;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
-use function ChatAgency\BackendComponents\processThemes;
+use function Juaniquillo\BackendComponents\processThemes;
 
 class IndividualDivTest extends TestCase
 {

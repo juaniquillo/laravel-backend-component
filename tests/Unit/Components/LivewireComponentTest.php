@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Unit\Components;
 
-use ChatAgency\BackendComponents\Builders\ComponentBuilder;
+use Juaniquillo\BackendComponents\Builders\ComponentBuilder;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 

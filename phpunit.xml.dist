@@ -16,7 +16,7 @@
     backupStaticProperties="false"
 >
     <testsuites>
-        <testsuite name="Chat Agency Test Suite">
+        <testsuite name="Juaniquillo Test Suite">
             <directory>tests</directory>
         </testsuite>
     </testsuites>

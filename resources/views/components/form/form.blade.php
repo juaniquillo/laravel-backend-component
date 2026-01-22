@@ -5,11 +5,11 @@
 ])
 
 <?php
-    use ChatAgency\BackendComponents\Enums\ComponentEnum;
+    use Juaniquillo\BackendComponents\Enums\ComponentEnum;
 
-    use function ChatAgency\BackendComponents\makeBackendComponent;
+    use function Juaniquillo\BackendComponents\makeBackendComponent;
     
-    /** @var \ChatAgency\BackendComponents\Components\DefaultAttributeBag $attrs */
+    /** @var \Juaniquillo\BackendComponents\Components\DefaultAttributeBag $attrs */
 ?>
 
 @php

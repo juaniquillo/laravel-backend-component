@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Components;
 
-use ChatAgency\BackendComponents\Builders\ComponentBuilder;
-use ChatAgency\BackendComponents\Contracts\LivewireComponent;
-use ChatAgency\BackendComponents\Enums\ComponentEnum;
-use ChatAgency\BackendComponents\Factories\ComponentFactory;
-use ChatAgency\BackendComponents\MainBackendComponent;
-use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
-use ChatAgency\BackendComponents\Themes\LocalThemeManager;
+use Juaniquillo\BackendComponents\Builders\ComponentBuilder;
+use Juaniquillo\BackendComponents\Contracts\LivewireComponent;
+use Juaniquillo\BackendComponents\Enums\ComponentEnum;
+use Juaniquillo\BackendComponents\Factories\ComponentFactory;
+use Juaniquillo\BackendComponents\MainBackendComponent;
+use Juaniquillo\BackendComponents\Themes\DefaultThemeManager;
+use Juaniquillo\BackendComponents\Themes\LocalThemeManager;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
-use function ChatAgency\BackendComponents\backendComponentNamespace;
+use function Juaniquillo\BackendComponents\backendComponentNamespace;
 
 class SimpleComponentTest extends TestCase
 {

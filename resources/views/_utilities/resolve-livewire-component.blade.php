@@ -1,5 +1,5 @@
 @php
-    /** @var \ChatAgency\BackendComponents\Contracts\CompoundComponent $component */
+    /** @var \Juaniquillo\BackendComponents\Contracts\CompoundComponent $component */
     $name = $component->getName();
     $params = $component->getLivewireParams();
     $key = $component->getLivewireKey();

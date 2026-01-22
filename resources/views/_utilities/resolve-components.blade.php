@@ -1,5 +1,5 @@
 @php
-    /** @var \ChatAgency\BackendComponents\Contracts\CompoundComponent $component */
+    /** @var \Juaniquillo\BackendComponents\Contracts\CompoundComponent $component */
     /** @var string|null $namespace */
 @endphp
 

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace ChatAgency\BackendComponents\Themes;
+namespace Juaniquillo\BackendComponents\Themes;
 
-use ChatAgency\BackendComponents\Concerns\IsThemeManager;
-use ChatAgency\BackendComponents\Contracts\ThemeManager;
+use Juaniquillo\BackendComponents\Concerns\IsThemeManager;
+use Juaniquillo\BackendComponents\Contracts\ThemeManager;
 
 final class LocalThemeManager implements ThemeManager
 {

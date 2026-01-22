@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace ChatAgency\BackendComponents {
+namespace Juaniquillo\BackendComponents {
 
     use BackedEnum;
-    use ChatAgency\BackendComponents\Cache\DefaultCache;
-    use ChatAgency\BackendComponents\Contracts\BackendComponent;
-    use ChatAgency\BackendComponents\Contracts\ThemeManager;
-    use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
-    use ChatAgency\BackendComponents\Themes\LocalThemeManager;
-    use ChatAgency\BackendComponents\Utils\CellBag;
+    use Juaniquillo\BackendComponents\Cache\DefaultCache;
+    use Juaniquillo\BackendComponents\Contracts\BackendComponent;
+    use Juaniquillo\BackendComponents\Contracts\ThemeManager;
+    use Juaniquillo\BackendComponents\Themes\DefaultThemeManager;
+    use Juaniquillo\BackendComponents\Themes\LocalThemeManager;
+    use Juaniquillo\BackendComponents\Utils\CellBag;
 
     function backendComponentNamespace(): string
     {

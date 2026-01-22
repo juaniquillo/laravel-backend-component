@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Feature\Utils;
 
-use ChatAgency\BackendComponents\Contracts\Cache as ContractsCache;
-use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
+use Juaniquillo\BackendComponents\Contracts\Cache as ContractsCache;
+use Juaniquillo\BackendComponents\Themes\DefaultThemeManager;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
-use function ChatAgency\BackendComponents\cache;
+use function Juaniquillo\BackendComponents\cache;
 
 class CacheTest extends TestCase
 {

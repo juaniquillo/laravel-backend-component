@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace ChatAgency\BackendComponents\Utils;
+namespace Juaniquillo\BackendComponents\Utils;
 
-use ChatAgency\BackendComponents\Contracts\CompoundComponent;
+use Juaniquillo\BackendComponents\Contracts\CompoundComponent;
 
 final readonly class CellBag
 {

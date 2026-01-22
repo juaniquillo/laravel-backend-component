@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ChatAgency\BackendComponents\Exceptions;
+namespace Juaniquillo\BackendComponents\Exceptions;
 
 use Throwable;
 

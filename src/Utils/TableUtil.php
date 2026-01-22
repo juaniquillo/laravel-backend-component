@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace ChatAgency\BackendComponents\Utils;
+namespace Juaniquillo\BackendComponents\Utils;
 
 use BackedEnum;
-use ChatAgency\BackendComponents\Contracts\CompoundComponent;
-use ChatAgency\BackendComponents\Contracts\ThemeManager;
-use ChatAgency\BackendComponents\Enums\ComponentEnum;
-use ChatAgency\BackendComponents\MainBackendComponent;
-use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
+use Juaniquillo\BackendComponents\Contracts\CompoundComponent;
+use Juaniquillo\BackendComponents\Contracts\ThemeManager;
+use Juaniquillo\BackendComponents\Enums\ComponentEnum;
+use Juaniquillo\BackendComponents\MainBackendComponent;
+use Juaniquillo\BackendComponents\Themes\DefaultThemeManager;
 
-use function ChatAgency\BackendComponents\isCellBag;
-use function ChatAgency\BackendComponents\isComponent;
+use function Juaniquillo\BackendComponents\isCellBag;
+use function Juaniquillo\BackendComponents\isComponent;
 
 final class TableUtil
 {

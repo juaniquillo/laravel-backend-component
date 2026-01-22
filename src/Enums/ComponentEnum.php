@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ChatAgency\BackendComponents\Enums;
+namespace Juaniquillo\BackendComponents\Enums;
 
 enum ComponentEnum: string
 {
