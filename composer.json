@@ -55,7 +55,7 @@
             "@composer run build",
             "@php vendor/bin/testbench serve"
         ],
-        "analyse": "vendor/bin/phpstan analyse",
+        "analyse": "@composer run phpstan",
         "test": "vendor/bin/phpunit --display-warnings --display-skipped --display-deprecations --display-errors --display-notices",
         "test-coverage": "vendor/bin/phpunit --coverage-html .tests_coverage",
         "format": "vendor/bin/pint",
