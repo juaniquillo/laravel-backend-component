@@ -17,7 +17,7 @@ namespace Juaniquillo\BackendComponents {
         return BackendComponentsServiceProvider::namespace().'::';
     }
 
-    function makeBackendComponent(string|\BackedEnum $name, ThemeManager $manager = new DefaultThemeManager): MainBackendComponent
+    function makeBackendComponent(string|BackedEnum $name, ThemeManager $manager = new DefaultThemeManager): MainBackendComponent
     {
         return new MainBackendComponent(name: $name, themeManager: $manager);
     }
