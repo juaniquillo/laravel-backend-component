@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Feature\Utils;
 
 use Juaniquillo\BackendComponents\Builders\ComponentBuilder;
+use Juaniquillo\BackendComponents\Contracts\CompoundComponent;
 use Juaniquillo\BackendComponents\Enums\ComponentEnum;
 use Juaniquillo\BackendComponents\Utils\CellBag;
 use Juaniquillo\BackendComponents\Utils\TableUtil;
@@ -203,21 +204,21 @@ final class TableUtilTest extends TestCase
 
         $this->assertEquals($component->getThemes(), $tableThemes);
 
-        /** @var \Juaniquillo\BackendComponents\Contracts\CompoundComponent $thead */
+        /** @var CompoundComponent $thead */
         $thead = $component->getContent(0);
-        /** @var \Juaniquillo\BackendComponents\Contracts\CompoundComponent $trHead */
+        /** @var CompoundComponent $trHead */
         $trHead = $thead->getContent(0);
-        /** @var \Juaniquillo\BackendComponents\Contracts\CompoundComponent $th */
+        /** @var CompoundComponent $th */
         $th = $trHead->getContent(0);
         $this->assertEquals($th->getThemes(), $thThemes);
 
-        /** @var \Juaniquillo\BackendComponents\Contracts\CompoundComponent $tBody */
+        /** @var CompoundComponent $tBody */
         $tBody = $component->getContent(1);
-        /** @var \Juaniquillo\BackendComponents\Contracts\CompoundComponent $trBody */
+        /** @var CompoundComponent $trBody */
         $trBody = $tBody->getContent(0);
         $this->assertEquals($trBody->getThemes(), $trThemes);
 
-        /** @var \Juaniquillo\BackendComponents\Contracts\CompoundComponent $td */
+        /** @var CompoundComponent $td */
         $td = $trBody->getContent(0);
         $this->assertEquals($td->getThemes(), $tdThemes);
     }
