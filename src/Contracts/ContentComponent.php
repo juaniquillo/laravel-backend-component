@@ -20,5 +20,9 @@ interface ContentComponent
      */
     public function setContents(array $contents): static;
 
+    public function prependContent(int|string|CompoundComponent|BackendComponent $content, string|int|null $key = null): static;
+
+    public function unsetContent(string|int|null $key = null): static;
+
     public function processContent(): ContentsComponent;
 }
