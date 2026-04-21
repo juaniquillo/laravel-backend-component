@@ -88,6 +88,53 @@ class SimpleComponentTest extends TestCase
     }
 
     #[Test]
+    public function a_component_can_prepend_content()
+    {
+        $component = ComponentBuilder::make(ComponentEnum::DIV)
+            ->setContent('first')
+            ->setContent('second')
+            ->prependContent('prepended');
+
+        $this->assertEquals(['prepended', 'first', 'second'], $component->getContents());
+    }
+
+    #[Test]
+    public function a_component_can_prepend_content_with_key()
+    {
+        $component = ComponentBuilder::make(ComponentEnum::DIV)
+            ->setContent('first', 'key_1')
+            ->setContent('second', 'key_2')
+            ->prependContent('prepended', 'prepended_key');
+
+        $this->assertEquals('prepended', $component->getContent('prepended_key'));
+        $this->assertEquals(['prepended_key' => 'prepended', 'key_1' => 'first', 'key_2' => 'second'], $component->getContents());
+    }
+
+    #[Test]
+    public function a_component_can_unset_content()
+    {
+        $component = ComponentBuilder::make(ComponentEnum::DIV)
+            ->setContent('first')
+            ->setContent('second');
+
+        $component->unsetContent();
+
+        $this->assertEquals([], $component->getContents());
+    }
+
+    #[Test]
+    public function a_component_can_unset_specific_content_by_key()
+    {
+        $component = ComponentBuilder::make(ComponentEnum::DIV)
+            ->setContent('first', 'key_1')
+            ->setContent('second', 'key_2');
+
+        $component->unsetContent('key_1');
+
+        $this->assertEquals(['key_2' => 'second'], $component->getContents());
+    }
+
+    #[Test]
     public function a_component_accepts_attributes()
     {
         $component = ComponentBuilder::make(ComponentEnum::DIV)
