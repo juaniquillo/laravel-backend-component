@@ -54,6 +54,32 @@ trait HasContent
         return $this;
     }
 
+    public function prependContent(int|string|CompoundComponent|BackendComponent $content, string|int|null $key = null): static
+    {
+        if ($key) {
+            $this->content = [$key => $content] + $this->content;
+
+            return $this;
+        }
+
+        array_unshift($this->content, $content);
+
+        return $this;
+    }
+
+    public function unsetContent(string|int|null $key = null): static
+    {
+        if ($key) {
+            unset($this->content[$key]);
+
+            return $this;
+        }
+
+        $this->content = [];
+
+        return $this;
+    }
+
     public function processContent(): ContentsComponent
     {
         return new DefaultContentsComponent($this->getContents());
