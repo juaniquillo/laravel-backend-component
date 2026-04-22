@@ -90,6 +90,11 @@ enum ComponentEnum: string
     case SUMMARY = 'details.summary';
 
     /**
+     * Layers
+     */
+    case DIALOG = 'layers.dialog';
+
+    /**
      * Custom
      */
     case MODAL = 'custom.modal';
