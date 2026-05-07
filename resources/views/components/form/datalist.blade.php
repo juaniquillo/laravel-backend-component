@@ -22,4 +22,4 @@
 
 @endphp
 
-<select {{ $attributes->merge($serverAttrs) }}>{{ $content }}{{ $slot }}</select>
+<datalist {{ $attributes->merge($serverAttrs) }}>{{ $content }}{{ $slot }}</datalist>

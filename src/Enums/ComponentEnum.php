@@ -54,9 +54,11 @@ enum ComponentEnum: string
     case FILE_INPUT = 'form.file';
     case EMAIL_INPUT = 'form.email';
     case SEARCH_INPUT = 'form.search';
+    case PASSWORD_INPUT = 'form.password';
     case CHECKBOX_INPUT = 'form.checkbox';
     case HIDDEN_INPUT = 'form.hidden';
     case RADIO_INPUT = 'form.radio';
+    case DATALIST = 'form.datalist';
     case TEXTAREA = 'form.textarea';
     case SELECT = 'form.select';
     case OPTGROUP = 'form.optgroup';
