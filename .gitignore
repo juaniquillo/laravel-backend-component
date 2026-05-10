@@ -11,3 +11,4 @@ vendor
 node_modules
 .vscode
 .tests_coverage
+laravel-boost-third-party-skill.md
