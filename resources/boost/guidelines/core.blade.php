@@ -46,13 +46,59 @@ $div = ComponentBuilder::make(ComponentEnum::DIV)
 
 ### Themes (Tailwind CSS)
 
-Theme files are PHP arrays in `resources/views/_themes/tailwind/`:
+Theme files are PHP arrays in `resources/views/_themes/tailwind/`, keyed by variant name:
+
+```php
+// resources/views/_themes/tailwind/action.blade.php
+return [
+    'default' => "whitespace-nowrap bg-blue-700 hover:bg-blue-800",
+    'success' => "whitespace-nowrap bg-green-700 hover:bg-green-800",
+    'error'   => "whitespace-nowrap bg-red-700 hover:bg-red-800",
+    'link'    => "text-blue-500 underline hover:no-underline",
+];
+```
 
 ```php
 $button = ComponentBuilder::make(ComponentEnum::BUTTON)
-    ->setTheme('action', 'success')
-    ->setThemes(['action' => 'success', 'size' => 'lg']);
+    ->setTheme('action', 'success')                       // single variant
+    ->setTheme('table', ['th', 'th-dark'])                // array of variant keys
+    ->setThemes(['action' => 'success', 'size' => 'lg']); // batch
 ```
+
+### Individual components
+
+For simple use cases without the enum, a concrete `DivComponent` is available:
+
+```php
+use Juaniquillo\BackendComponents\Components\Individual\DivComponent;
+
+$div = new DivComponent;
+$div->setAttribute('class', 'my-class');
+$div->setContent('Hello');
+```
+
+### Table utilities
+
+`TableUtil` builds a complete `<table>` from head/body arrays. `CellBag` passes per-cell data:
+
+```php
+use Juaniquillo\BackendComponents\Utils\TableUtil;
+use Juaniquillo\BackendComponents\Utils\CellBag;
+
+$table = TableUtil::make(
+    head: ['Name', 'Email', 'Role'],
+    body: [
+        ['Alice', 'alice@example.com', 'Admin'],
+        [
+            new CellBag(content: 'Bob', theme: ['color' => 'success']),
+            'bob@example.com',
+            'Editor',
+        ],
+    ],
+)->getComponent();
+```
+
+### Serialization
 
 ### Settings
 
@@ -73,15 +119,17 @@ ComponentBuilder::make('my-livewire-component')
 
 ### Available components
 
-- **Block:** DIV, PARAGRAPH
-- **Inline:** BUTTON, LINK, IMG, SPAN, BOLD, EM, ITALIC, STRONG, SMALL
-- **Headers:** H1–H6
-- **Form:** FORM, LABEL, LEGEND, FIELDSET, TEXT_INPUT, FILE_INPUT, EMAIL_INPUT, SEARCH_INPUT, PASSWORD_INPUT, CHECKBOX_INPUT, HIDDEN_INPUT, RADIO_INPUT, DATALIST, TEXTAREA, SELECT, OPTGROUP, OPTION
-- **Table:** TABLE, THEAD, TBODY, TFOOT, TR, TH, TD, CAPTION, COLGROUP, COL
-- **Lists:** OL, UL, LI
-- **Details:** DETAILS, SUMMARY
-- **Layers:** DIALOG
-- **Custom:** MODAL, COLLECTION, TEMPLATE
+- **Template:** `TEMPLATE`
+- **Collection:** `COLLECTION`
+- **Block:** `DIV`, `PARAGRAPH`
+- **Inline:** `BUTTON`, `LINK`, `IMG`, `SPAN`, `BOLD`, `EM`, `ITALIC`, `STRONG`, `SMALL`
+- **Headers:** `H1`, `H2`, `H3`, `H4`, `H5`, `H6`
+- **Form:** `FORM`, `LABEL`, `LEGEND`, `FIELDSET`, `TEXT_INPUT`, `FILE_INPUT`, `EMAIL_INPUT`, `SEARCH_INPUT`, `PASSWORD_INPUT`, `CHECKBOX_INPUT`, `HIDDEN_INPUT`, `RADIO_INPUT`, `DATALIST`, `TEXTAREA`, `SELECT`, `OPTGROUP`, `OPTION`
+- **Table:** `TABLE`, `THEAD`, `TBODY`, `TFOOT`, `TR`, `TH`, `TD`, `CAPTION`, `COLGROUP`, `COL`
+- **Lists:** `OL`, `UL`, `LI`
+- **Details:** `DETAILS`, `SUMMARY`
+- **Layers:** `DIALOG`
+- **Custom:** `MODAL`
 
 ### View conventions
 

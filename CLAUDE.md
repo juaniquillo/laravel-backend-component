@@ -68,11 +68,60 @@ $component = ComponentBuilder::make(ComponentEnum::MODAL)
 
 ```php
 $button = ComponentBuilder::make(ComponentEnum::BUTTON)
-    ->setTheme('action', 'success')                       // single
+    ->setTheme('action', 'success')                       // single variant
+    ->setTheme('table', ['th', 'th-dark'])                // array of variant keys
     ->setThemes(['action' => 'success', 'size' => 'lg']); // batch
 ```
 
-Theme files live in `resources/views/_themes/tailwind/` and return PHP arrays of CSS classes.
+Theme files live in `resources/views/_themes/tailwind/` and return PHP arrays of CSS classes keyed by variant name:
+
+```php
+// resources/views/_themes/tailwind/action.blade.php
+return [
+    'default'   => "whitespace-nowrap bg-blue-700 hover:bg-blue-800",
+    'success'   => "whitespace-nowrap bg-green-700 hover:bg-green-800",
+    'error'     => "whitespace-nowrap bg-red-700 hover:bg-red-800",
+    'link'      => "text-blue-500 underline hover:no-underline",
+    // ...
+];
+```
+
+### Individual components
+
+For simple use cases without the full enum, a concrete `DivComponent` is available:
+
+```php
+use Juaniquillo\BackendComponents\Components\Individual\DivComponent;
+
+$div = new DivComponent;
+$div->setAttribute('class', 'my-class');
+$div->setContent('Hello');
+```
+
+### Table utilities
+
+`TableUtil` builds a complete `<table>` component tree from head/body arrays. `CellBag` passes per-cell data:
+
+```php
+use Juaniquillo\BackendComponents\Utils\TableUtil;
+use Juaniquillo\BackendComponents\Utils\CellBag;
+
+$table = TableUtil::make(
+    head: ['Name', 'Email', 'Role'],
+    body: [
+        [                         // plain values
+            'Alice',
+            'alice@example.com',
+            'Admin',
+        ],
+        [                         // CellBag for per-cell control
+            new CellBag(content: 'Bob', theme: ['color' => 'success']),
+            'bob@example.com',
+            'Editor',
+        ],
+    ],
+)->getComponent();
+```
 
 ### Serialization / Factory
 
@@ -108,15 +157,17 @@ $component = ComponentBuilder::make(ComponentEnum::BUTTON)
 
 ## Available component enums
 
+**Template:** `TEMPLATE`
+**Collection:** `COLLECTION`
 **Block:** `DIV`, `PARAGRAPH`
 **Inline:** `BUTTON`, `LINK`, `IMG`, `SPAN`, `BOLD`, `EM`, `ITALIC`, `STRONG`, `SMALL`
-**Headers:** `H1` through `H6`
+**Headers:** `H1`, `H2`, `H3`, `H4`, `H5`, `H6`
 **Form:** `FORM`, `LABEL`, `LEGEND`, `FIELDSET`, `TEXT_INPUT`, `FILE_INPUT`, `EMAIL_INPUT`, `SEARCH_INPUT`, `PASSWORD_INPUT`, `CHECKBOX_INPUT`, `HIDDEN_INPUT`, `RADIO_INPUT`, `DATALIST`, `TEXTAREA`, `SELECT`, `OPTGROUP`, `OPTION`
 **Table:** `TABLE`, `THEAD`, `TBODY`, `TFOOT`, `TR`, `TH`, `TD`, `CAPTION`, `COLGROUP`, `COL`
 **Lists:** `OL`, `UL`, `LI`
 **Details:** `DETAILS`, `SUMMARY`
 **Layers:** `DIALOG`
-**Custom:** `MODAL`, `COLLECTION`, `TEMPLATE`
+**Custom:** `MODAL`
 
 ## Blade template conventions
 
