@@ -11,9 +11,11 @@ Use this skill when the user needs to:
 - Compose multiple components into a tree structure
 - Apply or create Tailwind CSS theme classes to components
 - Add Livewire integration to a component
-- Work with named slots (title, footer, button, overlay)
 - Serialize a component tree to an array or restore it from one
 - Build custom Blade templates for new component types
+- Add a new component type (enum case + blade file + tests)
+- Use the concrete `DivComponent` for quick divs without the builder
+- Build tables programmatically using `TableUtil` and `CellBag`
 - Resolve components or themes from the consuming app's local views
 
 ## Creating Components
@@ -33,6 +35,22 @@ $table = ComponentBuilder::make(ComponentEnum::TABLE);
 // By string name (path)
 $custom = ComponentBuilder::make('inline.button');
 ```
+
+### All available components
+
+| Category | Cases |
+|---|---|
+| **Template** | `TEMPLATE` |
+| **Collection** | `COLLECTION` |
+| **Block** | `DIV`, `PARAGRAPH` |
+| **Inline** | `BUTTON`, `LINK`, `IMG`, `SPAN`, `BOLD`, `EM`, `ITALIC`, `STRONG`, `SMALL` |
+| **Headers** | `H1`, `H2`, `H3`, `H4`, `H5`, `H6` |
+| **Form** | `FORM`, `LABEL`, `LEGEND`, `FIELDSET`, `TEXT_INPUT`, `FILE_INPUT`, `EMAIL_INPUT`, `SEARCH_INPUT`, `PASSWORD_INPUT`, `CHECKBOX_INPUT`, `HIDDEN_INPUT`, `RADIO_INPUT`, `DATALIST`, `TEXTAREA`, `SELECT`, `OPTGROUP`, `OPTION` |
+| **Table** | `TABLE`, `THEAD`, `TBODY`, `TFOOT`, `TR`, `TH`, `TD`, `CAPTION`, `COLGROUP`, `COL` |
+| **Lists** | `OL`, `UL`, `LI` |
+| **Details** | `DETAILS`, `SUMMARY` |
+| **Layers** | `DIALOG` |
+| **Custom** | `MODAL` |
 
 ## Setting Content
 
@@ -76,12 +94,26 @@ $card = ComponentBuilder::make(ComponentEnum::DIV)
 
 ## Applying Themes
 
-Themes are predefined in `resources/views/_themes/tailwind/`. Each file returns a PHP array of Tailwind classes keyed by name:
+Themes are predefined in `resources/views/_themes/tailwind/`. Each file returns a PHP array of Tailwind classes keyed by variant name:
 
 ```php
-// Apply a single theme
+// resources/views/_themes/tailwind/action.blade.php
+return [
+    'default' => "whitespace-nowrap bg-blue-700 hover:bg-blue-800",
+    'success' => "whitespace-nowrap bg-green-700 hover:bg-green-800",
+    'error'   => "whitespace-nowrap bg-red-700 hover:bg-red-800",
+    'link'    => "text-blue-500 underline hover:no-underline",
+];
+```
+
+```php
+// Apply a single theme variant
 $button = ComponentBuilder::make(ComponentEnum::BUTTON)
     ->setTheme('action', 'success');
+
+// Apply multiple variant keys from the same theme file
+$button = ComponentBuilder::make(ComponentEnum::BUTTON)
+    ->setTheme('table', ['th', 'th-dark']);
 
 // Apply multiple themes
 $button = ComponentBuilder::make(ComponentEnum::BUTTON)
@@ -91,6 +123,43 @@ $button = ComponentBuilder::make(ComponentEnum::BUTTON)
     ]);
 
 // Theme classes merge into the HTML class attribute automatically
+```
+
+## Individual Components
+
+For simple use cases without the enum, a concrete `DivComponent` is available:
+
+```php
+use Juaniquillo\BackendComponents\Components\Individual\DivComponent;
+
+$div = new DivComponent;
+$div->setAttribute('class', 'my-class');
+$div->setContent('Hello');
+```
+
+## Table Utilities
+
+`TableUtil` builds a complete `<table>` component tree from head/body arrays. `CellBag` passes per-cell data:
+
+```php
+use Juaniquillo\BackendComponents\Utils\TableUtil;
+use Juaniquillo\BackendComponents\Utils\CellBag;
+
+$table = TableUtil::make(
+    head: ['Name', 'Email', 'Role'],
+    body: [
+        [                         // plain values
+            'Alice',
+            'alice@example.com',
+            'Admin',
+        ],
+        [                         // CellBag for per-cell control
+            new CellBag(content: 'Bob', theme: ['color' => 'success']),
+            'bob@example.com',
+            'Editor',
+        ],
+    ],
+)->getComponent();
 ```
 
 ## Livewire Components
