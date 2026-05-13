@@ -4,7 +4,13 @@
 @endphp
 ## Laravel Backend Component
 
-This package lets you build dynamic, class-based HTML components in PHP. Instead of writing Blade HTML directly, you compose component trees via PHP objects and render them with `{{ $component }}` (components implement Laravel's `Htmlable`).
+This package lets you build dynamic, class-based HTML components in PHP. Instead of writing Blade HTML directly, you compose component trees via PHP objects and render them with:
+
+```php
+{{ $component }}
+```
+
+Components implement Laravel's `Htmlable`.
 
 ### Creating components
 
@@ -79,7 +85,7 @@ $div->setContent('Hello');
 
 ### Table utilities
 
-`TableUtil` builds a complete `<table>` from head/body arrays. `CellBag` passes per-cell data:
+TableUtil builds a complete `<table>` from head/body arrays. CellBag passes per-cell data:
 
 ```php
 use Juaniquillo\BackendComponents\Utils\TableUtil;
@@ -97,8 +103,6 @@ $table = TableUtil::make(
     ],
 )->getComponent();
 ```
-
-### Serialization
 
 ### Settings
 
@@ -134,10 +138,22 @@ ComponentBuilder::make('my-livewire-component')
 ### View conventions
 
 Each component Blade template follows:
-1. `@props(['attrs' => null])`
-2. `@php` block extracting `$serverAttrs`, `$content`, `$slot`
-3. Renders with `{{ $attributes->merge($serverAttrs) }}>{{ $content }}{{ $slot }}`
-4. Self-closing tags (input, img, col) use `/>`
+
+```blade
+@props(['attrs' => null])
+@php
+    $serverAttrs = [];
+    $content = null;
+    $slot = $slot ?? null;
+    if ($attrs) {
+        $serverAttrs = $attrs->getAttributes();
+        $content = $attrs->content;
+    }
+@endphp
+<element {{ $attributes->merge($serverAttrs) }}>{{ $content }}{{ $slot }}</element>
+```
+
+Self-closing tags (input, img, col) use `/>` instead.
 
 ### Local resolution
 
