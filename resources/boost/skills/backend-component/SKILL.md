@@ -127,7 +127,15 @@ $button = ComponentBuilder::make(ComponentEnum::BUTTON)
 
 ## Individual Components
 
-For simple use cases without the enum, a concrete `DivComponent` is available:
+`DivComponent` is both a utility **and** a blueprint for creating new targeted component classes that bypass the enum/builder entirely. To create a new individual component, duplicate the `DivComponent` pattern:
+
+1. Put the class in `src/Components/Individual/`
+2. Implement `BackendComponent`, `IndividualComponent`, `ThemeComponent`, `Htmlable` (omit `ContentsComponent`+`HasContent` for self-closing elements)
+3. Use traits `IsBackendComponent`, `IsThemeable` (add `HasContent` only if the component can hold children)
+4. Define `getName()` to return the `ComponentEnum` value (or any dotted view path)
+5. Define `getComponentPath()` and `getPathOnly()` following the existing convention
+6. Wire up `getAttributeBag()`, `toHtml()`, `toArray()`, and a static `make()` factory
+7. Mark the class `final` (optional but recommended)
 
 ```php
 use Juaniquillo\BackendComponents\Components\Individual\DivComponent;
@@ -136,6 +144,8 @@ $div = new DivComponent;
 $div->setAttribute('class', 'my-class');
 $div->setContent('Hello');
 ```
+
+Currently only `DivComponent` exists in this category — add more as needed.
 
 ## Table Utilities
 
