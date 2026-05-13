@@ -14,6 +14,13 @@ This package allows you to build complex, reusable UI components in PHP, making 
 
 View the full documentation (In Progress)
 
+> [!TIP]
+> #### Laravel Boost Skill
+> If you use [Laravel Boost](https://github.com/aleksipopovicdev/laravel-boost), install the AI skill:
+> ```bash
+> php artisan boost:add-skill https://github.com/juaniquillo/laravel-backend-component
+> ```
+
 Install the package via Composer:
 ```bash
 composer require juaniquillo/laravel-backend-component
@@ -96,6 +103,22 @@ use Juaniquillo\BackendComponents\Enums\ComponentEnum;
 $button = ComponentBuilder::make(ComponentEnum::BUTTON)
     ->setTheme('theme_file', 'theme_name');
 ```
+
+## Serialization
+
+Component trees can be serialized to arrays and restored, preserving attributes, content, themes, and Livewire state:
+
+```php
+use Juaniquillo\BackendComponents\Factories\ComponentFactory;
+
+// Serialize the entire component tree
+$array = $component->toArray();
+
+// Restore it later
+$restored = ComponentFactory::fromArray($array);
+```
+
+This works recursively for nested content, making it useful for caching, session storage, or API responses.
 
 # Tests
 
