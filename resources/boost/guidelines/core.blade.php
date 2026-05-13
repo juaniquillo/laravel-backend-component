@@ -7,7 +7,7 @@
 This package lets you build dynamic, class-based HTML components in PHP. Instead of writing Blade HTML directly, you compose component trees via PHP objects and render them with:
 
 ```php
-{{ $component }}
+@{{ $component }}
 ```
 
 Components implement Laravel's `Htmlable`.
@@ -140,8 +140,8 @@ ComponentBuilder::make('my-livewire-component')
 Each component Blade template follows:
 
 ```blade
-@props(['attrs' => null])
-@php
+@@props(['attrs' => null])
+@@php
     $serverAttrs = [];
     $content = null;
     $slot = $slot ?? null;
@@ -149,8 +149,8 @@ Each component Blade template follows:
         $serverAttrs = $attrs->getAttributes();
         $content = $attrs->content;
     }
-@endphp
-<element {{ $attributes->merge($serverAttrs) }}>{{ $content }}{{ $slot }}</element>
+@@endphp
+<element @{{ $attributes->merge($serverAttrs) }}>@{{ $content }}@{{ $slot }}</element>
 ```
 
 Self-closing tags (input, img, col) use `/>` instead.
