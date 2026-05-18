@@ -1,5 +1,5 @@
 ---
-name: backend-component-development
+name: backend-component
 description: Build and compose dynamic HTML components in PHP using the juaniquillo/laravel-backend-component package — create component trees, apply Tailwind themes, manage settings, integrate Livewire, serialize/deserialize component structures, and resolve components locally.
 ---
 
