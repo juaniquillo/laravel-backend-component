@@ -32,7 +32,8 @@ Use **`setContent()`** for a single item and **`setContents()`** for multiple it
 $div = ComponentBuilder::make(ComponentEnum::DIV)
     ->setContent('Hello');                // single (no key)
     ->setContent('World', 'key_1');       // single with key
-    ->setContents([...]);                 // batch
+    ->setContents([...]);                 // batch (ignores keys)
+    ->setContents([...], overwrite: true); // batch with keys (overwrites existing)
 $div->prependContent('First');            // Prepend
 $div->prependContent('Really', 'k0');     // Prepend with key
 $div->unsetContent();                     // Clear all

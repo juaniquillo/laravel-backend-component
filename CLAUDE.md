@@ -26,10 +26,14 @@ Use **`setContent()`** for a single item and **`setContents()`** for multiple it
 $div = ComponentBuilder::make(ComponentEnum::DIV)
     ->setContent('Hello')                               // appended (no key)
     ->setContent('World', 'key_1')                      // appended with key
-    ->setContents([                                      // batch
+    ->setContents([                                      // batch (ignores keys)
+        ComponentBuilder::make(ComponentEnum::SPAN)->setContent('A'),
+        ComponentBuilder::make(ComponentEnum::SPAN)->setContent('B'),
+    ])
+    ->setContents([                                      // batch with keys (overwrites existing)
         'item_1' => ComponentBuilder::make(ComponentEnum::SPAN)->setContent('A'),
         'item_2' => ComponentBuilder::make(ComponentEnum::SPAN)->setContent('B'),
-    ])
+    ], overwrite: true)
     ->prependContent('First')                           // prepended (no key)
     ->prependContent('Really First', 'key_0')           // prepended with key
     ->unsetContent()                                     // clear all content

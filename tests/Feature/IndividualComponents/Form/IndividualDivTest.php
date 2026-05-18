@@ -106,12 +106,12 @@ class IndividualDivTest extends TestCase
     public function the_component_can_return_an_array_representation()
     {
         $div = (new DivComponent)
-            ->setContents([
+            ->setContents(contents: [
                 'span_1' => ComponentBuilder::make(ComponentEnum::SPAN)
                     ->setContent('Span'),
                 'bold_1' => ComponentBuilder::make(ComponentEnum::BOLD)
                     ->setContent('Bold'),
-            ]);
+            ], overwrite: true);
 
         $divArray = $div->toArray();
 
