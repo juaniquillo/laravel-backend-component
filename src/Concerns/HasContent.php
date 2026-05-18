@@ -45,10 +45,10 @@ trait HasContent
     /**
      * @param  array<string|int, string|int|CompoundComponent|BackendComponent>  $contents
      */
-    public function setContents(array $contents): static
+    public function setContents(array $contents, bool $overwrite = false): static
     {
         foreach ($contents as $key => $content) {
-            $this->setContent($content, $key);
+            $this->setContent($content, $overwrite ? $key : null);
         }
 
         return $this;
