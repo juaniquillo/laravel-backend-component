@@ -209,7 +209,7 @@ class SimpleComponentTest extends TestCase
     public function a_component_can_return_an_array_representation()
     {
         $component = ComponentBuilder::make(ComponentEnum::DIV)
-            ->setContents([
+            ->setContents(contents: [
                 'span_1' => ComponentBuilder::make(ComponentEnum::SPAN)
                     ->setContent('inside a span'),
                 'span_2' => ComponentBuilder::make(ComponentEnum::SPAN)
@@ -219,7 +219,8 @@ class SimpleComponentTest extends TestCase
                             ->setContent('this is a link')
                             ->setTheme('action', 'success')
                     ),
-            ]);
+
+            ], overwrite: true);
 
         $componentArray = $component->toArray();
 
