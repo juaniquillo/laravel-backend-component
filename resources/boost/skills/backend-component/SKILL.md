@@ -60,10 +60,14 @@ Use **`setContent()`** for a single item and **`setContents()`** for multiple it
 $div = ComponentBuilder::make(ComponentEnum::DIV)
     ->setContent('Hello')                               // single (no key)
     ->setContent('World', 'key_1')                      // single with key
-    ->setContents([                                      // batch
+    ->setContents([                                      // batch (ignores keys)
+        ComponentBuilder::make(ComponentEnum::SPAN)->setContent('A'),
+        ComponentBuilder::make(ComponentEnum::SPAN)->setContent('B'),
+    ])
+    ->setContents([                                      // batch with keys (overwrites existing)
         'item_1' => ComponentBuilder::make(ComponentEnum::SPAN)->setContent('A'),
         'item_2' => ComponentBuilder::make(ComponentEnum::SPAN)->setContent('B'),
-    ]);
+    ], overwrite: true);
 ```
 
 ## Setting Attributes
