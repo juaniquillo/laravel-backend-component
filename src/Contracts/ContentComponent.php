@@ -18,7 +18,7 @@ interface ContentComponent
     /**
      * @param  array<string|int, string|int|CompoundComponent|BackendComponent>  $contents
      */
-    public function setContents(array $contents): static;
+    public function setContents(array $contents, bool $overwrite = false): static;
 
     public function prependContent(int|string|CompoundComponent|BackendComponent $content, string|int|null $key = null): static;
 
