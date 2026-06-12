@@ -6,6 +6,7 @@ namespace Tests\Feature\Components\Custom;
 
 use Juaniquillo\BackendComponents\Builders\ComponentBuilder;
 use Juaniquillo\BackendComponents\Enums\ComponentEnum;
+use Juaniquillo\BackendComponents\Utils\ModalUtil;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
@@ -16,22 +17,19 @@ class ModalTest extends TestCase
     #[Test]
     public function simple_modal()
     {
-        $modal = ComponentBuilder::make(ComponentEnum::MODAL);
+        $modal = ModalUtil::make(content: '')->getComponent();
 
         $this->blade('{{ $modal }}', [
             'modal' => $modal,
         ])
-        // inertia's code
-            ->assertSee('x-data="{ \'showModal\': false }"', false)
-        // overlay classes
+            ->assertSee('x-data="{ showModal: false }"', false)
             ->assertSee('class="'.processThemes(['modal' => 'overlay']), false);
     }
 
     #[Test]
     public function modal_accepts_content()
     {
-        $modal = ComponentBuilder::make(ComponentEnum::MODAL)
-            ->setContent("This is the modal's content");
+        $modal = ModalUtil::make(content: "This is the modal's content")->getComponent();
 
         $this->blade('{{ $modal }}', [
             'modal' => $modal,
@@ -42,8 +40,9 @@ class ModalTest extends TestCase
     #[Test]
     public function modal_accepts_attributes()
     {
-        $modal = ComponentBuilder::make(ComponentEnum::MODAL)
-            ->setAttribute('id', 'my_modal');
+        $modal = ModalUtil::make(content: '')
+            ->setAttribute('id', 'my_modal')
+            ->getComponent();
 
         $this->blade('{{ $modal }}', [
             'modal' => $modal,
@@ -55,8 +54,9 @@ class ModalTest extends TestCase
     public function modal_accepts_theme()
     {
         $theme = ['modal' => 'default'];
-        $modal = ComponentBuilder::make(ComponentEnum::MODAL)
-            ->setThemes($theme);
+        $modal = ModalUtil::make(content: '')
+            ->setThemes($theme)
+            ->getComponent();
 
         $this->blade('{{ $modal }}', [
             'modal' => $modal,
@@ -65,16 +65,15 @@ class ModalTest extends TestCase
     }
 
     #[Test]
-    public function modal_accepts_button_slot()
+    public function modal_accepts_button()
     {
-        $modal = ComponentBuilder::make(ComponentEnum::MODAL)
-            ->setSlot(
-                'button',
-                ComponentBuilder::make(ComponentEnum::BUTTON)
-                    ->setContent('Open Modal')
-                    ->setAttribute('type', 'button')
-                    ->setAttribute('@click', 'showModal = true')
-            );
+        $modal = ModalUtil::make(
+            content: '',
+            button: ComponentBuilder::make(ComponentEnum::BUTTON)
+                ->setContent('Open Modal')
+                ->setAttribute('type', 'button')
+                ->setAttribute('@click', 'showModal = true'),
+        )->getComponent();
 
         $this->blade('{{ $modal }}', [
             'modal' => $modal,
@@ -87,15 +86,14 @@ class ModalTest extends TestCase
     }
 
     #[Test]
-    public function modal_accepts_title_slot()
+    public function modal_accepts_title()
     {
-        $modal = ComponentBuilder::make(ComponentEnum::MODAL)
-            ->setSlot(
-                'title',
-                ComponentBuilder::make(ComponentEnum::DIV)
-                    ->setContent('This is the title')
-                    ->setAttribute('id', 'modal_title')
-            );
+        $modal = ModalUtil::make(
+            content: '',
+            title: ComponentBuilder::make(ComponentEnum::DIV)
+                ->setContent('This is the title')
+                ->setAttribute('id', 'modal_title'),
+        )->getComponent();
 
         $this->blade('{{ $modal }}', [
             'modal' => $modal,
@@ -105,38 +103,19 @@ class ModalTest extends TestCase
     }
 
     #[Test]
-    public function modal_accepts_footer_slot()
+    public function modal_accepts_footer()
     {
-        $modal = ComponentBuilder::make(ComponentEnum::MODAL)
-            ->setSlot(
-                'footer',
-                ComponentBuilder::make(ComponentEnum::DIV)
-                    ->setContent('This is the footer')
-                    ->setAttribute('id', 'modal_footer')
-            );
+        $modal = ModalUtil::make(
+            content: '',
+            footer: ComponentBuilder::make(ComponentEnum::DIV)
+                ->setContent('This is the footer')
+                ->setAttribute('id', 'modal_footer'),
+        )->getComponent();
 
         $this->blade('{{ $modal }}', [
             'modal' => $modal,
         ])
             ->assertSee('<div id="modal_footer"', false)
             ->assertSee('This is the footer');
-    }
-
-    #[Test]
-    public function modal_does_not_accept_arbitrary_slots()
-    {
-        $modal = ComponentBuilder::make(ComponentEnum::MODAL)
-            ->setSlot(
-                'arbitrary_slo',
-                ComponentBuilder::make(ComponentEnum::DIV)
-                    ->setContent('This is the arbitrary slot')
-                    ->setAttribute('id', 'modal_arbitrary_slot')
-            );
-
-        $this->blade('{{ $modal }}', [
-            'modal' => $modal,
-        ])
-            ->assertDontSee('<div id="modal_arbitrary_slot"', false)
-            ->assertDontSee('This is the arbitrary slot');
     }
 }

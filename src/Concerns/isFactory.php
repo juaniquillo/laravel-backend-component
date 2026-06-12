@@ -23,7 +23,6 @@ trait isFactory
      *   realPath: string,
      *  },
      *  path?: string,
-     *  slots?: array<string, array<string, int|string>|int|string>,
      *  settings?: array<string, bool|string>,
      *  isLivewire?: bool,
      *  livewireKey?: string|null,
@@ -40,7 +39,7 @@ trait isFactory
      *  name:  int|string,
      *  component: class-string<BackendComponent|CompoundComponent>,
      *  attributes: array<string, int|string|null>,
-     *  contents?: array<string, array<string, int|string>|int|string>,
+     *  contents?: array<string,array<string, int|string>|int|string>,
      *  theme?: array{
      *   manager: class-string<ThemeManager>,
      *   themes: array<string, array<int|string, string>|string>,
@@ -48,7 +47,6 @@ trait isFactory
      *   realPath: string,
      *  },
      *  path?: string,
-     *  slots?: array<string, array<string, int|string>|int|string>,
      *  settings?: array<string, bool|string>,
      *  isLivewire?: bool,
      *  livewireKey?: string|null,
@@ -78,12 +76,6 @@ trait isFactory
 
             $component->setThemeManager($themeManager);
             $component->setThemes($componentArray['theme']['themes']);
-        }
-
-        if (($componentArray['slots'] ?? null) && count($componentArray['slots'])) {
-            $component->setSlots(
-                $this->resolveSlots($componentArray['slots'])
-            );
         }
 
         if (($componentArray['settings'] ?? null) && count($componentArray['settings'])) {
@@ -143,30 +135,6 @@ trait isFactory
         }
 
         return $contents;
-    }
-
-    /**
-     * @param  array<string, array<string, int|string>|int|string>  $slotsArray
-     * @return array<string|int, CompoundComponent|BackendComponent>
-     *
-     * @throws \InvalidArgumentException
-     */
-    public function resolveSlots(array $slotsArray): array
-    {
-        $slots = [];
-
-        foreach ($slotsArray as $name => $slot) {
-
-            /**
-             * Don't know how to describe concurrency
-             * here with phpstan
-             *
-             * @phpstan-ignore argument.type
-             */
-            $slots[$name] = $this->resolveComponent($slot);
-        }
-
-        return $slots;
     }
 
     /**

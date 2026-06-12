@@ -10,7 +10,6 @@ use Juaniquillo\BackendComponents\Components\DefaultAttributeBag;
 use Juaniquillo\BackendComponents\Concerns\HasContent;
 use Juaniquillo\BackendComponents\Concerns\HasPath;
 use Juaniquillo\BackendComponents\Concerns\HasSettings;
-use Juaniquillo\BackendComponents\Concerns\HasSlots;
 use Juaniquillo\BackendComponents\Concerns\IsBackendComponent;
 use Juaniquillo\BackendComponents\Concerns\IsLivewireComponent;
 use Juaniquillo\BackendComponents\Concerns\IsThemeable;
@@ -25,7 +24,6 @@ final class MainBackendComponent implements CompoundComponent, Htmlable
     use HasContent,
         HasPath,
         HasSettings,
-        HasSlots,
         IsBackendComponent,
         IsLivewireComponent,
         IsThemeable;
@@ -42,7 +40,6 @@ final class MainBackendComponent implements CompoundComponent, Htmlable
             $this->processContent(),
             $this->compileTheme(),
             $this->getComponentPath(),
-            $this->getSlots(),
             $this->getSettings(),
             $this->isLivewire(),
             $this->getLivewireKey(),
@@ -63,7 +60,6 @@ final class MainBackendComponent implements CompoundComponent, Htmlable
      *   realPath: string,
      *  },
      *  path: string|null,
-     *  slots: array<string, array<string, int|string>|int|string>,
      *  settings: array<string, bool|string>,
      *  isLivewire: bool,
      *  livewireKey: string|null,
@@ -84,7 +80,6 @@ final class MainBackendComponent implements CompoundComponent, Htmlable
                 'realPath' => $this->themeManager->getThemePath(),
             ],
             'path' => $this->getPathOnly(),
-            'slots' => $this->processSlots()->toArray(),
             'settings' => $this->getSettings(),
             'isLivewire' => $this->isLivewire(),
             'livewireKey' => $this->getLivewireKey(),

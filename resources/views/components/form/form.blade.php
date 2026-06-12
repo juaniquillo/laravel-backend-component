@@ -27,7 +27,6 @@
         
         $content = $attrs->content;
         
-        $slots = $attrs->slots;
         $settings = $attrs->settings;
 
         $method =  $serverAttrs['method'] ?? $method;
