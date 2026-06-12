@@ -96,9 +96,4 @@ enum ComponentEnum: string
      */
     case DIALOG = 'layers.dialog';
 
-    /**
-     * Custom (deprecated — use ModalUtil instead)
-     */
-    case MODAL = 'custom.modal';
-
 }

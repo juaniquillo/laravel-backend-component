@@ -63,7 +63,7 @@ $livewire = ComponentBuilder::make(ComponentEnum::DIV)
 ### Settings bag
 
 ```php
-$component = ComponentBuilder::make(ComponentEnum::MODAL)
+$component = ComponentBuilder::make(ComponentEnum::DIV)
     ->setSetting('transition', 'fade')
     ->setSettings(['setting_1' => 'value_1', 'setting_2' => 'value_2']);
 ```
@@ -111,6 +111,28 @@ $div->setContent('Hello');
 ```
 
 Currently only `DivComponent` exists in this category — add more as needed.
+
+### Modal utility
+
+`ModalUtil` builds a complete modal component tree with Alpine.js interactivity:
+
+```php
+use Juaniquillo\BackendComponents\Utils\ModalUtil;
+
+$modal = ModalUtil::make(
+    content: 'Hello World',
+    button: ComponentBuilder::make(ComponentEnum::BUTTON)
+        ->setContent('Open')
+        ->setAttribute('@click', 'showModal = true'),
+    title: ComponentBuilder::make(ComponentEnum::H2)->setContent('Title'),
+    footer: ComponentBuilder::make(ComponentEnum::DIV)->setContent('Footer'),
+)
+    ->setAttribute('id', 'my-modal')
+    ->setTheme('modal', 'lg')
+    ->getComponent();
+```
+
+The modal is composed from `DIV` components with Alpine.js attributes — no separate blade template or slots needed.
 
 ### Table utilities
 
@@ -181,7 +203,6 @@ $component = ComponentBuilder::make(ComponentEnum::BUTTON)
 **Lists:** `OL`, `UL`, `LI`
 **Details:** `DETAILS`, `SUMMARY`
 **Layers:** `DIALOG`
-**Custom:** `MODAL`
 
 ## Blade template conventions
 
@@ -221,4 +242,4 @@ vendor/bin/phpstan   # Static analysis (level 8)
 - `declare(strict_types=1)` on all PHP files
 - Fluent return types (`: static`) on setters
 - Docblock `@param` / `@return` for array generics
-- Trait-per-concern pattern (9 traits in `src/Concerns/`)
+- Trait-per-concern pattern (8 traits in `src/Concerns/`)

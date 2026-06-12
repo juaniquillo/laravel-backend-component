@@ -109,6 +109,11 @@ final class ModalUtil
 
         if ($this->themes !== []) {
             $innerContentDiv->setThemes($this->themes);
+        } else {
+            $innerContentDiv->setTheme('modal', [
+                'default',
+                'xl',
+            ]);
         }
 
         if ($this->attributes !== []) {
@@ -123,13 +128,21 @@ final class ModalUtil
             $innerItems['title'] = $this->title;
         }
 
-        $innerItems[] = $this->content;
+        $content = $this->content;
+
+        if (\is_string($content) || \is_int($content)) {
+            $content = (new MainBackendComponent(ComponentEnum::DIV, $this->themeManager))
+                ->setContent($content)
+                ->setTheme('padding', 'sm');
+        }
+
+        $innerItems[] = $content;
 
         if ($this->footer !== null) {
             $innerItems['footer'] = $this->footer;
         }
 
-        $innerContentDiv->setContents($innerItems, overwrite: true);
+        $innerContentDiv->setContents(contents: $innerItems, overwrite: true);
 
         // Content wrapper with trap and transitions
         $contentWrapper = new MainBackendComponent(ComponentEnum::DIV, $this->themeManager);
@@ -164,9 +177,15 @@ final class ModalUtil
         /** @var array<string|int, string|int|CompoundComponent> $rootContents */
         $rootContents = [];
 
-        if ($this->button !== null) {
-            $rootContents[] = $this->button;
-        }
+        $button = $this->button ?? (new MainBackendComponent(ComponentEnum::BUTTON, $this->themeManager))
+            ->setContent('Open Modal')
+            ->setAttribute('type', 'button')
+            ->setAttribute('@click', 'showModal = true')
+            ->setTheme('action', 'info')
+            ->setTheme('padding', 'button-compact')
+            ->setTheme('border-radius', 'sm');
+
+        $rootContents[] = $button;
 
         $rootContents[] = $modalWrapper;
         $root->setContents($rootContents);

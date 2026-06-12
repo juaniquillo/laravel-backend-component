@@ -16,6 +16,7 @@ Use this skill when the user needs to:
 - Add a new component type (enum case + blade file + tests)
 - Use the concrete `DivComponent` for quick divs without the builder
 - Build tables programmatically using `TableUtil` and `CellBag`
+- Build modals programmatically using `ModalUtil`
 - Resolve components or themes from the consuming app's local views
 
 ## Creating Components
@@ -50,7 +51,6 @@ $custom = ComponentBuilder::make('inline.button');
 | **Lists** | `OL`, `UL`, `LI` |
 | **Details** | `DETAILS`, `SUMMARY` |
 | **Layers** | `DIALOG` |
-| **Custom** | `MODAL` |
 
 ## Setting Content
 
@@ -150,6 +150,28 @@ $div->setContent('Hello');
 ```
 
 Currently only `DivComponent` exists in this category — add more as needed.
+
+## Modal Utility
+
+`ModalUtil` builds a complete modal component tree with Alpine.js interactivity:
+
+```php
+use Juaniquillo\BackendComponents\Utils\ModalUtil;
+
+$modal = ModalUtil::make(
+    content: 'Hello World',
+    button: ComponentBuilder::make(ComponentEnum::BUTTON)
+        ->setContent('Open')
+        ->setAttribute('@click', 'showModal = true'),
+    title: ComponentBuilder::make(ComponentEnum::H2)->setContent('Title'),
+    footer: ComponentBuilder::make(ComponentEnum::DIV)->setContent('Footer'),
+)
+    ->setAttribute('id', 'my-modal')
+    ->setTheme('modal', 'lg')
+    ->getComponent();
+```
+
+The modal is composed from `DIV` components with Alpine.js attributes — no separate blade template or slots needed.
 
 ## Table Utilities
 

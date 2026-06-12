@@ -115,10 +115,30 @@ $table = TableUtil::make(
 )->getComponent();
 ```
 
+### Modal utility
+
+ModalUtil builds a complete modal tree with Alpine.js interactivity — no separate blade template or slots needed:
+
+```php
+use Juaniquillo\BackendComponents\Utils\ModalUtil;
+
+$modal = ModalUtil::make(
+    content: 'Hello World',
+    button: ComponentBuilder::make(ComponentEnum::BUTTON)
+        ->setContent('Open')
+        ->setAttribute('@click', 'showModal = true'),
+    title: ComponentBuilder::make(ComponentEnum::H2)->setContent('Title'),
+    footer: ComponentBuilder::make(ComponentEnum::DIV)->setContent('Footer'),
+)
+    ->setAttribute('id', 'my-modal')
+    ->setTheme('modal', 'lg')
+    ->getComponent();
+```
+
 ### Settings
 
 ```php
-$component = ComponentBuilder::make(ComponentEnum::MODAL)
+$component = ComponentBuilder::make(ComponentEnum::DIV)
     ->setSetting('transition', 'fade')
     ->setSettings(['setting_1' => 'value_1']);
 ```
@@ -144,7 +164,6 @@ ComponentBuilder::make('my-livewire-component')
 - **Lists:** `OL`, `UL`, `LI`
 - **Details:** `DETAILS`, `SUMMARY`
 - **Layers:** `DIALOG`
-- **Custom:** `MODAL`
 
 ### View conventions
 
