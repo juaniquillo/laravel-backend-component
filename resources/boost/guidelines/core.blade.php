@@ -22,6 +22,9 @@ use Juaniquillo\BackendComponents\Enums\ComponentEnum;
 
 $button = ComponentBuilder::make(ComponentEnum::BUTTON);
 $div    = ComponentBuilder::make(ComponentEnum::DIV);
+// Or directly — second param controls theme resolution:
+$div = new MainBackendComponent('div');                        // package themes
+$div = new MainBackendComponent('div', new LocalThemeManager); // app-local themes
 ```
 
 ### Content management
