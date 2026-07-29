@@ -167,25 +167,6 @@ class SimpleComponentTest extends TestCase
     }
 
     #[Test]
-    public function a_component_accepts_slots()
-    {
-        $component = ComponentBuilder::make(ComponentEnum::MODAL)
-            ->setSlot('button', ComponentBuilder::make(ComponentEnum::BUTTON));
-
-        $this->assertInstanceOf(MainBackendComponent::class, $component->getSlot('button'));
-
-        $component2 = ComponentBuilder::make(ComponentEnum::MODAL)
-            ->setSlots([
-                'title' => ComponentBuilder::make(ComponentEnum::H2)
-                    ->setContent('Nice Title', 1),
-            ]);
-
-        $this->assertInstanceOf(MainBackendComponent::class, $component2->getSlot('title'));
-        $this->assertEquals('Nice Title', ($component2->getSlots()['title'])->getContent(1));
-
-    }
-
-    #[Test]
     public function a_component_string_representation_is_a_json_object()
     {
         $component = ComponentBuilder::make(ComponentEnum::DIV);
@@ -271,35 +252,15 @@ class SimpleComponentTest extends TestCase
     }
 
     #[Test]
-    public function a_component_with_a_slot_can_be_recreated_from_an_array()
-    {
-        $component = ComponentBuilder::make(ComponentEnum::MODAL)
-            ->setSlot('button', ComponentBuilder::make(ComponentEnum::BUTTON)
-                ->setContent('Click me'))
-            ->setAttribute('@click', 'showModal = true')
-            ->setTheme('action', 'default')
-            ->setAttribute('id', 'modal_id')
-            ->setTheme('size', 'large');
-
-        $componentArray = $component->toArray();
-
-        $recreatedComponent = ComponentFactory::fromArray($componentArray);
-
-        $this->assertEquals($componentArray, $recreatedComponent->toArray());
-    }
-
-    #[Test]
     public function a_component_with_a_settings_can_be_recreated_from_an_array()
     {
-        $component = ComponentBuilder::make(ComponentEnum::MODAL)
+        $component = ComponentBuilder::make(ComponentEnum::DIV)
             ->setSettings([
                 'setting_1' => 'value_1',
                 'setting_2' => 'value_2',
             ])
-            ->setAttribute('@click', 'showModal = true')
-            ->setTheme('action', 'default')
-            ->setAttribute('id', 'modal_id')
-            ->setTheme('size', 'large');
+            ->setAttribute('id', 'div_id')
+            ->setTheme('display', 'block');
 
         $componentArray = $component->toArray();
 

@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace Juaniquillo\BackendComponents\Components;
 
 use Juaniquillo\BackendComponents\Contracts\AttributeBag;
-use Juaniquillo\BackendComponents\Contracts\BackendComponent;
-use Juaniquillo\BackendComponents\Contracts\CompoundComponent;
 use Juaniquillo\BackendComponents\Contracts\ContentsComponent;
 
 readonly class DefaultAttributeBag implements AttributeBag
@@ -17,8 +15,6 @@ readonly class DefaultAttributeBag implements AttributeBag
         public readonly ?ContentsComponent $content = null,
         public readonly ?string $themes = null,
         public readonly ?string $path = null,
-        /** @var array<int|string, CompoundComponent|BackendComponent> $slots */
-        public readonly array $slots = [],
         /** @var array<string, bool|string> $settings */
         public readonly array $settings = [],
         public readonly bool $isLivewire = false,

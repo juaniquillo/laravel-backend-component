@@ -4,11 +4,8 @@ declare(strict_types=1);
 
 namespace Feature\Utils;
 
-use Juaniquillo\BackendComponents\Builders\ComponentBuilder;
 use Juaniquillo\BackendComponents\Components\DefaultAttributeBag;
 use Juaniquillo\BackendComponents\Contracts\AttributeBag;
-use Juaniquillo\BackendComponents\Contracts\BackendComponent;
-use Juaniquillo\BackendComponents\Enums\ComponentEnum;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
@@ -24,7 +21,6 @@ class AttributeBagTest extends TestCase
         $this->assertInstanceOf(AttributeBag::class, $bag);
         $this->assertEmpty($bag->getAttributes());
         $this->assertEmpty($bag->themes);
-        $this->assertEmpty($bag->slots);
     }
 
     #[Test]
@@ -107,28 +103,6 @@ class AttributeBagTest extends TestCase
 
         $this->assertInstanceOf(AttributeBag::class, $bag);
         $this->assertEquals('test-class', $bag->getAttributes()['class']);
-    }
-
-    #[Test]
-    public function a_bag_can_handle_slots()
-    {
-        $slots = [
-            'slot1' => ComponentBuilder::make(ComponentEnum::SPAN),
-            'slot2' => ComponentBuilder::make(ComponentEnum::BOLD),
-        ];
-
-        $bag = new DefaultAttributeBag(
-            attributes: [],
-            slots: $slots,
-        );
-
-        $this->assertInstanceOf(AttributeBag::class, $bag);
-        $this->assertArrayHasKey('slot1', $bag->slots);
-        $this->assertArrayHasKey('slot2', $bag->slots);
-
-        $this->assertInstanceOf(BackendComponent::class, $bag->slots['slot1']);
-        $this->assertInstanceOf(BackendComponent::class, $bag->slots['slot2']);
-
     }
 
     #[Test]
