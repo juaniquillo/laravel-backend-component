@@ -16,6 +16,7 @@ use Juaniquillo\BackendComponents\Enums\ComponentEnum;
 
 $button = ComponentBuilder::make(ComponentEnum::BUTTON);
 $div = new MainBackendComponent('div');
+$div = new MainBackendComponent('div', new LocalThemeManager);  // app-local themes
 ```
 
 ### Setting content
