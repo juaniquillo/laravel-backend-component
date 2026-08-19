@@ -135,12 +135,17 @@ trait IsThemeManager
     /**
      * @param  array<string, string>  $styleGroup
      * @param  string|array<int|string, string>  $theme
+     *
+     * @throws ThemeDoesNotExistsException
      */
     public function resolveTheme(array $styleGroup, string|array $theme): string
     {
         $value = '';
 
         if (is_string($theme)) {
+            if (! \array_key_exists($theme, $styleGroup)) {
+                throw new ThemeDoesNotExistsException("Theme variant '{$theme}' does not exist in the theme group. Available variants: ".implode(', ', array_keys($styleGroup)));
+            }
 
             $value = $styleGroup[$theme];
 
@@ -156,12 +161,18 @@ trait IsThemeManager
     /**
      * @param  array<string, string>  $styleGroup
      * @param  array<int|string, string>  $theme
+     *
+     * @throws ThemeDoesNotExistsException
      */
     public function resolveArrayThemes(array $styleGroup, array $theme): string
     {
         $value = '';
 
         foreach ($theme as $style) {
+            if (! \array_key_exists($style, $styleGroup)) {
+                throw new ThemeDoesNotExistsException("Theme variant '{$style}' does not exist in the theme group. Available variants: ".implode(', ', array_keys($styleGroup)));
+            }
+
             $value .= $styleGroup[$style].' ';
         }
 
