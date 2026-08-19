@@ -164,7 +164,7 @@ final class TableUtil
             $contents[] = $this->composeComponent(ComponentEnum::CAPTION, $this->caption, $this->captionThemes);
         }
 
-        if (count($this->head)) {
+        if (\count($this->head)) {
             $contents[] = $this->head();
         }
 
@@ -254,7 +254,7 @@ final class TableUtil
             return $content->content;
         }
 
-        if (is_array($content)) {
+        if (\is_array($content)) {
             return $content['content'];
         }
 
@@ -281,7 +281,7 @@ final class TableUtil
             return $content->theme;
         }
 
-        if (is_array($content) && isset($content['theme'])) {
+        if (\is_array($content) && isset($content['theme'])) {
             return $content['theme'];
         }
 
@@ -303,7 +303,7 @@ final class TableUtil
             return $content->attributes;
         }
 
-        if (is_array($content) && isset($content['attributes'])) {
+        if (\is_array($content) && isset($content['attributes'])) {
             return $content['attributes'];
         }
 
@@ -318,7 +318,7 @@ final class TableUtil
      */
     public function composeComponent(BackedEnum $name, int|array|string|CompoundComponent $contents, ?array $theme = null, ?array $attributes = null): CompoundComponent
     {
-        $contents = is_array($contents) ? $contents : [$contents];
+        $contents = \is_array($contents) ? $contents : [$contents];
 
         $component = (new MainBackendComponent($name, $this->themeManager))
             ->setContents($contents);

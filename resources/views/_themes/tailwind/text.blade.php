@@ -24,4 +24,9 @@ return [
     'lowercase' =>  "lowercase",
     'capitalize' => "capitalize",
     'normal-case' => "normal-case",
+
+    'truncate' => "truncate",
+    'underline' => "underline",
+    'no-underline' => "no-underline",
+    'line-through' => "line-through",
 ];

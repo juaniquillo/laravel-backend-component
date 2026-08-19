@@ -78,6 +78,19 @@ $button = ComponentBuilder::make(ComponentEnum::BUTTON)
     ->setThemes(['action' => 'success', 'size' => 'lg']); // batch
 ```
 
+Themes accumulate by default — calling `setTheme` with the same name appends rather than replaces:
+
+```php
+$button = ComponentBuilder::make(ComponentEnum::BUTTON)
+    ->setTheme('action', 'success')
+    ->setTheme('action', 'error');
+// theme['action'] = ['success', 'error']
+
+// Use overwrite: true to replace instead
+$button->setTheme('action', 'link', overwrite: true);
+// theme['action'] = 'link'
+```
+
 Theme files live in `resources/views/_themes/tailwind/` and return PHP arrays of CSS classes keyed by variant name:
 
 ```php
@@ -241,6 +254,7 @@ vendor/bin/phpstan   # Static analysis (level 8)
 - PHP 8.2+, strict types, PSR-4 (`Juaniquillo\BackendComponents` → `src/`)
 - Namespaced helpers in `src/helpers.php` (import with `use function Juaniquillo\BackendComponents\processThemes;`)
 - `declare(strict_types=1)` on all PHP files
+- Prefix global PHP functions with `\` (e.g., `\is_array()`, `\count()`, `\trim()`)
 - Fluent return types (`: static`) on setters
 - Docblock `@param` / `@return` for array generics
 - Trait-per-concern pattern (8 traits in `src/Concerns/`)

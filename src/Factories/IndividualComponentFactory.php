@@ -24,7 +24,7 @@ final class IndividualComponentFactory
         $componentClass = $componentArray['component'];
 
         return match (true) {
-            in_array(IndividualComponent::class, class_implements($componentClass)) => (new $componentClass),
+            \in_array(IndividualComponent::class, \class_implements($componentClass)) => (new $componentClass),
             default => (new $componentClass($componentArray['name'])),
         };
 

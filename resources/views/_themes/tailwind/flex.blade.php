@@ -20,6 +20,12 @@ return [
     'items-baseline' => "items-baseline",
     'items-stretch' => "items-stretch",
 
+    'justify-center' => "justify-center",
+    'justify-start' => "justify-start",
+    'justify-end' => "justify-end",
+    'justify-baseline' => "justify-baseline",
+    'justify-stretch' => "justify-stretch",
+    
     'justify-items-start' => "justify-items-start",
     'justify-items-end' => "justify-items-end",
     'justify-items-center' => "justify-items-center",

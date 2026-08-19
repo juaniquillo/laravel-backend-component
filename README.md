@@ -104,6 +104,16 @@ $button = ComponentBuilder::make(ComponentEnum::BUTTON)
     ->setTheme('theme_file', 'theme_name');
 ```
 
+Themes accumulate by default — calling `setTheme` with the same name appends rather than replaces. Use `overwrite: true` to replace:
+
+```php
+$button = ComponentBuilder::make(ComponentEnum::BUTTON)
+    ->setTheme('action', 'success')
+    ->setTheme('action', 'error');      // theme['action'] = ['success', 'error']
+
+$button->setTheme('action', 'link', overwrite: true); // theme['action'] = 'link'
+```
+
 ## Serialization
 
 Component trees can be serialized to arrays and restored, preserving attributes, content, themes, and Livewire state:

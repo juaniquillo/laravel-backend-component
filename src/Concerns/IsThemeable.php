@@ -44,22 +44,45 @@ trait IsThemeable
     }
 
     /**
-     * @param  string|array<string|int, string>  $theme
+     * @param  string|array<int|string, string>  $theme
      */
-    public function setTheme(string $name, string|array $theme): static
+    public function setTheme(string $name, string|array $theme, bool $overwrite = false): static
     {
-        $this->themes[$name] = $theme;
+        if ($overwrite) {
+            $this->themes[$name] = $theme;
+
+            return $this;
+        }
+
+        $existing = $this->themes[$name] ?? null;
+
+        if ($existing === null) {
+            $this->themes[$name] = $theme;
+
+            return $this;
+        }
+
+        $existingArray = \is_array($existing) ? $existing : [$existing];
+        $newValues = \is_array($theme) ? $theme : [$theme];
+
+        foreach ($newValues as $value) {
+            if (! \in_array($value, $existingArray, true)) {
+                $existingArray[] = $value;
+            }
+        }
+
+        $this->themes[$name] = $existingArray;
 
         return $this;
     }
 
     /**
-     * @param  array<string, string|array<string|int, string>>  $themes
+     * @param  array<string, string|array<int|string, string>>  $themes
      */
-    public function setThemes(array $themes): static
+    public function setThemes(array $themes, bool $overwrite = false): static
     {
         foreach ($themes as $name => $theme) {
-            $this->setTheme($name, $theme);
+            $this->setTheme($name, $theme, $overwrite);
         }
 
         return $this;
@@ -69,7 +92,7 @@ trait IsThemeable
     {
         $themes = $this->getThemes();
 
-        if (! count($themes)) {
+        if (! \count($themes)) {
             return null;
         }
 

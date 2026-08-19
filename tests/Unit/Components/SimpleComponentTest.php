@@ -167,6 +167,70 @@ class SimpleComponentTest extends TestCase
     }
 
     #[Test]
+    public function set_theme_accumulates_string_values()
+    {
+        $component = ComponentBuilder::make(ComponentEnum::DIV)
+            ->setTheme('action', 'success')
+            ->setTheme('action', 'error');
+
+        $this->assertEquals(['success', 'error'], $component->getTheme('action'));
+    }
+
+    #[Test]
+    public function set_theme_accumulates_array_values()
+    {
+        $component = ComponentBuilder::make(ComponentEnum::DIV)
+            ->setTheme('action', 'success')
+            ->setTheme('action', ['error', 'link']);
+
+        $this->assertEquals(['success', 'error', 'link'], $component->getTheme('action'));
+    }
+
+    #[Test]
+    public function set_theme_does_not_add_duplicates()
+    {
+        $component = ComponentBuilder::make(ComponentEnum::DIV)
+            ->setTheme('action', 'success')
+            ->setTheme('action', 'success');
+
+        $this->assertEquals(['success'], $component->getTheme('action'));
+    }
+
+    #[Test]
+    public function set_theme_does_not_add_duplicates_from_array()
+    {
+        $component = ComponentBuilder::make(ComponentEnum::DIV)
+            ->setTheme('action', 'success')
+            ->setTheme('action', ['success', 'error']);
+
+        $this->assertEquals(['success', 'error'], $component->getTheme('action'));
+    }
+
+    #[Test]
+    public function set_theme_with_overwrite_replaces_value()
+    {
+        $component = ComponentBuilder::make(ComponentEnum::DIV)
+            ->setTheme('action', 'success')
+            ->setTheme('action', 'error', overwrite: true);
+
+        $this->assertEquals('error', $component->getTheme('action'));
+    }
+
+    #[Test]
+    public function set_themes_accumulates_multiple_themes()
+    {
+        $component = ComponentBuilder::make(ComponentEnum::DIV)
+            ->setTheme('action', 'success')
+            ->setThemes([
+                'action' => 'error',
+                'display' => 'block',
+            ]);
+
+        $this->assertEquals(['success', 'error'], $component->getTheme('action'));
+        $this->assertEquals('block', $component->getTheme('display'));
+    }
+
+    #[Test]
     public function a_component_string_representation_is_a_json_object()
     {
         $component = ComponentBuilder::make(ComponentEnum::DIV);

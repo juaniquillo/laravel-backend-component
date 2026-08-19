@@ -60,7 +60,7 @@ trait HasPath
 
     public function getComponentPath(): string
     {
-        return trim(
+        return \trim(
             string: $this->getPath().'.'.$this->getName(),
             characters: '.',
         );

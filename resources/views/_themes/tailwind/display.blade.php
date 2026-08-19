@@ -24,4 +24,7 @@ return [
     'table' => 'table',
     'table-md' => 'md:table',
     'table-lg' => 'lg:table',
+
+    'hidden' => 'hidden',
+    'contents' => 'contents',
 ];

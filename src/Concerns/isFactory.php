@@ -78,7 +78,7 @@ trait isFactory
             $component->setThemes($componentArray['theme']['themes']);
         }
 
-        if (($componentArray['settings'] ?? null) && count($componentArray['settings'])) {
+        if (($componentArray['settings'] ?? null) && \count($componentArray['settings'])) {
             $component->setSettings($componentArray['settings']);
         }
 
@@ -93,7 +93,7 @@ trait isFactory
                 $component->setLivewireKey($componentArray['livewireKey']);
             }
 
-            if (($componentArray['livewireParams'] ?? null) && count($componentArray['livewireParams'])) {
+            if (($componentArray['livewireParams'] ?? null) && \count($componentArray['livewireParams'])) {
                 $component->setLivewireParams($componentArray['livewireParams']);
             }
         }
@@ -123,7 +123,7 @@ trait isFactory
         $contents = [];
 
         foreach ($contentsArray as $name => $content) {
-            $contents[$name] = is_array($content)
+            $contents[$name] = \is_array($content)
                 /**
                  * Don't know how to describe concurrency
                  * here with phpstan
