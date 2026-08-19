@@ -20,4 +20,14 @@ return [
     'bottom-lg' => "mb-12",
     'left-lg' => "ml-12",
     'right-lg' => "mr-12",
+
+    'x-xs' => "mx-1",
+    'x-sm' => "mx-3",
+    'x-md' => "mx-6",
+    'x-lg' => "mx-12",
+
+    'y-xs' => "my-1",
+    'y-sm' => "my-3",
+
+    'auto' => "mx-auto",
 ];

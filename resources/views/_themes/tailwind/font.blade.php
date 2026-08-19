@@ -1,14 +1,7 @@
 <?php
 
 return [
-    'extrabold' => "font-extrabold",
-    'bold' => "font-bold",
-    'semibold' => "font-semibold",
-    'medium' => "font-medium",
     'thin' => "font-thin",
-    'italic' => "italic",
-    'not-italic' => "not-italic",
-    'thin' => "thin",
     'extralight' => "font-extralight",
     'light' => "font-light",
     'normal' => "font-normal",
@@ -17,4 +10,11 @@ return [
     'bold' => "font-bold",
     'extrabold' => "font-extrabold",
     'black' => "font-black",
+
+    'italic' => "italic",
+    'not-italic' => "not-italic",
+
+    'sans' => "font-sans",
+    'serif' => "font-serif",
+    'mono' => "font-mono",
 ];

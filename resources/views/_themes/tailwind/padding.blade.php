@@ -21,6 +21,14 @@ return [
     'left-md' => "pl-8",
     'right-md' => "pr-8",
     
+    'x-xs' => "px-2",
+    'x-sm' => "px-4",
+    'x-md' => "px-8",
+
+    'y-xs' => "py-2",
+    'y-sm' => "py-4",
+    'y-md' => "py-8",
+
     'button' => "py-2 px-4",
     'button-compact' => "py-1 px-2",
     'button-medium' => "py-1 px-3",

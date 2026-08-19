@@ -2,7 +2,7 @@
 
 return [
     'w-full' => "w-full",
-    'w-half' => "w-1/4",
+    'w-half' => "w-1/2",
     
     'sm' => "w-2 h-2",
     'md' => "w-4 h-4",
