@@ -78,6 +78,19 @@ $button = ComponentBuilder::make(ComponentEnum::BUTTON)
     ->setThemes(['action' => 'success', 'size' => 'lg']); // batch
 ```
 
+Themes accumulate by default — calling `setTheme` with the same name appends rather than replaces:
+
+```php
+$button = ComponentBuilder::make(ComponentEnum::BUTTON)
+    ->setTheme('action', 'success')
+    ->setTheme('action', 'error');
+// theme['action'] = ['success', 'error']
+
+// Use overwrite: true to replace instead
+$button->setTheme('action', 'link', overwrite: true);
+// theme['action'] = 'link'
+```
+
 Theme files live in `resources/views/_themes/tailwind/` and return PHP arrays of CSS classes keyed by variant name:
 
 ```php
