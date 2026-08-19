@@ -30,8 +30,10 @@ final class MainBackendComponent implements CompoundComponent, Htmlable
 
     public function __construct(
         private string|BackedEnum $name,
-        private ThemeManager $themeManager = new DefaultThemeManager
-    ) {}
+        ThemeManager $themeManager = new DefaultThemeManager
+    ) {
+        $this->themeManager = $themeManager;
+    }
 
     public function getAttributeBag(): AttributeBag
     {
