@@ -35,9 +35,7 @@ final class DivComponent implements BackendComponent, ContentsComponent, Htmlabl
         return new self($themeManager);
     }
 
-    /**
-     * @return array<string, array<string, array<string, array<int|string, string>|int|string>|int|string|null>|string>
-     */
+    /** @return array<string, mixed> */
     public function toArray(): array
     {
         return [
@@ -47,6 +45,7 @@ final class DivComponent implements BackendComponent, ContentsComponent, Htmlabl
             'contents' => $this->processContent()->toArray(),
             'theme' => [
                 'manager' => get_class($this->themeManager),
+                /** @var array<string, string|array<string|int, string>> */
                 'themes' => $this->getThemes(),
                 'path' => $this->themeManager->getDefaultPath(),
                 'realPath' => $this->themeManager->getThemePath(),
