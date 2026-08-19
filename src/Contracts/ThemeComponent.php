@@ -11,12 +11,12 @@ interface ThemeComponent
     /**
      * @param  string|array<string|int, string>  $theme
      */
-    public function setTheme(string $name, string|array $theme): static;
+    public function setTheme(string $name, string|array $theme, bool $overwrite = false): static;
 
     /**
      * @param  array<string, string|array<string|int, string>>  $themes
      */
-    public function setThemes(array $themes): static;
+    public function setThemes(array $themes, bool $overwrite = false): static;
 
     /**
      * @return array<string, string|array<string|int, string>>

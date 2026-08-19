@@ -25,6 +25,7 @@
 - **Themes** live in `resources/views/_themes/tailwind/`. Each file returns a PHP array keyed by variant name.
 - **Serialization**: `$component->toArray()` / `ComponentFactory::fromArray($array)` preserves full component tree recursively.
 - **Livewire**: Use `->setLivewire()`, `->setLivewireKey('key')`, `->setLivewireParams(['param' => 'value'])`.
+- **Themes accumulate by default**: `->setTheme('action', 'success')` then `->setTheme('action', 'error')` produces `['success', 'error']`. Use `->setTheme('action', 'error', overwrite: true)` to replace.
 
 ## Builders & local resolution
 
