@@ -92,7 +92,7 @@ trait IsThemeable
     {
         $themes = $this->getThemes();
 
-        if (! count($themes)) {
+        if (! \count($themes)) {
             return null;
         }
 

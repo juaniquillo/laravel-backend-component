@@ -27,14 +27,14 @@ final class ThemeList
     public function scanFiles(): array
     {
         $path = $this->path;
-        $realpath = realpath($path);
+        $realpath = \realpath($path);
 
         if (! $realpath) {
             throw new \Exception("The path ({$path}) is incorrect", 500);
         }
 
         /** @var array<int, string> $files */
-        $files = scandir($realpath);
+        $files = \scandir($realpath);
 
         $themes = $this->getThemes($files);
 
@@ -62,7 +62,7 @@ final class ThemeList
 
             $path = $this->path;
 
-            $realPath = realpath($path.'/'.$subFile.'/'.$file);
+            $realPath = \realpath($path.'/'.$subFile.'/'.$file);
 
             if (! $realPath) {
                 throw new \Exception('The theme file '.$file.' does not exist', 500);

@@ -41,6 +41,7 @@ Use `ComponentBuilder::make(ComponentEnum::BUTTON)->useLocal()` to resolve from 
 
 - `declare(strict_types=1)` is enforced by Pint (`pint.json` rule)
 - PSR-4: `Juaniquillo\BackendComponents` → `src/`
+- Prefix global PHP functions with `\` (e.g., `\is_array()`, `\count()`, `\trim()`)
 - Fluent return types (`: static`) on all setters
 - Namespaced helpers in `src/helpers.php`; import with `use function Juaniquillo\BackendComponents\processThemes;`
 - Trait-per-concern pattern: 8 traits in `src/Concerns/`

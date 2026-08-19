@@ -254,6 +254,7 @@ vendor/bin/phpstan   # Static analysis (level 8)
 - PHP 8.2+, strict types, PSR-4 (`Juaniquillo\BackendComponents` → `src/`)
 - Namespaced helpers in `src/helpers.php` (import with `use function Juaniquillo\BackendComponents\processThemes;`)
 - `declare(strict_types=1)` on all PHP files
+- Prefix global PHP functions with `\` (e.g., `\is_array()`, `\count()`, `\trim()`)
 - Fluent return types (`: static`) on setters
 - Docblock `@param` / `@return` for array generics
 - Trait-per-concern pattern (8 traits in `src/Concerns/`)

@@ -49,7 +49,7 @@ trait IsThemeManager
     public function getThemePath(): string
     {
         $defaultPath = $this->getDefaultPath();
-        $path = realpath($defaultPath);
+        $path = \realpath($defaultPath);
 
         if (! $path) {
             throw new IncorrectThemePathException("The theme path ({$defaultPath}) is incorrect");
@@ -82,7 +82,7 @@ trait IsThemeManager
      */
     public function processThemes(array $themes): ?string
     {
-        if (! count($themes)) {
+        if (! \count($themes)) {
             return null;
         }
 
@@ -92,7 +92,7 @@ trait IsThemeManager
             $classes .= $this->processTheme($type, $theme).' ';
         }
 
-        return trim($classes);
+        return \trim($classes);
     }
 
     /**
@@ -106,7 +106,7 @@ trait IsThemeManager
 
         $filePath = $themePath.'/'.$type.self::THEME_EXTENSION;
 
-        $realPath = realpath($filePath);
+        $realPath = \realpath($filePath);
 
         if ($realPath === false) {
             throw new ThemeDoesNotExistsException('The theme file '.$filePath.' does not exist');
@@ -142,14 +142,14 @@ trait IsThemeManager
     {
         $value = '';
 
-        if (is_string($theme)) {
+        if (\is_string($theme)) {
             if (! \array_key_exists($theme, $styleGroup)) {
-                throw new ThemeDoesNotExistsException("Theme variant '{$theme}' does not exist in the theme group. Available variants: ".implode(', ', array_keys($styleGroup)));
+                throw new ThemeDoesNotExistsException("Theme variant '{$theme}' does not exist in the theme group. Available variants: ".\implode(', ', \array_keys($styleGroup)));
             }
 
             $value = $styleGroup[$theme];
 
-        } elseif (is_array($theme)) {
+        } elseif (\is_array($theme)) {
 
             $value .= $this->resolveArrayThemes($styleGroup, $theme);
 
@@ -170,7 +170,7 @@ trait IsThemeManager
 
         foreach ($theme as $style) {
             if (! \array_key_exists($style, $styleGroup)) {
-                throw new ThemeDoesNotExistsException("Theme variant '{$style}' does not exist in the theme group. Available variants: ".implode(', ', array_keys($styleGroup)));
+                throw new ThemeDoesNotExistsException("Theme variant '{$style}' does not exist in the theme group. Available variants: ".\implode(', ', \array_keys($styleGroup)));
             }
 
             $value .= $styleGroup[$style].' ';

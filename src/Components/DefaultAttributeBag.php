@@ -41,6 +41,6 @@ readonly class DefaultAttributeBag implements AttributeBag
     {
         $class = $this->attributes['class'] ?? null ? $this->attributes['class'].' ' : null;
 
-        return trim($class.$this->themes);
+        return \trim($class.$this->themes);
     }
 }

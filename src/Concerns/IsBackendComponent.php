@@ -45,7 +45,7 @@ trait IsBackendComponent
 
     public function __toString(): string
     {
-        $json = json_encode($this->toArray());
+        $json = \json_encode($this->toArray());
 
         return $json ? $json : '';
     }

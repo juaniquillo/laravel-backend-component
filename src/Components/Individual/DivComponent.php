@@ -44,7 +44,7 @@ final class DivComponent implements BackendComponent, ContentsComponent, Htmlabl
             'attributes' => $this->getAttributes(),
             'contents' => $this->processContent()->toArray(),
             'theme' => [
-                'manager' => get_class($this->themeManager),
+                'manager' => \get_class($this->themeManager),
                 /** @var array<string, string|array<string|int, string>> */
                 'themes' => $this->getThemes(),
                 'path' => $this->themeManager->getDefaultPath(),

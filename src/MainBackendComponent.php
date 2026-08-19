@@ -76,7 +76,7 @@ final class MainBackendComponent implements CompoundComponent, Htmlable
             'attributes' => $this->getAttributes(),
             'contents' => $this->processContent()->toArray(),
             'theme' => [
-                'manager' => get_class($this->themeManager),
+                'manager' => \get_class($this->themeManager),
                 'themes' => $this->getThemes(),
                 'path' => $this->themeManager->getDefaultPath(),
                 'realPath' => $this->themeManager->getThemePath(),
