@@ -12,7 +12,7 @@ This package allows you to build complex, reusable UI components in PHP, making 
 > 
 > This repository is a fork of [Chat-Agency/laravel-backend-component](https://github.com/Chat-Agency/laravel-backend-component). I worked on this repository while I was working with that company and decided to fork it and take ownership of it.
 
-View the full documentation (In Progress)
+Go to the [documentation](https://github.com/juaniquillo/laravel-backend-component-docs).
 
 > [!TIP]
 > #### Laravel Boost Skill
