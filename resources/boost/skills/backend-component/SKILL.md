@@ -262,6 +262,43 @@ $restored = ComponentFactory::fromArray($array);
 
 This works recursively for nested content, themes, settings, and Livewire state.
 
+## Cached Components
+
+`CachedBackendComponent` caches its rendered HTML output to disk. Uses PSR-16 (`Psr\SimpleCache\CacheInterface`) via `FileCache`.
+
+```php
+use Juaniquillo\BackendComponents\Components\CachedBackendComponent;
+
+$button = new CachedBackendComponent(ComponentEnum::BUTTON);
+$html = $button->getCachedHtml();   // renders + caches on first call
+$html = $button->getCachedHtml();   // served from cache on subsequent calls
+$button->clearCache();              // invalidates the cached entry
+```
+
+The cache key is `md5(json_encode($toArray()))` — same component state always produces the same key. Default cache directory: `cache/backend-components/`. Livewire components bypass caching automatically. Best suited for static content like documentation, navigation, or footer blocks — avoid caching dynamic or user-specific content unless you handle invalidation.
+
+### Cache configuration
+
+```php
+$component = new CachedBackendComponent(ComponentEnum::DIV);
+$component->setCacheDirectory('/custom/path'); // override default
+$component->disableCache();                    // bypass cache entirely
+$component->enableCache();                     // re-enable
+```
+
+### Using the IsCachable trait
+
+Any component class can use the `IsCachable` trait directly:
+
+```php
+use Juaniquillo\BackendComponents\Concerns\IsCachable;
+
+class MyCustomComponent implements BackendComponent {
+    use IsBackendComponent, IsCachable;
+    // ...
+}
+```
+
 ## Guardrails
 - Do NOT build HTML strings manually — always use the component builder and enum to ensure proper rendering.
 - Do NOT apply CSS classes directly in Blade templates — use the theme system instead for maintainability.

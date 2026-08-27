@@ -228,3 +228,21 @@ $component   = ComponentBuilder::make(ComponentEnum::BUTTON)->useLocal();
 $array = $component->toArray();
 $restored = ComponentFactory::fromArray($array);
 ```
+
+### Cached components
+
+`CachedBackendComponent` caches its rendered HTML output to disk via PSR-16:
+
+```php
+use Juaniquillo\BackendComponents\Components\CachedBackendComponent;
+
+$button = new CachedBackendComponent(ComponentEnum::BUTTON);
+$html = $button->getCachedHtml();   // renders + caches
+$html = $button->getCachedHtml();   // served from cache
+$button->clearCache();              // invalidates
+
+$button->setCacheDirectory('/custom/path'); // override default
+$button->disableCache();                    // bypass cache
+```
+
+Default cache directory: `cache/backend-components/`. Livewire components bypass caching. Cache key: `md5(json_encode($toArray()))`. Best suited for static content like documentation, navigation, or footer blocks — avoid caching dynamic or user-specific content unless you handle invalidation.
