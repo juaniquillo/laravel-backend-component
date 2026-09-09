@@ -30,4 +30,14 @@ return [
     'justify-items-end' => "justify-items-end",
     'justify-items-center' => "justify-items-center",
     'justify-items-stretch' => "justify-items-stretch",
+
+    'self-auto' => 'self-auto',
+    'self-start' => 'self-start',
+    'self-end' => 'self-end',
+    'self-end-safe' => 'self-end-safe',
+    'self-center' => 'self-center',
+    'self-center-safe' => 'self-center-safe',
+    'self-stretch' => 'self-stretch',
+    'self-baseline' => 'self-baseline',
+    'self-baseline-last' => 'self-baseline-last',
 ];
