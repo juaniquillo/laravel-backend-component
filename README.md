@@ -2,7 +2,7 @@
 
 [![Tests](https://github.com/juaniquillo/laravel-backend-component/actions/workflows/run-tests.yml/badge.svg)](https://github.com/juaniquillo/laravel-backend-component/actions/workflows/run-tests.yml) [![PHPStan](https://github.com/juaniquillo/laravel-backend-component/actions/workflows/phpstan.yml/badge.svg)](https://github.com/juaniquillo/laravel-backend-component/actions/workflows/phpstan.yml) [![Laravel Pint](https://github.com/juaniquillo/laravel-backend-component/actions/workflows/fix-php-code-style-issues.yml/badge.svg)](https://github.com/juaniquillo/laravel-backend-component/actions/workflows/fix-php-code-style-issues.yml)
 
-A package that simplifies the creation of dynamic, class-based Laravel components.
+A package that simplifies the creation of dynamic, [Htmlable](https://api.laravel.com/docs/9.x/Illuminate/Contracts/Support/Htmlable.html) Laravel components.
 
 This package allows you to build complex, reusable UI components in PHP, making your backend and frontend integration seamless.
 
