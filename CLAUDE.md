@@ -1,8 +1,8 @@
-# Laravel Backend Component — AI Guide
+# Laravel Backend Component - AI Guide
 
 ## Overview
 
-A Laravel package for building dynamic, class-based HTML components in PHP. Instead of blade HTML, you compose component trees via PHP objects and render them as HTML through Laravel's `x-dynamic-component`.
+A Laravel package for building dynamic, dynamic HTML components in PHP. Instead of blade HTML, you compose component trees via PHP objects and render them as HTML through Laravel's `x-dynamic-component`.
 
 Components implement `Htmlable` so they render in Blade via `{{ $component }}`.
 

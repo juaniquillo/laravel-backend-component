@@ -1,11 +1,11 @@
-# AGENTS.md — Laravel Backend Component
+# AGENTS.md - Laravel Backend Component
 
 ## Commands
 
-- `composer test` — Run PHPUnit (Orchestra Testbench)
-- `composer qa` — Run format (Pint) + typecheck (PHPStan) + tests in sequence
-- `vendor/bin/pint` — Fix code style (enforces `declare_strict_types`)
-- `vendor/bin/phpstan` — Static analysis at level 8 (memory limit: 1G)
+- `composer test`,Run PHPUnit (Orchestra Testbench)
+- `composer qa`,Run format (Pint) + typecheck (PHPStan) + tests in sequence
+- `vendor/bin/pint`,Fix code style (enforces `declare_strict_types`)
+- `vendor/bin/phpstan`,Static analysis at level 8 (memory limit: 1G)
 
 **Order matters**: `qa` runs `format → analyse → test`. Run them in this order before committing.
 
@@ -96,7 +96,7 @@ $button = ComponentBuilder::make(ComponentEnum::BUTTON)
     ->setThemes(['action' => 'success', 'size' => 'lg']); // batch
 ```
 
-Themes accumulate by default — calling `setTheme` with the same name appends rather than replaces:
+Themes accumulate by default,calling `setTheme` with the same name appends rather than replaces:
 
 ```php
 $button = ComponentBuilder::make(ComponentEnum::BUTTON)
@@ -142,7 +142,7 @@ $div->setAttribute('class', 'my-class');
 $div->setContent('Hello');
 ```
 
-Currently only `DivComponent` exists in this category — add more as needed.
+Currently only `DivComponent` exists in this category,add more as needed.
 
 ## Modal utility
 
@@ -164,7 +164,7 @@ $modal = ModalUtil::make(
     ->getComponent();
 ```
 
-The modal is composed from `DIV` components with Alpine.js attributes — no separate blade template or slots needed.
+The modal is composed from `DIV` components with Alpine.js attributes,no separate blade template or slots needed.
 
 ## Table utilities
 
@@ -211,13 +211,13 @@ $html = $button->getCachedHtml();   // served from cache on subsequent calls
 $button->clearCache();              // invalidates the cached entry
 ```
 
-The cache key is generated from `md5(json_encode($toArray()))` — same component state always produces the same key.
+The cache key is generated from `md5(json_encode($toArray()))`,same component state always produces the same key.
 
 Default cache directory: `cache/backend-components/` in the project root.
 
 Livewire components bypass caching automatically.
 
-Cache components that are expensive to render and whose content doesn't change per-request — such as documentation pages, static navigation, footer blocks, or reusable layout sections. Avoid caching components with dynamic or user-specific content unless you handle invalidation.
+Cache components that are expensive to render and whose content doesn't change per-request,such as documentation pages, static navigation, footer blocks, or reusable layout sections. Avoid caching components with dynamic or user-specific content unless you handle invalidation.
 
 ### Cache configuration
 
@@ -283,9 +283,9 @@ $component = ComponentBuilder::make(ComponentEnum::BUTTON)
 
 ## Key patterns
 
-- **ComponentBuilder** (`src/Builders/ComponentBuilder.php`) — fluent builder with `setContent()`, `setAttribute()`, `setTheme()`, `setLivewire()`, `setSetting()` methods. Returns `static` for chaining.
-- **ComponentEnum** (`src/Enums/ComponentEnum.php`) — defines all available component types. Values are dotted view paths (e.g., `'form.datalist'`).
-- **MainBackendComponent** (`src/MainBackendComponent.php`) — implements `Htmlable`; renders via `{{ $component }}` in Blade.
+- **ComponentBuilder** (`src/Builders/ComponentBuilder.php`),fluent builder with `setContent()`, `setAttribute()`, `setTheme()`, `setLivewire()`, `setSetting()` methods. Returns `static` for chaining.
+- **ComponentEnum** (`src/Enums/ComponentEnum.php`),defines all available component types. Values are dotted view paths (e.g., `'form.datalist'`).
+- **MainBackendComponent** (`src/MainBackendComponent.php`),implements `Htmlable`; renders via `{{ $component }}` in Blade.
 - **Themes** live in `resources/views/_themes/tailwind/`. Each file returns a PHP array keyed by variant name.
 - **Serialization**: `$component->toArray()` / `ComponentFactory::fromArray($array)` preserves full component tree recursively.
 - **Livewire**: Use `->setLivewire()`, `->setLivewireKey('key')`, `->setLivewireParams(['param' => 'value'])`.
