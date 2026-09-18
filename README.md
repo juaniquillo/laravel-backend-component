@@ -70,7 +70,7 @@ use Juaniquillo\BackendComponents\Enums\ComponentEnum;
 
 $button = ComponentBuilder::make(ComponentEnum::BUTTON);
 ```
-Since the main component class implements Laravel’s [Htmlable](https://laravel.com/api/8.x/Illuminate/Contracts/Support/Htmlable.html) interface, you can output the component using simple Blade syntax—no escaping needed:
+Since the main component class implements Laravel’s [Htmlable](https://laravel.com/api/8.x/Illuminate/Contracts/Support/Htmlable.html) interface, you can output the component using simple Blade syntax, no escaping needed:
 
 ```blade
 {{-- This will render the button's HTML --}}
@@ -104,7 +104,7 @@ $button = ComponentBuilder::make(ComponentEnum::BUTTON)
     ->setTheme('theme_file', 'theme_name');
 ```
 
-Themes accumulate by default — calling `setTheme` with the same name appends rather than replaces. Use `overwrite: true` to replace:
+Themes accumulate by default,calling `setTheme` with the same name appends rather than replaces. Use `overwrite: true` to replace:
 
 ```php
 $button = ComponentBuilder::make(ComponentEnum::BUTTON)
@@ -138,7 +138,7 @@ Run tests using Composer:
 composer test
 ```
 
-If you're submitting a pull request, use the `qa` command—it runs `phpstan`, `pint`, and `tests`. These are the same checks performed in GitHub Actions
+If you're submitting a pull request, use the `qa` command, it runs `phpstan`, `pint`, and `tests`. These are the same checks performed in GitHub Actions
 
 ```
 composer qa 

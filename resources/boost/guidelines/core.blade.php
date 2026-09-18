@@ -1,10 +1,10 @@
 @php
-    // Laravel Boost — AI Guidelines for juaniquillo/laravel-backend-component
+    // Laravel Boost,AI Guidelines for juaniquillo/laravel-backend-component
     // Auto-loaded when the user runs `php artisan boost:install`
 @endphp
 ## Laravel Backend Component
 
-This package lets you build dynamic, class-based HTML components in PHP. Instead of writing Blade HTML directly, you compose component trees via PHP objects and render them with:
+This package lets you build dynamic, dynamic HTML components in PHP. Instead of writing Blade HTML directly, you compose component trees via PHP objects and render them with:
 
 ```php
 @{{ $component }}
@@ -22,7 +22,7 @@ use Juaniquillo\BackendComponents\Enums\ComponentEnum;
 
 $button = ComponentBuilder::make(ComponentEnum::BUTTON);
 $div    = ComponentBuilder::make(ComponentEnum::DIV);
-// Or directly — second param controls theme resolution:
+// Or directly,second param controls theme resolution:
 $div = new MainBackendComponent('div');                        // package themes
 $div = new MainBackendComponent('div', new LocalThemeManager); // app-local themes
 ```
@@ -75,7 +75,7 @@ $button = ComponentBuilder::make(ComponentEnum::BUTTON)
     ->setThemes(['action' => 'success', 'size' => 'lg']); // batch
 ```
 
-Themes accumulate by default — calling `setTheme` with the same name appends rather than replaces:
+Themes accumulate by default,calling `setTheme` with the same name appends rather than replaces:
 
 ```php
 $button = ComponentBuilder::make(ComponentEnum::BUTTON)
@@ -108,7 +108,7 @@ $div->setAttribute('class', 'my-class');
 $div->setContent('Hello');
 ```
 
-Currently only `DivComponent` exists in this category — add more as needed.
+Currently only `DivComponent` exists in this category,add more as needed.
 
 ### Table utilities
 
@@ -133,7 +133,7 @@ $table = TableUtil::make(
 
 ### Modal utility
 
-ModalUtil builds a complete modal tree with Alpine.js interactivity — no separate blade template or slots needed:
+ModalUtil builds a complete modal tree with Alpine.js interactivity,no separate blade template or slots needed:
 
 ```php
 use Juaniquillo\BackendComponents\Utils\ModalUtil;
@@ -205,9 +205,9 @@ Self-closing tags (input, img, col) use `/>` instead.
 
 For apps consuming the package, three builders control which `resources/views/` directory resolves components and themes:
 
-- **`ComponentBuilder`** — package views for both components and themes
-- **`LocalComponentBuilder`** — app views for both components and themes
-- **`LocalThemeComponentBuilder`** — package views for components, app views for themes
+- **`ComponentBuilder`**,package views for both components and themes
+- **`LocalComponentBuilder`**,app views for both components and themes
+- **`LocalThemeComponentBuilder`**,package views for components, app views for themes
 
 ```php
 use Juaniquillo\BackendComponents\Builders\ComponentBuilder;
@@ -245,4 +245,4 @@ $button->setCacheDirectory('/custom/path'); // override default
 $button->disableCache();                    // bypass cache
 ```
 
-Default cache directory: `cache/backend-components/`. Livewire components bypass caching. Cache key: `md5(json_encode($toArray()))`. Best suited for static content like documentation, navigation, or footer blocks — avoid caching dynamic or user-specific content unless you handle invalidation.
+Default cache directory: `cache/backend-components/`. Livewire components bypass caching. Cache key: `md5(json_encode($toArray()))`. Best suited for static content like documentation, navigation, or footer blocks,avoid caching dynamic or user-specific content unless you handle invalidation.
