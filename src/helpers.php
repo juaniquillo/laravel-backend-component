@@ -41,12 +41,12 @@ namespace Juaniquillo\BackendComponents {
     }
 
     /**
-     * @return DefaultCache<string|null>
+     * @return DefaultCache<mixed>
      */
     function cache(string $name): DefaultCache
     {
         /**
-         * @var array<string, DefaultCache<string|null>>
+         * @var array<string, DefaultCache<mixed>>
          */
         static $cache = [];
 
