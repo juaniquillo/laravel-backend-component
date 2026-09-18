@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Juaniquillo\BackendComponents\Utils;
 
 use BackedEnum;
-use Juaniquillo\BackendComponents\Contracts\CompoundComponent;
+use Juaniquillo\BackendComponents\Contracts\BackendComponent;
 use Juaniquillo\BackendComponents\Contracts\ThemeManager;
 use Juaniquillo\BackendComponents\Enums\ComponentEnum;
 use Juaniquillo\BackendComponents\MainBackendComponent;
@@ -60,13 +60,13 @@ final class TableUtil
     ];
 
     /**
-     * @param  array<string|int, string|CompoundComponent|CellBag|array{
-     *   content: string|int|CompoundComponent,
+     * @param  array<string|int, string|BackendComponent|CellBag|array{
+     *   content: string|int|BackendComponent,
      *   theme?: array<string, string|array<string|int, string>>,
      *   attributes?: array<string, int|string|null>
      * }>  $head
-     * @param  array<string|int, array<string|int, string|CompoundComponent|CellBag|array{
-     *   content: string|int|CompoundComponent,
+     * @param  array<string|int, array<string|int, string|BackendComponent|CellBag|array{
+     *   content: string|int|BackendComponent,
      *   theme?: array<string, string|array<string|int, string>>,
      *   attributes?: array<string, string|int|null>
      * }>>  $body
@@ -78,13 +78,13 @@ final class TableUtil
     ) {}
 
     /**
-     * @param  array<string|int, string|CompoundComponent|CellBag|array{
-     *   content: string|int|CompoundComponent,
+     * @param  array<string|int, string|BackendComponent|CellBag|array{
+     *   content: string|int|BackendComponent,
      *   theme?: array<string, string|array<string|int, string>>,
      *   attributes?: array<string, string|int|null>
      * }>  $head
-     * @param  array<string|int, array<string|int, string|CompoundComponent|CellBag|array{
-     *   content: string|int|CompoundComponent,
+     * @param  array<string|int, array<string|int, string|BackendComponent|CellBag|array{
+     *   content: string|int|BackendComponent,
      *   theme?: array<string, string|array<string|int, string>>,
      *   attributes?: array<string, string|int|null>
      * }>>  $body
@@ -153,7 +153,7 @@ final class TableUtil
 
     }
 
-    public function getComponent(): CompoundComponent
+    public function getComponent(): BackendComponent
     {
 
         $theme = $this->tableThemes;
@@ -173,7 +173,7 @@ final class TableUtil
         return $this->composeComponent(ComponentEnum::TABLE, $contents, $theme);
     }
 
-    private function head(): CompoundComponent
+    private function head(): BackendComponent
     {
         $columns = [];
 
@@ -196,7 +196,7 @@ final class TableUtil
 
     }
 
-    private function body(): CompoundComponent
+    private function body(): BackendComponent
     {
         $rows = [];
 
@@ -214,12 +214,12 @@ final class TableUtil
     }
 
     /**
-     * @param  array<string|int, string|CompoundComponent|CellBag|array{
-     *   content: string|int|CompoundComponent,
+     * @param  array<string|int, string|BackendComponent|CellBag|array{
+     *   content: string|int|BackendComponent,
      *   theme?: array<string, string|array<string|int, string>>,
      *   attributes?: array<string, string|int|null>
      * }>  $rows
-     * @return array<int, CompoundComponent>
+     * @return array<int, BackendComponent>
      */
     private function rows(array $rows): array
     {
@@ -242,13 +242,13 @@ final class TableUtil
     }
 
     /**
-     * @param string|CompoundComponent|CellBag|array{
-     *   content: string|int|CompoundComponent,
+     * @param string|BackendComponent|CellBag|array{
+     *   content: string|int|BackendComponent,
      *   theme?: array<string, string|array<string|int, string>>,
      *   attributes?: array<string, string|int|null>
      * } $content
      */
-    private function resolveContent(array|string|CellBag|CompoundComponent $content): string|int|CompoundComponent
+    private function resolveContent(array|string|CellBag|BackendComponent $content): string|int|BackendComponent
     {
         if (isCellBag($content)) {
             return $content->content;
@@ -267,15 +267,15 @@ final class TableUtil
     }
 
     /**
-     * @param string|CompoundComponent|CellBag|array{
-     *   content: string|int|CompoundComponent,
+     * @param string|BackendComponent|CellBag|array{
+     *   content: string|int|BackendComponent,
      *   theme?: array<string, string|array<string|int, string>>,
      *   attributes?: array<string, string|int|null>
      * } $content
      * @param  array<string, string|array<string|int, string>>  $theme
      * @return array<string, string|array<string|int, string>>
      */
-    private function resolveTheme(array $theme, array|string|CellBag|CompoundComponent $content): array
+    private function resolveTheme(array $theme, array|string|CellBag|BackendComponent $content): array
     {
         if (isCellBag($content) && $content->theme) {
             return $content->theme;
@@ -290,14 +290,14 @@ final class TableUtil
     }
 
     /**
-     * @param string|CompoundComponent|CellBag|array{
-     *   content: string|int|CompoundComponent,
+     * @param string|BackendComponent|CellBag|array{
+     *   content: string|int|BackendComponent,
      *   theme?: array<string, string|array<string|int, string>>,
      *   attributes?: array<string, string|int|null>
      * } $content
      * @return array<string, int|string|null>
      */
-    private function resolveAttributes(array|string|CellBag|CompoundComponent $content): array
+    private function resolveAttributes(array|string|CellBag|BackendComponent $content): array
     {
         if (isCellBag($content) && $content->attributes) {
             return $content->attributes;
@@ -312,11 +312,11 @@ final class TableUtil
     }
 
     /**
-     * @param  int|string|CompoundComponent|array<string|int, int|string|CompoundComponent>  $contents
+     * @param  int|string|BackendComponent|array<string|int, int|string|BackendComponent>  $contents
      * @param  array<string, string|array<string|int, string>>|null  $theme
      * @param  array<string, int|string|null>  $attributes
      */
-    public function composeComponent(BackedEnum $name, int|array|string|CompoundComponent $contents, ?array $theme = null, ?array $attributes = null): CompoundComponent
+    public function composeComponent(BackedEnum $name, int|array|string|BackendComponent $contents, ?array $theme = null, ?array $attributes = null): BackendComponent
     {
         $contents = \is_array($contents) ? $contents : [$contents];
 
