@@ -21,6 +21,8 @@ readonly class DefaultAttributeBag implements AttributeBag
         public readonly ?string $livewireKey = null,
         /** @var array<string, mixed> $livewireParams */
         public readonly array $livewireParams = [],
+        /** @var array<string, mixed> $props */
+        public readonly array $props = [],
     ) {}
 
     /** @return  array<string, int|string|null> */
@@ -37,10 +39,17 @@ readonly class DefaultAttributeBag implements AttributeBag
         return $attrs;
     }
 
+    /** @return array<string, mixed> */
+    public function getAttributesAndProps(): array
+    {
+        return array_merge($this->getAttributes(), $this->props);
+    }
+
     private function mergeClasses(): string
     {
         $class = $this->attributes['class'] ?? null ? $this->attributes['class'].' ' : null;
 
         return \trim($class.$this->themes);
     }
+
 }

@@ -38,14 +38,14 @@ final class MainBackendComponent implements CompoundComponent, Htmlable
     public function getAttributeBag(): AttributeBag
     {
         return new DefaultAttributeBag(
-            $this->getAttributes(),
-            $this->processContent(),
-            $this->compileTheme(),
-            $this->getComponentPath(),
-            $this->getSettings(),
-            $this->isLivewire(),
-            $this->getLivewireKey(),
-            $this->getLivewireParams(),
+            attributes: $this->getAttributes(),
+            content: $this->processContent(),
+            themes: $this->compileTheme(),
+            path: $this->getComponentPath(),
+            settings: $this->getSettings(),
+            isLivewire: $this->isLivewire(),
+            livewireKey: $this->getLivewireKey(),
+            livewireParams: $this->getLivewireParams(),
         );
     }
 
