@@ -31,8 +31,6 @@ final class PropsComponent implements BackendComponent, ContentComponent, Htmlab
     use IsBackendComponent;
     use IsThemeable;
 
-    private const UTILITY_VIEW = 'backend-component::_utilities.resolve-third-party-component';
-
     public function __construct(
         private string|BackedEnum $name,
         ThemeManager $themeManager = new DefaultThemeManager
@@ -96,7 +94,13 @@ final class PropsComponent implements BackendComponent, ContentComponent, Htmlab
         $attributes = $this->getAttributeBag()->getAttributesAndProps();
         $attributeBag = new ComponentAttributeBag($attributes);
 
-        return \view(self::UTILITY_VIEW)
+        /**
+         * PHPStan bug
+         * https://github.com/larastan/larastan/issues/2213
+         *
+         * @phpstan-ignore argument.type
+         */
+        return \view($this->getContext().'_utilities.resolve-third-party-component')
             ->with('path', $this->getComponentPath())
             ->with('attributes', $attributeBag)
             ->with('content', $this->processContent())
