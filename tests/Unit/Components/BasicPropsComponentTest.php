@@ -13,13 +13,13 @@ class BasicPropsComponentTest extends TestCase
     #[Test]
     public function custom_props_can_be_passed_to_a_component()
     {
-        $component =( new PropsComponent('props'))
+        $component = (new PropsComponent('props'))
             ->setAttribute('class', 'themed-div')
-            ->setProp('customProp', new class {
+            ->setProp('customProp', new class
+            {
                 public string $key = 'prop-key';
 
                 public string $value = 'this is the value';
-
             });
 
         $props = $component->getAttributeBag()->getProps();
@@ -31,13 +31,13 @@ class BasicPropsComponentTest extends TestCase
     #[Test]
     public function custom_props_are_merged_with_the_rest_of_the_attributes()
     {
-       $component =( new PropsComponent('props'))
+        $component = (new PropsComponent('props'))
             ->setAttribute('class', 'themed-div')
-            ->setProp('customProp', new class {
+            ->setProp('customProp', new class
+            {
                 public string $key = 'prop-key';
 
                 public string $value = 'this is the value';
-
             });
 
         $attrsAndProps = $component->getAttributeBag()->getAttributesAndProps();

@@ -33,7 +33,6 @@ final class PropsComponent implements BackendComponent, ContentComponent, Htmlab
 
     private const UTILITY_VIEW = 'backend-component::_utilities.resolve-third-party-component';
 
-
     public function __construct(
         private string|BackedEnum $name,
         ThemeManager $themeManager = new DefaultThemeManager
@@ -98,7 +97,7 @@ final class PropsComponent implements BackendComponent, ContentComponent, Htmlab
         $attributeBag = new ComponentAttributeBag($attributes);
 
         return \view(self::UTILITY_VIEW)
-            ->with('path',  $this->getComponentPath())
+            ->with('path', $this->getComponentPath())
             ->with('attributes', $attributeBag)
             ->with('content', $this->processContent())
             ->render();
