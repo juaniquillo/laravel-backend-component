@@ -8,4 +8,7 @@ interface AttributeBag
 {
     /** @return array<string, string> */
     public function getAttributes(): array;
+
+    /** @return array<string, mixed> */
+    public function getAttributesAndProps(): array;
 }

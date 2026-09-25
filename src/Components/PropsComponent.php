@@ -2,31 +2,34 @@
 
 declare(strict_types=1);
 
-namespace Juaniquillo\BackendComponents;
+namespace Juaniquillo\BackendComponents\Components;
 
 use BackedEnum;
 use Illuminate\Contracts\Support\Htmlable;
-use Juaniquillo\BackendComponents\Components\DefaultAttributeBag;
+use Illuminate\View\ComponentAttributeBag;
 use Juaniquillo\BackendComponents\Concerns\HasContent;
 use Juaniquillo\BackendComponents\Concerns\HasPath;
+use Juaniquillo\BackendComponents\Concerns\HasProps;
 use Juaniquillo\BackendComponents\Concerns\HasSettings;
 use Juaniquillo\BackendComponents\Concerns\IsBackendComponent;
-use Juaniquillo\BackendComponents\Concerns\IsLivewireComponent;
 use Juaniquillo\BackendComponents\Concerns\IsThemeable;
-use Juaniquillo\BackendComponents\Contracts\AttributeBag;
 use Juaniquillo\BackendComponents\Contracts\BackendComponent;
-use Juaniquillo\BackendComponents\Contracts\CompoundComponent;
+use Juaniquillo\BackendComponents\Contracts\ContentComponent;
+use Juaniquillo\BackendComponents\Contracts\PathComponent;
+use Juaniquillo\BackendComponents\Contracts\PropsComponent as PropsContract;
+use Juaniquillo\BackendComponents\Contracts\SettingsComponent;
+use Juaniquillo\BackendComponents\Contracts\ThemeComponent;
 use Juaniquillo\BackendComponents\Contracts\ThemeManager;
 use Juaniquillo\BackendComponents\Themes\DefaultThemeManager;
 
-final class MainBackendComponent implements CompoundComponent, Htmlable
+final class PropsComponent implements BackendComponent, ContentComponent, Htmlable, PathComponent, PropsContract, SettingsComponent, ThemeComponent
 {
-    use HasContent,
-        HasPath,
-        HasSettings,
-        IsBackendComponent,
-        IsLivewireComponent,
-        IsThemeable;
+    use HasContent;
+    use HasPath;
+    use HasProps;
+    use HasSettings;
+    use IsBackendComponent;
+    use IsThemeable;
 
     public function __construct(
         private string|BackedEnum $name,
@@ -35,7 +38,12 @@ final class MainBackendComponent implements CompoundComponent, Htmlable
         $this->themeManager = $themeManager;
     }
 
-    public function getAttributeBag(): AttributeBag
+    public function isLivewire(): bool
+    {
+        return false;
+    }
+
+    public function getAttributeBag(): DefaultAttributeBag
     {
         return new DefaultAttributeBag(
             attributes: $this->getAttributes(),
@@ -43,18 +51,16 @@ final class MainBackendComponent implements CompoundComponent, Htmlable
             themes: $this->compileTheme(),
             path: $this->getComponentPath(),
             settings: $this->getSettings(),
-            isLivewire: $this->isLivewire(),
-            livewireKey: $this->getLivewireKey(),
-            livewireParams: $this->getLivewireParams(),
+            props: $this->getProps(),
         );
     }
 
     /**
      * @return array{
-     *  name:  int|string,
-     *  component: class-string<BackendComponent|CompoundComponent>,
+     *  name: int|string,
+     *  component: class-string,
      *  attributes: array<string, int|string|null>,
-     *  contents: array<string,array<string, int|string>|int|string>,
+     *  contents: array<string, array<string, int|string>|int|string>,
      *  theme: array{
      *   manager: class-string<ThemeManager>,
      *   themes: array<string, array<int|string, string>|string>,
@@ -62,10 +68,7 @@ final class MainBackendComponent implements CompoundComponent, Htmlable
      *   realPath: string,
      *  },
      *  path: string|null,
-     *  settings: array<string, bool|string>,
-     *  isLivewire: bool,
-     *  livewireKey: string|null,
-     *  livewireParams: array<string, mixed>
+     *  settings: array<string, bool|string>
      * }
      */
     public function toArray(): array
@@ -83,29 +86,24 @@ final class MainBackendComponent implements CompoundComponent, Htmlable
             ],
             'path' => $this->getPathOnly(),
             'settings' => $this->getSettings(),
-            'isLivewire' => $this->isLivewire(),
-            'livewireKey' => $this->getLivewireKey(),
-            'livewireParams' => $this->getLivewireParams(),
         ];
     }
 
-    /**
-     * Get content as a string of HTML.
-     *
-     * @return string
-     */
-    public function toHtml()
+    public function toHtml(): string
     {
+        $attributes = $this->getAttributeBag()->getAttributesAndProps();
+        $attributeBag = new ComponentAttributeBag($attributes);
+
         /**
          * PHPStan bug
          * https://github.com/larastan/larastan/issues/2213
          *
          * @phpstan-ignore argument.type
          */
-        return \view($this->getContext().'_utilities.resolve-components')
-            ->with('component', $this)
-            ->with('namespace', $this->getContext())
+        return \view($this->getContext().'_utilities.resolve-third-party-component')
+            ->with('path', $this->getComponentPath())
+            ->with('attributes', $attributeBag)
+            ->with('content', $this->processContent())
             ->render();
-
     }
 }

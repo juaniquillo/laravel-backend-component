@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Test\Feature\Components\Table;
+namespace Tests\Feature\Components\Table;
 
 use Juaniquillo\BackendComponents\Builders\ComponentBuilder;
 use Juaniquillo\BackendComponents\Enums\ComponentEnum;
