@@ -40,6 +40,12 @@ readonly class DefaultAttributeBag implements AttributeBag
     }
 
     /** @return array<string, mixed> */
+    public function getProps(): array
+    {
+        return $this->props;
+    }
+
+    /** @return array<string, mixed> */
     public function getAttributesAndProps(): array
     {
         return array_merge($this->getAttributes(), $this->props);
@@ -51,5 +57,4 @@ readonly class DefaultAttributeBag implements AttributeBag
 
         return \trim($class.$this->themes);
     }
-
 }
