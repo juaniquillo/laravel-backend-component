@@ -146,9 +146,9 @@ Currently only `DivComponent` exists in this category,add more as needed.
 
 ## PropsComponent (third-party packages)
 
-`PropsComponent` in this package is an example of how third-party packages can create custom components with typed props. Create your own class implementing the same interfaces and using the same traits in your own namespace.
+`PropsComponent` in this package is an example of how third-party packages can create custom components with typed props. Create your own class implementing the same interfaces and using the same traits in your own namespace. (The example class aliases the contract as `PropsContract` to avoid colliding with its own class name — the interface itself is `Contracts\PropsComponent`.)
 
-The interfaces to implement: `BackendComponent`, `ContentComponent`, `Htmlable`, `PathComponent`, `PropsContract`, `SettingsComponent`, `ThemeComponent`.
+The interfaces to implement: `BackendComponent`, `ContentComponent`, `Htmlable`, `PathComponent`, `PropsComponent`, `SettingsComponent`, `ThemeComponent`.
 
 The traits to use: `HasContent`, `HasPath`, `HasProps`, `HasSettings`, `IsBackendComponent`, `IsThemeable`.
 
@@ -186,7 +186,7 @@ The Blade template resolves from the dotted path (e.g., `path.to.component` → 
 </div>
 ```
 
-Non-scalar props (arrays, objects) are passed as `data-*` attributes automatically when extracted from `$attrs`:
+Non-scalar props (arrays, objects) are not rendered automatically — map them to `data-*` attributes (or similar) in your own template:
 
 ```blade
 @props([
