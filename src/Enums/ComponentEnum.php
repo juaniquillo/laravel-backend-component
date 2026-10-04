@@ -58,6 +58,13 @@ enum ComponentEnum: string
     case CHECKBOX_INPUT = 'form.checkbox';
     case HIDDEN_INPUT = 'form.hidden';
     case RADIO_INPUT = 'form.radio';
+    case NUMBER_INPUT = 'form.number';
+    case URL_INPUT = 'form.url';
+    case TEL_INPUT = 'form.tel';
+    case DATE_INPUT = 'form.date';
+    case TIME_INPUT = 'form.time';
+    case COLOR_INPUT = 'form.color';
+    case RANGE_INPUT = 'form.range';
     case DATALIST = 'form.datalist';
     case TEXTAREA = 'form.textarea';
     case SELECT = 'form.select';
