@@ -47,7 +47,7 @@ $custom = ComponentBuilder::make('inline.button');
 | **Block** | `DIV`, `PARAGRAPH` |
 | **Inline** | `BUTTON`, `LINK`, `IMG`, `SPAN`, `BOLD`, `EM`, `ITALIC`, `STRONG`, `SMALL` |
 | **Headers** | `H1`, `H2`, `H3`, `H4`, `H5`, `H6` |
-| **Form** | `FORM`, `LABEL`, `LEGEND`, `FIELDSET`, `TEXT_INPUT`, `FILE_INPUT`, `EMAIL_INPUT`, `SEARCH_INPUT`, `PASSWORD_INPUT`, `CHECKBOX_INPUT`, `HIDDEN_INPUT`, `RADIO_INPUT`, `DATALIST`, `TEXTAREA`, `SELECT`, `OPTGROUP`, `OPTION` |
+| **Form** | `FORM`, `LABEL`, `LEGEND`, `FIELDSET`, `TEXT_INPUT`, `FILE_INPUT`, `EMAIL_INPUT`, `SEARCH_INPUT`, `PASSWORD_INPUT`, `CHECKBOX_INPUT`, `HIDDEN_INPUT`, `RADIO_INPUT`, `NUMBER_INPUT`, `URL_INPUT`, `TEL_INPUT`, `DATE_INPUT`, `TIME_INPUT`, `COLOR_INPUT`, `RANGE_INPUT`, `DATALIST`, `TEXTAREA`, `SELECT`, `OPTGROUP`, `OPTION` |
 | **Table** | `TABLE`, `THEAD`, `TBODY`, `TFOOT`, `TR`, `TH`, `TD`, `CAPTION`, `COLGROUP`, `COL` |
 | **Lists** | `OL`, `UL`, `LI` |
 | **Details** | `DETAILS`, `SUMMARY` |
