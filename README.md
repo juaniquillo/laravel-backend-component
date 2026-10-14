@@ -104,7 +104,7 @@ $button = ComponentBuilder::make(ComponentEnum::BUTTON)
     ->setTheme('theme_file', 'theme_name');
 ```
 
-Themes accumulate by default,calling `setTheme` with the same name appends rather than replaces. Use `overwrite: true` to replace:
+Themes accumulate by default, calling `setTheme` with the same name appends rather than replaces. Use `overwrite: true` to replace:
 
 ```php
 $button = ComponentBuilder::make(ComponentEnum::BUTTON)
