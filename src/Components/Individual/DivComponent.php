@@ -28,8 +28,10 @@ final class DivComponent implements BackendComponent, ContentsComponent, Htmlabl
         IsThemeable;
 
     public function __construct(
-        private ThemeManager $themeManager = new DefaultThemeManager
-    ) {}
+        ThemeManager $themeManager = new DefaultThemeManager
+    ) {
+        $this->themeManager = $themeManager;
+    }
 
     public static function make(ThemeManager $themeManager = new DefaultThemeManager): static
     {
@@ -62,7 +64,7 @@ final class DivComponent implements BackendComponent, ContentsComponent, Htmlabl
          *
          * @phpstan-ignore argument.type
          */
-        return view($this->getComponentPath())
+        return view($this->getViewPath())
             ->with('attributes', new ComponentAttributeBag($this->getAttributeBag()->getAttributes()))
             ->with('slot', $this->processContent())
             ->render();
@@ -86,6 +88,15 @@ final class DivComponent implements BackendComponent, ContentsComponent, Htmlabl
     {
         return backendComponentNamespace()
             .$this->getPathOnly();
+    }
+
+    /**
+     * Unlike the HasPath trait, getPathOnly() already includes the
+     * "components" directory, so the component path is the view path.
+     */
+    public function getViewPath(): string
+    {
+        return $this->getComponentPath();
     }
 
     public function getPathOnly(): string
