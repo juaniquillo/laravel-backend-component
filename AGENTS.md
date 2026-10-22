@@ -130,7 +130,7 @@ return [
 2. Implement `BackendComponent`, `IndividualComponent`, `ThemeComponent`, `Htmlable` (omit `ContentsComponent`+`HasContent` for self-closing elements)
 3. Use traits `IsBackendComponent`, `IsThemeable` (add `HasContent` only if the component can hold children)
 4. Define `getName()` to return the `ComponentEnum` value (or any dotted view path)
-5. Define `getComponentPath()` and `getPathOnly()` following the existing convention
+5. Define `getComponentPath()`, `getPathOnly()` and `getViewPath()` following the existing convention
 6. Wire up `getAttributeBag()`, `toHtml()`, `toArray()`, and a static `make()` factory
 7. Mark the class `final` (optional but recommended)
 
@@ -142,92 +142,13 @@ $div->setAttribute('class', 'my-class');
 $div->setContent('Hello');
 ```
 
-Currently only `DivComponent` exists in this category, add more as needed.
+Currently only `DivComponent` exists in this category, add more as needed. `DivComponent` does not use the `HasPath` trait, so it defines `getViewPath()` itself.
 
-## PropsComponent (third-party packages)
+## Third-party components
 
-`PropsComponent` in this package is an example of how third-party packages can create custom components with typed props. Create your own class implementing the same interfaces and using the same traits in your own namespace. (The example class aliases the contract as `PropsContract` to avoid colliding with its own class name — the interface itself is `Contracts\PropsComponent`.)
+Third-party packages can implement `Contracts\BackendComponent` in their own namespace and choose their own view and rendering strategy. The package's concerns (`HasContent`, `HasPath`, `HasProps`, `HasSettings`, `IsBackendComponent`, `IsThemeable`) are opt-in traits.
 
-The interfaces to implement: `BackendComponent`, `ContentComponent`, `Htmlable`, `PathComponent`, `PropsComponent`, `SettingsComponent`, `ThemeComponent`.
-
-The traits to use: `HasContent`, `HasPath`, `HasProps`, `HasSettings`, `IsBackendComponent`, `IsThemeable`.
-
-### Setting props
-
-Use **`setProp()`** for a single prop and **`setProps()`** for multiple at once:
-
-```php
-// In your own class:
-$component->setProp('title', 'Hello')
-    ->setProps(['count' => 5, 'items' => ['a', 'b']]);
-```
-
-Use **`getProp()`** and **`getProps()`** to retrieve:
-
-```php
-$title = $component->getProp('title');   // 'Hello'
-$all = $component->getProps();           // ['title' => 'Hello', 'count' => 5, 'items' => ['a', 'b']]
-```
-
-Props are stored in the `DefaultAttributeBag` alongside HTML attributes, making them available in the Blade template via `@props()`.
-
-### Blade template conventions
-
-The Blade template resolves from the dotted path (e.g., `path.to.component` → `resources/views/components/path/to/component.blade.php`). Use `@props()` to declare expected props:
-
-```blade
-@props([
-    'title' => null,
-    'data' => [],
-])
-
-<div {{ $attributes->merge(['title' => $title]) }}>
-    {{ $title }}
-</div>
-```
-
-Non-scalar props (arrays, objects) are not rendered automatically — map them to `data-*` attributes (or similar) in your own template:
-
-```blade
-@props([
-    'dataProps' => [],
-    'customProp' => null,
-])
-
-@php
-    $localAttrs = [];
-    foreach ($dataProps as $key => $value) {
-        $localAttrs["data-{$key}"] = $value;
-    }
-    if($customProp) {
-        $localAttrs[$customProp->key] = $customProp->value;
-    }
-@endphp
-
-<div {{ $attributes->merge($localAttrs) }}>{{ $content }}{{ $slot }}</div>
-```
-
-### Rendering
-
-`toHtml()` uses `backend-component::_utilities.resolve-third-party-component`, which renders `<x-dynamic-component>` with the resolved path and attribute bag. The component view resolves from the package's view namespace via `getComponentPath()`.
-
-Use `{{ $component }}` in Blade to render.
-
-### Feature testing
-
-Use `$this->blade()` to test the full rendering pipeline:
-
-```php
-$this->blade('{{ $component }}', ['component' => $component])
-    ->assertSee('Hello');
-```
-
-For non-scalar props:
-
-```php
-$this->blade('{{ $component }}', ['component' => $component])
-    ->assertSee('data-config="');
-```
+`PropsComponent` in this package is only a reference implementation of those contracts, not a required base class.
 
 ## Modal utility
 
@@ -371,6 +292,7 @@ $component = ComponentBuilder::make(ComponentEnum::BUTTON)
 - **ComponentBuilder** (`src/Builders/ComponentBuilder.php`), fluent builder with `setContent()`, `setAttribute()`, `setTheme()`, `setLivewire()`, `setSetting()` methods. Returns `static` for chaining.
 - **ComponentEnum** (`src/Enums/ComponentEnum.php`), defines all available component types. Values are dotted view paths (e.g., `'form.datalist'`).
 - **MainBackendComponent** (`src/MainBackendComponent.php`), implements `Htmlable`; renders via `{{ $component }}` in Blade.
+- **View resolution**: templates are included via `getViewPath()` (namespace + `components/` + optional `setPath()` subdirectory + name). `getComponentPath()` is the `x-dynamic-component` form and must not be used with `view()`/`@include`.
 - **Themes** live in `resources/views/_themes/tailwind/`. Each file returns a PHP array keyed by variant name.
 - **Serialization**: `$component->toArray()` / `ComponentFactory::fromArray($array)` preserves full component tree recursively.
 - **Livewire**: Use `->setLivewire()`, `->setLivewireKey('key')`, `->setLivewireParams(['param' => 'value'])`.

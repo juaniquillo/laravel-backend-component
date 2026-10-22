@@ -90,6 +90,20 @@ $divWithButton = ComponentBuilder::make(ComponentEnum::DIV)
     );
 ```
 
+## Rendering and custom templates
+
+Components implement `Htmlable`, so `{{ $component }}` renders them through a plain Blade view. Each view is resolved with `getViewPath()` and receives three variables:
+
+| Variable | Description |
+|---|---|
+| `$attributes` | `ComponentAttributeBag` with the component attributes and compiled theme classes |
+| `$slot` | Processed content, including nested components |
+| `$settings` | Key-value settings set with `setSetting()` / `setSettings()` |
+
+Custom templates live in `resources/views/components/` and are plain views: do not declare props or rely on component server state. Use `->useLocal()` to resolve them from the application's views instead of the package's.
+
+See the [Blade use documentation](docs/06-blade-use.md) for the full rendering pipeline.
+
 ## Theming
 
 The package supports theming, primarily designed for use with Tailwind CSS classes. All themes are stored inside `resources/views/_themes/tailwind` by default, ensuring they are automatically discovered by Tailwind's scanner.
