@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Juaniquillo\BackendComponents\Components\Individual;
 
 use Illuminate\Contracts\Support\Htmlable;
+use Illuminate\View\ComponentAttributeBag;
 use Juaniquillo\BackendComponents\Components\DefaultAttributeBag;
 use Juaniquillo\BackendComponents\Concerns\HasContent;
 use Juaniquillo\BackendComponents\Concerns\IsBackendComponent;
@@ -62,7 +63,8 @@ final class DivComponent implements BackendComponent, ContentsComponent, Htmlabl
          * @phpstan-ignore argument.type
          */
         return view($this->getComponentPath())
-            ->with('attrs', $this->getAttributeBag())
+            ->with('attributes', new ComponentAttributeBag($this->getAttributeBag()->getAttributes()))
+            ->with('slot', $this->processContent())
             ->render();
     }
 
