@@ -66,6 +66,27 @@ trait HasPath
         );
     }
 
+    /**
+     * Get the name of the Blade view rendered by the component.
+     *
+     * The path set through setPath() is relative to the namespace's
+     * "components" directory, and getComponentPath() leaves that directory
+     * out because x-dynamic-component prepends it while resolving. A view
+     * name used with view() or @include needs the directory in the string.
+     */
+    public function getViewPath(): string
+    {
+        $path = $this->getPathOnly();
+
+        return \trim(
+            (string) $this->getNamespace()
+            .'components.'
+            .($path ? $path.'.' : '')
+            .$this->getName(),
+            '.',
+        );
+    }
+
     public function setNamespace(string $namespace): static
     {
         $this->namespace = $namespace;

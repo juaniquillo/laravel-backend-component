@@ -1,53 +1,24 @@
-@props([
-    'attrs' => null,
-    'disableCsrf' => false,
-    'hasButton' => false,
-])
-
-<?php
+@php
     use Juaniquillo\BackendComponents\Enums\ComponentEnum;
 
     use function Juaniquillo\BackendComponents\makeBackendComponent;
-    
-    /** @var \Juaniquillo\BackendComponents\Components\DefaultAttributeBag $attrs */
-?>
 
-@php
-    $serverAttrs = [];
-    $content = null;
-    $slot = $slot ?? null;
-    $disableCsrf = false;
-    $disableMethodInput = false;
-    
-    $method = 'POST';
+    $settings = $settings ?? [];
 
-    if($attrs) {    
+    $disableCsrf = (bool) ($settings['disable_csrf'] ?? false);
+    $disableMethodInput = (bool) ($settings['disable_method_input'] ?? false);
 
-        $serverAttrs = $attrs->getAttributes();
-        
-        $content = $attrs->content;
-        
-        $settings = $attrs->settings;
+    $method = (string) ($attributes->get('method') ?? 'POST');
 
-        $method =  $serverAttrs['method'] ?? $method;
-
-        $serverAttrs['method'] = strtoupper($method) == 'GET' ? 'GET' : 'POST';
-
-        $disableCsrf = $settings['disable_csrf'] ?? $disableCsrf;
-        $disableMethodInput = $settings['disable_method_input'] ?? $disableMethodInput;
-        
-    }
+    $attributes = $attributes->except('method');
 
     $methodInput = $disableMethodInput ? null : makeBackendComponent(ComponentEnum::HIDDEN_INPUT)
-        ->setAttribute('name', '_method' )
-        ->setAttribute('value', strtoupper($method) );
-
+        ->setAttribute('name', '_method')
+        ->setAttribute('value', strtoupper($method));
 @endphp
 
-<form {{ $attributes->merge($serverAttrs) }}>   
-    
+<form {{ $attributes->merge(['method' => strtoupper($method) === 'GET' ? 'GET' : 'POST']) }}>
     {{ $methodInput }}
     @if(!$disableCsrf) @csrf @endif
-    {{ $content }}{{ $slot }}
-
+    {{ $slot }}
 </form>

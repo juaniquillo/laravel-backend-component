@@ -1,6 +1,7 @@
 @php
     /** @var \Juaniquillo\BackendComponents\Contracts\CompoundComponent $component */
-    $path = $component->getComponentPath();
-    $componentArray =  $component->getAttributeBag();
+    $attributes = new \Illuminate\View\ComponentAttributeBag($component->getAttributeBag()->getAttributes());
+    $slot = $component->processContent();
+    $settings = $component->getSettings();
 @endphp
-<x-dynamic-component :component="$path" :attrs="$componentArray" />
+@include($component->getViewPath(), ['attributes' => $attributes, 'slot' => $slot, 'settings' => $settings])

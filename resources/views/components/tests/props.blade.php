@@ -3,10 +3,6 @@
     'customProp' => null
 ])
 
-<?php
-    /** @var \Juaniquillo\BackendComponents\Components\DefaultAttributeBag $attrs */
-?>
-
 @php
     $localAttrs = [];
     $content = null;

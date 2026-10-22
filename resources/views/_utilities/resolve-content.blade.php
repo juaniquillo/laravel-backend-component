@@ -1,4 +1,4 @@
 @php
     $contents = $contents ?? [];
 @endphp
-@foreach($contents as $content){{ $content }}@endforeach
+{!! implode('', array_map(fn ($content) => e($content), $contents)) !!}
