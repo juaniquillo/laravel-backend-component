@@ -262,23 +262,13 @@ ComponentBuilder::make('my-livewire-component')
 
 ### View conventions
 
-Each component Blade template follows:
+Each component Blade template is a plain view that receives `$attributes`, `$slot` and `$settings`:
 
 ```blade
-@@props(['attrs' => null])
-@@php
-    $serverAttrs = [];
-    $content = null;
-    $slot = $slot ?? null;
-    if ($attrs) {
-        $serverAttrs = $attrs->getAttributes();
-        $content = $attrs->content;
-    }
-@@endphp
-<element @{{ $attributes->merge($serverAttrs) }}>@{{ $content }}@{{ $slot }}</element>
+<element @{{ $attributes }}>@{{ $slot }}</element>
 ```
 
-Self-closing tags (input, img, col) use `/>` instead.
+Self-closing tags (input, img, col) use `/>` instead. Use `@{{ $attributes->merge([...]) }}` when the element needs default attributes.
 
 ### Local resolution
 
