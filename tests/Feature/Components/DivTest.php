@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Components;
 
-use Juaniquillo\BackendComponents\Builders\ComponentBuilder;
 use Juaniquillo\BackendComponents\Enums\ComponentEnum;
+use Juaniquillo\BackendComponents\Factories\ComponentFactory;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
@@ -16,7 +16,7 @@ class DivTest extends TestCase
     #[Test]
     public function empty_div()
     {
-        $div = ComponentBuilder::make(ComponentEnum::DIV);
+        $div = ComponentFactory::make(ComponentEnum::DIV);
 
         $this->blade('{{ $div }}', [
             'div' => $div,
@@ -28,9 +28,9 @@ class DivTest extends TestCase
     #[Test]
     public function div_accepts_content()
     {
-        $div = ComponentBuilder::make(ComponentEnum::DIV)
+        $div = ComponentFactory::make(ComponentEnum::DIV)
             ->setContent(
-                ComponentBuilder::make(ComponentEnum::PARAGRAPH)
+                ComponentFactory::make(ComponentEnum::PARAGRAPH)
                     ->setContent('This is the content content')
             );
 
@@ -45,11 +45,11 @@ class DivTest extends TestCase
     #[Test]
     public function div_accepts_contents_array()
     {
-        $div = ComponentBuilder::make(ComponentEnum::DIV)
+        $div = ComponentFactory::make(ComponentEnum::DIV)
             ->setContents([
-                ComponentBuilder::make(ComponentEnum::SPAN)
+                ComponentFactory::make(ComponentEnum::SPAN)
                     ->setContent('Span'),
-                ComponentBuilder::make(ComponentEnum::BOLD)
+                ComponentFactory::make(ComponentEnum::BOLD)
                     ->setContent('Bold'),
             ]);
 
@@ -69,7 +69,7 @@ class DivTest extends TestCase
     #[Test]
     public function div_accepts_attributes()
     {
-        $div = ComponentBuilder::make(ComponentEnum::DIV)
+        $div = ComponentFactory::make(ComponentEnum::DIV)
             ->setAttribute('id', 'div_id');
 
         $this->blade('{{ $div }}', [
@@ -85,7 +85,7 @@ class DivTest extends TestCase
             'color' => 'success',
         ];
 
-        $div = ComponentBuilder::make(ComponentEnum::DIV)
+        $div = ComponentFactory::make(ComponentEnum::DIV)
             ->setThemes($theme);
 
         $this->blade('{{ $div }}', [

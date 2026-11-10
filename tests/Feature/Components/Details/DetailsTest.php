@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Feature\Components\Details;
 
-use Juaniquillo\BackendComponents\Builders\ComponentBuilder;
 use Juaniquillo\BackendComponents\Enums\ComponentEnum;
+use Juaniquillo\BackendComponents\Factories\ComponentFactory;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
@@ -16,7 +16,7 @@ class DetailsTest extends TestCase
     #[Test]
     public function empty_details()
     {
-        $details = ComponentBuilder::make(ComponentEnum::DETAILS);
+        $details = ComponentFactory::make(ComponentEnum::DETAILS);
 
         $this->blade('{{ $details }}', [
             'details' => $details,
@@ -28,13 +28,13 @@ class DetailsTest extends TestCase
     #[Test]
     public function details_accepts_content()
     {
-        $details = ComponentBuilder::make(ComponentEnum::DETAILS)
+        $details = ComponentFactory::make(ComponentEnum::DETAILS)
             ->setContent(
-                ComponentBuilder::make(ComponentEnum::SUMMARY)
+                ComponentFactory::make(ComponentEnum::SUMMARY)
                     ->setContent('This is the summary content')
             )
             ->setContent(
-                ComponentBuilder::make(ComponentEnum::PARAGRAPH)
+                ComponentFactory::make(ComponentEnum::PARAGRAPH)
                     ->setContent('This is the content content')
             );
 
@@ -50,11 +50,11 @@ class DetailsTest extends TestCase
     #[Test]
     public function details_accepts_contents_array()
     {
-        $details = ComponentBuilder::make(ComponentEnum::DETAILS)
+        $details = ComponentFactory::make(ComponentEnum::DETAILS)
             ->setContents([
-                ComponentBuilder::make(ComponentEnum::SUMMARY)
+                ComponentFactory::make(ComponentEnum::SUMMARY)
                     ->setContent('This is the summary content'),
-                ComponentBuilder::make(ComponentEnum::PARAGRAPH)
+                ComponentFactory::make(ComponentEnum::PARAGRAPH)
                     ->setContent('This is the content content'),
             ]);
 
@@ -70,7 +70,7 @@ class DetailsTest extends TestCase
     #[Test]
     public function details_accepts_attributes()
     {
-        $details = ComponentBuilder::make(ComponentEnum::DETAILS)
+        $details = ComponentFactory::make(ComponentEnum::DETAILS)
             ->setAttribute('open', 'open')
             ->setAttribute('name', 'custom_details');
 
@@ -88,7 +88,7 @@ class DetailsTest extends TestCase
             'background' => 'default',
         ];
 
-        $details = ComponentBuilder::make(ComponentEnum::DETAILS)
+        $details = ComponentFactory::make(ComponentEnum::DETAILS)
             ->setThemes($theme);
 
         $this->blade('{{ $details }}', [

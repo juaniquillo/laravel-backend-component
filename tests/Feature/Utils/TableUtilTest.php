@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Utils;
 
-use Juaniquillo\BackendComponents\Builders\ComponentBuilder;
 use Juaniquillo\BackendComponents\Contracts\CompoundComponent;
 use Juaniquillo\BackendComponents\Enums\ComponentEnum;
+use Juaniquillo\BackendComponents\Factories\ComponentFactory;
 use Juaniquillo\BackendComponents\Utils\CellBag;
 use Juaniquillo\BackendComponents\Utils\TableUtil;
 use PHPUnit\Framework\Attributes\Test;
@@ -23,7 +23,7 @@ final class TableUtilTest extends TestCase
             ['first column', 'second column'],
             [
                 [
-                    ComponentBuilder::make(ComponentEnum::SPAN)
+                    ComponentFactory::make(ComponentEnum::SPAN)
                         ->setContent('Inside a span'),
                     'first row first column',
                     'first row second column',
@@ -58,7 +58,7 @@ final class TableUtilTest extends TestCase
             ['first column', 'second column'],
             [
                 [
-                    ComponentBuilder::make(ComponentEnum::SPAN)
+                    ComponentFactory::make(ComponentEnum::SPAN)
                         ->setContent('Inside a span'),
                     'first row second column',
                 ],

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Components;
 
-use Juaniquillo\BackendComponents\Builders\ComponentBuilder;
 use Juaniquillo\BackendComponents\Contracts\LivewireComponent;
+use Juaniquillo\BackendComponents\Deserializers\ComponentDeserializer;
 use Juaniquillo\BackendComponents\Enums\ComponentEnum;
 use Juaniquillo\BackendComponents\Factories\ComponentFactory;
 use Juaniquillo\BackendComponents\MainBackendComponent;
@@ -29,7 +29,7 @@ class SimpleComponentTest extends TestCase
     #[Test]
     public function a_component_can_be_created_using_a_builder()
     {
-        $component = ComponentBuilder::make('div');
+        $component = ComponentFactory::make('div');
 
         $this->assertEquals('div', $component->getName());
     }
@@ -37,7 +37,7 @@ class SimpleComponentTest extends TestCase
     #[Test]
     public function a_component_can_be_created_using_a_builder_and_enum()
     {
-        $component = ComponentBuilder::make(ComponentEnum::DIV);
+        $component = ComponentFactory::make(ComponentEnum::DIV);
 
         $this->assertEquals('div', $component->getName());
     }
@@ -45,7 +45,7 @@ class SimpleComponentTest extends TestCase
     #[Test]
     public function a_local_component_component_can_be_created()
     {
-        $component = ComponentBuilder::make(ComponentEnum::DIV);
+        $component = ComponentFactory::make(ComponentEnum::DIV);
 
         $this->assertStringStartsWith(backendComponentNamespace(), $component->getComponentPath());
 
@@ -57,7 +57,7 @@ class SimpleComponentTest extends TestCase
     #[Test]
     public function the_namespace_can_be_set()
     {
-        $component = ComponentBuilder::make(ComponentEnum::DIV);
+        $component = ComponentFactory::make(ComponentEnum::DIV);
 
         $this->assertEquals(backendComponentNamespace(), $component->getNamespace());
 
@@ -69,7 +69,7 @@ class SimpleComponentTest extends TestCase
     #[Test]
     public function the_path_can_be_set()
     {
-        $component = ComponentBuilder::make(ComponentEnum::DIV);
+        $component = ComponentFactory::make(ComponentEnum::DIV);
 
         $this->assertEquals(backendComponentNamespace(), $component->getPath());
 
@@ -81,7 +81,7 @@ class SimpleComponentTest extends TestCase
     #[Test]
     public function a_component_accepts_content_and_can_be_accessed_using_a_key()
     {
-        $component = ComponentBuilder::make(ComponentEnum::DIV)
+        $component = ComponentFactory::make(ComponentEnum::DIV)
             ->setContent('Nice content', 1);
 
         $this->assertEquals('Nice content', $component->getContent(1));
@@ -90,7 +90,7 @@ class SimpleComponentTest extends TestCase
     #[Test]
     public function a_component_can_prepend_content()
     {
-        $component = ComponentBuilder::make(ComponentEnum::DIV)
+        $component = ComponentFactory::make(ComponentEnum::DIV)
             ->setContent('first')
             ->setContent('second')
             ->prependContent('prepended');
@@ -101,7 +101,7 @@ class SimpleComponentTest extends TestCase
     #[Test]
     public function a_component_can_prepend_content_with_key()
     {
-        $component = ComponentBuilder::make(ComponentEnum::DIV)
+        $component = ComponentFactory::make(ComponentEnum::DIV)
             ->setContent('first', 'key_1')
             ->setContent('second', 'key_2')
             ->prependContent('prepended', 'prepended_key');
@@ -113,7 +113,7 @@ class SimpleComponentTest extends TestCase
     #[Test]
     public function a_component_can_unset_content()
     {
-        $component = ComponentBuilder::make(ComponentEnum::DIV)
+        $component = ComponentFactory::make(ComponentEnum::DIV)
             ->setContent('first')
             ->setContent('second');
 
@@ -125,7 +125,7 @@ class SimpleComponentTest extends TestCase
     #[Test]
     public function a_component_can_unset_specific_content_by_key()
     {
-        $component = ComponentBuilder::make(ComponentEnum::DIV)
+        $component = ComponentFactory::make(ComponentEnum::DIV)
             ->setContent('first', 'key_1')
             ->setContent('second', 'key_2');
 
@@ -137,12 +137,12 @@ class SimpleComponentTest extends TestCase
     #[Test]
     public function a_component_accepts_attributes()
     {
-        $component = ComponentBuilder::make(ComponentEnum::DIV)
+        $component = ComponentFactory::make(ComponentEnum::DIV)
             ->setAttribute('id', 'div_id');
 
         $this->assertEquals('div_id', $component->getAttribute('id'));
 
-        $component2 = ComponentBuilder::make(ComponentEnum::DIV)
+        $component2 = ComponentFactory::make(ComponentEnum::DIV)
             ->setAttributes([
                 'id' => 'div_id',
             ]);
@@ -153,12 +153,12 @@ class SimpleComponentTest extends TestCase
     #[Test]
     public function a_component_accepts_theme()
     {
-        $component = ComponentBuilder::make(ComponentEnum::DIV)
+        $component = ComponentFactory::make(ComponentEnum::DIV)
             ->setTheme('display', 'inline');
 
         $this->assertEquals('inline', $component->getTheme('display'));
 
-        $component2 = ComponentBuilder::make(ComponentEnum::DIV)
+        $component2 = ComponentFactory::make(ComponentEnum::DIV)
             ->setThemes([
                 'display' => 'inline',
             ]);
@@ -169,7 +169,7 @@ class SimpleComponentTest extends TestCase
     #[Test]
     public function set_theme_accumulates_string_values()
     {
-        $component = ComponentBuilder::make(ComponentEnum::DIV)
+        $component = ComponentFactory::make(ComponentEnum::DIV)
             ->setTheme('action', 'success')
             ->setTheme('action', 'error');
 
@@ -179,7 +179,7 @@ class SimpleComponentTest extends TestCase
     #[Test]
     public function set_theme_accumulates_array_values()
     {
-        $component = ComponentBuilder::make(ComponentEnum::DIV)
+        $component = ComponentFactory::make(ComponentEnum::DIV)
             ->setTheme('action', 'success')
             ->setTheme('action', ['error', 'link']);
 
@@ -189,7 +189,7 @@ class SimpleComponentTest extends TestCase
     #[Test]
     public function set_theme_does_not_add_duplicates()
     {
-        $component = ComponentBuilder::make(ComponentEnum::DIV)
+        $component = ComponentFactory::make(ComponentEnum::DIV)
             ->setTheme('action', 'success')
             ->setTheme('action', 'success');
 
@@ -199,7 +199,7 @@ class SimpleComponentTest extends TestCase
     #[Test]
     public function set_theme_does_not_add_duplicates_from_array()
     {
-        $component = ComponentBuilder::make(ComponentEnum::DIV)
+        $component = ComponentFactory::make(ComponentEnum::DIV)
             ->setTheme('action', 'success')
             ->setTheme('action', ['success', 'error']);
 
@@ -209,7 +209,7 @@ class SimpleComponentTest extends TestCase
     #[Test]
     public function set_theme_with_overwrite_replaces_value()
     {
-        $component = ComponentBuilder::make(ComponentEnum::DIV)
+        $component = ComponentFactory::make(ComponentEnum::DIV)
             ->setTheme('action', 'success')
             ->setTheme('action', 'error', overwrite: true);
 
@@ -219,7 +219,7 @@ class SimpleComponentTest extends TestCase
     #[Test]
     public function set_themes_accumulates_multiple_themes()
     {
-        $component = ComponentBuilder::make(ComponentEnum::DIV)
+        $component = ComponentFactory::make(ComponentEnum::DIV)
             ->setTheme('action', 'success')
             ->setThemes([
                 'action' => 'error',
@@ -233,7 +233,7 @@ class SimpleComponentTest extends TestCase
     #[Test]
     public function a_component_string_representation_is_a_json_object()
     {
-        $component = ComponentBuilder::make(ComponentEnum::DIV);
+        $component = ComponentFactory::make(ComponentEnum::DIV);
 
         $this->assertJson($component->__toString());
     }
@@ -253,13 +253,13 @@ class SimpleComponentTest extends TestCase
     #[Test]
     public function a_component_can_return_an_array_representation()
     {
-        $component = ComponentBuilder::make(ComponentEnum::DIV)
+        $component = ComponentFactory::make(ComponentEnum::DIV)
             ->setContents(contents: [
-                'span_1' => ComponentBuilder::make(ComponentEnum::SPAN)
+                'span_1' => ComponentFactory::make(ComponentEnum::SPAN)
                     ->setContent('inside a span'),
-                'span_2' => ComponentBuilder::make(ComponentEnum::SPAN)
+                'span_2' => ComponentFactory::make(ComponentEnum::SPAN)
                     ->setContent(
-                        ComponentBuilder::make(ComponentEnum::LINK)
+                        ComponentFactory::make(ComponentEnum::LINK)
                             ->setAttribute('href', 'https://google.com')
                             ->setContent('this is a link')
                             ->setTheme('action', 'success')
@@ -283,13 +283,13 @@ class SimpleComponentTest extends TestCase
     #[Test]
     public function a_component_can_be_recreated_from_an_array()
     {
-        $component = ComponentBuilder::make(ComponentEnum::DIV)
+        $component = ComponentFactory::make(ComponentEnum::DIV)
             ->setContents([
-                'span_1' => ComponentBuilder::make(ComponentEnum::SPAN)
+                'span_1' => ComponentFactory::make(ComponentEnum::SPAN)
                     ->setContent('inside a span'),
-                'span_2' => ComponentBuilder::make(ComponentEnum::SPAN)
+                'span_2' => ComponentFactory::make(ComponentEnum::SPAN)
                     ->setContent(
-                        ComponentBuilder::make(ComponentEnum::LINK)
+                        ComponentFactory::make(ComponentEnum::LINK)
                             ->setAttribute('href', 'https://google.com')
                             ->setContent('this is a link')
                             ->setTheme('action', 'success')
@@ -305,7 +305,7 @@ class SimpleComponentTest extends TestCase
 
         $componentArray = $component->toArray();
 
-        $recreatedComponent = ComponentFactory::fromArray($componentArray);
+        $recreatedComponent = ComponentDeserializer::fromArray($componentArray);
 
         $this->blade('{{ $recreatedComponent }}', [
             'recreatedComponent' => $recreatedComponent,
@@ -318,7 +318,7 @@ class SimpleComponentTest extends TestCase
     #[Test]
     public function a_component_with_a_settings_can_be_recreated_from_an_array()
     {
-        $component = ComponentBuilder::make(ComponentEnum::DIV)
+        $component = ComponentFactory::make(ComponentEnum::DIV)
             ->setSettings([
                 'setting_1' => 'value_1',
                 'setting_2' => 'value_2',
@@ -328,7 +328,7 @@ class SimpleComponentTest extends TestCase
 
         $componentArray = $component->toArray();
 
-        $recreatedComponent = ComponentFactory::fromArray($componentArray);
+        $recreatedComponent = ComponentDeserializer::fromArray($componentArray);
 
         $this->assertEquals($componentArray, $recreatedComponent->toArray());
     }
@@ -336,7 +336,7 @@ class SimpleComponentTest extends TestCase
     #[Test]
     public function a_livewire_component_with_can_be_recreated_from_an_array()
     {
-        $component = ComponentBuilder::make(LivewireComponent::class)
+        $component = ComponentFactory::make(LivewireComponent::class)
             ->setLivewire()
             ->setLivewireKey('livewire-key')
             ->setLivewireParams([
@@ -345,7 +345,7 @@ class SimpleComponentTest extends TestCase
 
         $componentArray = $component->toArray();
 
-        $recreatedComponent = ComponentFactory::fromArray($componentArray);
+        $recreatedComponent = ComponentDeserializer::fromArray($componentArray);
 
         $this->assertEquals($componentArray, $recreatedComponent->toArray());
 
@@ -354,7 +354,7 @@ class SimpleComponentTest extends TestCase
     #[Test]
     public function a_component_with_a_different_path_can_be_recreated_from_an_array()
     {
-        $component = ComponentBuilder::make('img')
+        $component = ComponentFactory::make('img')
             ->setPath('inline')
             ->setContent('Custom path content');
 
@@ -365,7 +365,7 @@ class SimpleComponentTest extends TestCase
 
         $componentArray = $component->toArray();
 
-        $recreatedComponent = ComponentFactory::fromArray($componentArray);
+        $recreatedComponent = ComponentDeserializer::fromArray($componentArray);
 
         $this->blade('{{ $recreatedComponent }}', [
             'recreatedComponent' => $recreatedComponent,

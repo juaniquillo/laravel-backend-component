@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Components\Headers;
 
-use Juaniquillo\BackendComponents\Builders\ComponentBuilder;
 use Juaniquillo\BackendComponents\Enums\ComponentEnum;
+use Juaniquillo\BackendComponents\Factories\ComponentFactory;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
@@ -16,7 +16,7 @@ class H4Test extends TestCase
     #[Test]
     public function empty_h4_header()
     {
-        $header = ComponentBuilder::make(ComponentEnum::H4);
+        $header = ComponentFactory::make(ComponentEnum::H4);
 
         $this->blade('{{ $header }}', [
             'header' => $header,
@@ -28,7 +28,7 @@ class H4Test extends TestCase
     #[Test]
     public function h4_header_accepts_content()
     {
-        $header = ComponentBuilder::make(ComponentEnum::H4)
+        $header = ComponentFactory::make(ComponentEnum::H4)
             ->setContent('Nice h4 tag');
 
         $this->blade('{{ $header }}', [
@@ -40,11 +40,11 @@ class H4Test extends TestCase
     #[Test]
     public function h4_accepts_contents_array()
     {
-        $header = ComponentBuilder::make(ComponentEnum::H4)
+        $header = ComponentFactory::make(ComponentEnum::H4)
             ->setContents([
-                ComponentBuilder::make(ComponentEnum::SPAN)
+                ComponentFactory::make(ComponentEnum::SPAN)
                     ->setContent('Span'),
-                ComponentBuilder::make(ComponentEnum::BOLD)
+                ComponentFactory::make(ComponentEnum::BOLD)
                     ->setContent('Bold'),
             ]);
 
@@ -64,7 +64,7 @@ class H4Test extends TestCase
     #[Test]
     public function h4_header_accepts_attributes()
     {
-        $header = ComponentBuilder::make(ComponentEnum::H4)
+        $header = ComponentFactory::make(ComponentEnum::H4)
             ->setAttribute('id', 'nice_header');
 
         $this->blade('{{ $header }}', [
@@ -80,7 +80,7 @@ class H4Test extends TestCase
             'color' => 'error',
         ];
 
-        $header = ComponentBuilder::make(ComponentEnum::H4)
+        $header = ComponentFactory::make(ComponentEnum::H4)
             ->setThemes($theme);
 
         $this->blade('{{ $header }}', [

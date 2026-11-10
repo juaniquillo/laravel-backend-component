@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Components;
 
-use Juaniquillo\BackendComponents\Builders\ComponentBuilder;
 use Juaniquillo\BackendComponents\Enums\ComponentEnum;
+use Juaniquillo\BackendComponents\Factories\ComponentFactory;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
@@ -14,7 +14,7 @@ class ResolveComponentTest extends TestCase
     #[Test]
     public function alpine_style_attributes_are_rendered_as_is()
     {
-        $div = ComponentBuilder::make(ComponentEnum::DIV)
+        $div = ComponentFactory::make(ComponentEnum::DIV)
             ->setAttribute('@click', 'open = true')
             ->setAttribute('x-show', 'open');
 
@@ -28,7 +28,7 @@ class ResolveComponentTest extends TestCase
     #[Test]
     public function settings_are_not_rendered_as_html_attributes()
     {
-        $div = ComponentBuilder::make(ComponentEnum::DIV)
+        $div = ComponentFactory::make(ComponentEnum::DIV)
             ->setSetting('transition', 'fade')
             ->setContent('Hello');
 
@@ -43,10 +43,10 @@ class ResolveComponentTest extends TestCase
     #[Test]
     public function content_and_attributes_are_rendered_together()
     {
-        $div = ComponentBuilder::make(ComponentEnum::DIV)
+        $div = ComponentFactory::make(ComponentEnum::DIV)
             ->setAttribute('id', 'wrapper')
             ->setContent(
-                ComponentBuilder::make(ComponentEnum::PARAGRAPH)
+                ComponentFactory::make(ComponentEnum::PARAGRAPH)
                     ->setContent('Nested')
             );
 

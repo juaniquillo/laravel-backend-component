@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Components\Inline;
 
-use Juaniquillo\BackendComponents\Builders\ComponentBuilder;
 use Juaniquillo\BackendComponents\Enums\ComponentEnum;
+use Juaniquillo\BackendComponents\Factories\ComponentFactory;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
@@ -16,7 +16,7 @@ class SpanTest extends TestCase
     #[Test]
     public function simple_span()
     {
-        $span = ComponentBuilder::make(ComponentEnum::SPAN);
+        $span = ComponentFactory::make(ComponentEnum::SPAN);
 
         $this->blade('{{ $span }}', [
             'span' => $span,
@@ -28,7 +28,7 @@ class SpanTest extends TestCase
     #[Test]
     public function span_accepts_content()
     {
-        $span = ComponentBuilder::make(ComponentEnum::SPAN)
+        $span = ComponentFactory::make(ComponentEnum::SPAN)
             ->setContent('Nice span');
 
         $this->blade('{{ $span }}', [
@@ -40,7 +40,7 @@ class SpanTest extends TestCase
     #[Test]
     public function span_accepts_contents_array()
     {
-        $span = ComponentBuilder::make(ComponentEnum::SPAN)
+        $span = ComponentFactory::make(ComponentEnum::SPAN)
             ->setContents([
                 'content 1 ',
                 'content 2',
@@ -58,7 +58,7 @@ class SpanTest extends TestCase
     #[Test]
     public function span_accepts_attributes()
     {
-        $span = ComponentBuilder::make(ComponentEnum::SPAN)
+        $span = ComponentFactory::make(ComponentEnum::SPAN)
             ->setAttribute('id', 'nice_span');
 
         $this->blade('{{ $span }}', [
@@ -74,7 +74,7 @@ class SpanTest extends TestCase
             'font' => 'bold',
         ];
 
-        $span = ComponentBuilder::make(ComponentEnum::SPAN)
+        $span = ComponentFactory::make(ComponentEnum::SPAN)
             ->setThemes($theme);
 
         $this->blade('{{ $span }}', [

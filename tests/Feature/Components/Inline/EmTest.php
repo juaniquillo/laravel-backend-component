@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Components\Inline;
 
-use Juaniquillo\BackendComponents\Builders\ComponentBuilder;
 use Juaniquillo\BackendComponents\Enums\ComponentEnum;
+use Juaniquillo\BackendComponents\Factories\ComponentFactory;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
@@ -16,7 +16,7 @@ class EmTest extends TestCase
     #[Test]
     public function simple_em()
     {
-        $em = ComponentBuilder::make(ComponentEnum::EM);
+        $em = ComponentFactory::make(ComponentEnum::EM);
 
         $this->blade('{{ $em }}', [
             'em' => $em,
@@ -28,7 +28,7 @@ class EmTest extends TestCase
     #[Test]
     public function em_accepts_content()
     {
-        $em = ComponentBuilder::make(ComponentEnum::EM)
+        $em = ComponentFactory::make(ComponentEnum::EM)
             ->setContent('Nice em tag');
 
         $this->blade('{{ $em }}', [
@@ -40,7 +40,7 @@ class EmTest extends TestCase
     #[Test]
     public function em_accepts_contents_array()
     {
-        $em = ComponentBuilder::make(ComponentEnum::EM)
+        $em = ComponentFactory::make(ComponentEnum::EM)
             ->setContents([
                 'content 1 ',
                 'content 2',
@@ -58,7 +58,7 @@ class EmTest extends TestCase
     #[Test]
     public function em_accepts_attributes()
     {
-        $em = ComponentBuilder::make(ComponentEnum::EM)
+        $em = ComponentFactory::make(ComponentEnum::EM)
             ->setAttribute('id', 'nice_em');
 
         $this->blade('{{ $em }}', [
@@ -74,7 +74,7 @@ class EmTest extends TestCase
             'display' => 'inline-block',
         ];
 
-        $em = ComponentBuilder::make(ComponentEnum::EM)
+        $em = ComponentFactory::make(ComponentEnum::EM)
             ->setThemes($theme);
 
         $this->blade('{{ $em }}', [

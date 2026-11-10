@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Components\Lists;
 
-use Juaniquillo\BackendComponents\Builders\ComponentBuilder;
 use Juaniquillo\BackendComponents\Enums\ComponentEnum;
+use Juaniquillo\BackendComponents\Factories\ComponentFactory;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
@@ -16,7 +16,7 @@ class OrderedListTest extends TestCase
     #[Test]
     public function empty_ordered_list()
     {
-        $orderedList = ComponentBuilder::make(ComponentEnum::OL);
+        $orderedList = ComponentFactory::make(ComponentEnum::OL);
 
         $this->blade('{{ $orderedList }}', [
             'orderedList' => $orderedList,
@@ -28,9 +28,9 @@ class OrderedListTest extends TestCase
     #[Test]
     public function ordered_list_accepts_content()
     {
-        $orderedList = ComponentBuilder::make(ComponentEnum::OL)
+        $orderedList = ComponentFactory::make(ComponentEnum::OL)
             ->setContent(
-                ComponentBuilder::make(ComponentEnum::LI)
+                ComponentFactory::make(ComponentEnum::LI)
                     ->setContent('List content')
             );
 
@@ -45,11 +45,11 @@ class OrderedListTest extends TestCase
     #[Test]
     public function ordered_list_accepts_contents_array()
     {
-        $ordered_list = ComponentBuilder::make(ComponentEnum::OL)
+        $ordered_list = ComponentFactory::make(ComponentEnum::OL)
             ->setContents([
-                ComponentBuilder::make(ComponentEnum::LI)
+                ComponentFactory::make(ComponentEnum::LI)
                     ->setContent('First item'),
-                ComponentBuilder::make(ComponentEnum::LI)
+                ComponentFactory::make(ComponentEnum::LI)
                     ->setContent('Second item'),
             ]);
 
@@ -67,7 +67,7 @@ class OrderedListTest extends TestCase
     #[Test]
     public function ordered_list_accepts_attributes()
     {
-        $orderedList = ComponentBuilder::make(ComponentEnum::OL)
+        $orderedList = ComponentFactory::make(ComponentEnum::OL)
             ->setAttribute('id', 'list_id');
 
         $this->blade('{{ $orderedList }}', [
@@ -83,7 +83,7 @@ class OrderedListTest extends TestCase
             'lists' => 'ordered',
         ];
 
-        $orderedList = ComponentBuilder::make(ComponentEnum::OL)
+        $orderedList = ComponentFactory::make(ComponentEnum::OL)
             ->setThemes($theme);
 
         $this->blade('{{ $orderedList }}', [

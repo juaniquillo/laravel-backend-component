@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Components\Form;
 
-use Juaniquillo\BackendComponents\Builders\ComponentBuilder;
 use Juaniquillo\BackendComponents\Enums\ComponentEnum;
+use Juaniquillo\BackendComponents\Factories\ComponentFactory;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
@@ -16,7 +16,7 @@ class LegendTest extends TestCase
     #[Test]
     public function simple_legend()
     {
-        $legend = ComponentBuilder::make(ComponentEnum::LEGEND);
+        $legend = ComponentFactory::make(ComponentEnum::LEGEND);
 
         $this->blade('{{ $legend }}', [
             'legend' => $legend,
@@ -27,9 +27,9 @@ class LegendTest extends TestCase
     #[Test]
     public function legend_accepts_content()
     {
-        $legend = ComponentBuilder::make(ComponentEnum::LEGEND)
+        $legend = ComponentFactory::make(ComponentEnum::LEGEND)
             ->setContent(
-                ComponentBuilder::make(ComponentEnum::PARAGRAPH)
+                ComponentFactory::make(ComponentEnum::PARAGRAPH)
                     ->setContent('Span content')
             );
 
@@ -44,7 +44,7 @@ class LegendTest extends TestCase
     #[Test]
     public function legend_accepts_contents_array()
     {
-        $header = ComponentBuilder::make(ComponentEnum::LEGEND)
+        $header = ComponentFactory::make(ComponentEnum::LEGEND)
             ->setContents([
                 'content 1 ',
                 'content 2',
@@ -62,7 +62,7 @@ class LegendTest extends TestCase
     #[Test]
     public function legend_accepts_attributes()
     {
-        $legend = ComponentBuilder::make(ComponentEnum::LEGEND)
+        $legend = ComponentFactory::make(ComponentEnum::LEGEND)
             ->setAttribute('for', 'legend_for');
 
         $this->blade('{{ $legend }}', [
@@ -78,7 +78,7 @@ class LegendTest extends TestCase
             'color' => 'default',
         ];
 
-        $legend = ComponentBuilder::make(ComponentEnum::LEGEND)
+        $legend = ComponentFactory::make(ComponentEnum::LEGEND)
             ->setThemes($theme);
 
         $this->blade('{{ $legend }}', [

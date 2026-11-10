@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Components;
 
-use Juaniquillo\BackendComponents\Builders\ComponentBuilder;
 use Juaniquillo\BackendComponents\Enums\ComponentEnum;
+use Juaniquillo\BackendComponents\Factories\ComponentFactory;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
@@ -16,7 +16,7 @@ class ParagraphTest extends TestCase
     #[Test]
     public function empty_paragraph()
     {
-        $paragraph = ComponentBuilder::make(ComponentEnum::PARAGRAPH);
+        $paragraph = ComponentFactory::make(ComponentEnum::PARAGRAPH);
 
         $this->blade('{{ $paragraph }}', [
             'paragraph' => $paragraph,
@@ -28,9 +28,9 @@ class ParagraphTest extends TestCase
     #[Test]
     public function paragraph_accepts_content()
     {
-        $paragraph = ComponentBuilder::make(ComponentEnum::PARAGRAPH)
+        $paragraph = ComponentFactory::make(ComponentEnum::PARAGRAPH)
             ->setContent(
-                ComponentBuilder::make(ComponentEnum::LINK)
+                ComponentFactory::make(ComponentEnum::LINK)
                     ->setContent('Link content')
             );
 
@@ -47,11 +47,11 @@ class ParagraphTest extends TestCase
     #[Test]
     public function paragraph_accepts_contents_array()
     {
-        $paragraph = ComponentBuilder::make(ComponentEnum::PARAGRAPH)
+        $paragraph = ComponentFactory::make(ComponentEnum::PARAGRAPH)
             ->setContents([
-                ComponentBuilder::make(ComponentEnum::SPAN)
+                ComponentFactory::make(ComponentEnum::SPAN)
                     ->setContent('Span'),
-                ComponentBuilder::make(ComponentEnum::BOLD)
+                ComponentFactory::make(ComponentEnum::BOLD)
                     ->setContent('Bold'),
             ]);
 
@@ -71,7 +71,7 @@ class ParagraphTest extends TestCase
     #[Test]
     public function paragraph_accepts_attributes()
     {
-        $paragraph = ComponentBuilder::make(ComponentEnum::PARAGRAPH)
+        $paragraph = ComponentFactory::make(ComponentEnum::PARAGRAPH)
             ->setContent('Nice paragraph')
             ->setAttribute('id', 'paragraph_id');
 
@@ -90,7 +90,7 @@ class ParagraphTest extends TestCase
             'color' => 'success',
         ];
 
-        $paragraph = ComponentBuilder::make(ComponentEnum::PARAGRAPH)
+        $paragraph = ComponentFactory::make(ComponentEnum::PARAGRAPH)
             ->setContent('Nice paragraph')
             ->setThemes($theme);
 

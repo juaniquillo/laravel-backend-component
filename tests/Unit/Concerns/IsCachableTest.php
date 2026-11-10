@@ -6,10 +6,10 @@ namespace Tests\Unit\Concerns;
 
 use Illuminate\Cache\ArrayStore;
 use Illuminate\Cache\Repository;
-use Juaniquillo\BackendComponents\Builders\ComponentBuilder;
 use Juaniquillo\BackendComponents\Cache\FileCache;
 use Juaniquillo\BackendComponents\Components\CachedBackendComponent;
 use Juaniquillo\BackendComponents\Enums\ComponentEnum;
+use Juaniquillo\BackendComponents\Factories\ComponentFactory;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
@@ -218,7 +218,7 @@ class IsCachableTest extends TestCase
         $parent = new CachedBackendComponent(ComponentEnum::DIV);
         $parent->setCacheDirectory($this->cacheDir);
 
-        $child = ComponentBuilder::make(ComponentEnum::SPAN);
+        $child = ComponentFactory::make(ComponentEnum::SPAN);
         $child->setContent('Child content');
         $parent->setContent($child);
 

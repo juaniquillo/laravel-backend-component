@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Components\Lists;
 
-use Juaniquillo\BackendComponents\Builders\ComponentBuilder;
 use Juaniquillo\BackendComponents\Enums\ComponentEnum;
+use Juaniquillo\BackendComponents\Factories\ComponentFactory;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
@@ -16,7 +16,7 @@ class UnorderedListTest extends TestCase
     #[Test]
     public function empty_unordered_list()
     {
-        $unorderedList = ComponentBuilder::make(ComponentEnum::UL);
+        $unorderedList = ComponentFactory::make(ComponentEnum::UL);
 
         $this->blade('{{ $unorderedList }}', [
             'unorderedList' => $unorderedList,
@@ -28,9 +28,9 @@ class UnorderedListTest extends TestCase
     #[Test]
     public function unordered_list_accepts_content()
     {
-        $unorderedList = ComponentBuilder::make(ComponentEnum::UL)
+        $unorderedList = ComponentFactory::make(ComponentEnum::UL)
             ->setContent(
-                ComponentBuilder::make(ComponentEnum::LI)
+                ComponentFactory::make(ComponentEnum::LI)
                     ->setContent('List content')
             );
 
@@ -45,11 +45,11 @@ class UnorderedListTest extends TestCase
     #[Test]
     public function unordered_list_accepts_contents_array()
     {
-        $unordered_list = ComponentBuilder::make(ComponentEnum::UL)
+        $unordered_list = ComponentFactory::make(ComponentEnum::UL)
             ->setContents([
-                ComponentBuilder::make(ComponentEnum::LI)
+                ComponentFactory::make(ComponentEnum::LI)
                     ->setContent('First item'),
-                ComponentBuilder::make(ComponentEnum::LI)
+                ComponentFactory::make(ComponentEnum::LI)
                     ->setContent('Second item'),
             ]);
 
@@ -67,7 +67,7 @@ class UnorderedListTest extends TestCase
     #[Test]
     public function unordered_list_accepts_attributes()
     {
-        $unorderedList = ComponentBuilder::make(ComponentEnum::UL)
+        $unorderedList = ComponentFactory::make(ComponentEnum::UL)
             ->setAttribute('id', 'list_id');
 
         $this->blade('{{ $unorderedList }}', [
@@ -83,7 +83,7 @@ class UnorderedListTest extends TestCase
             'lists' => 'unordered',
         ];
 
-        $unorderedList = ComponentBuilder::make(ComponentEnum::UL)
+        $unorderedList = ComponentFactory::make(ComponentEnum::UL)
             ->setThemes($theme);
 
         $this->blade('{{ $unorderedList }}', [

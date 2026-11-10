@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Components\Layers;
 
-use Juaniquillo\BackendComponents\Builders\ComponentBuilder;
 use Juaniquillo\BackendComponents\Enums\ComponentEnum;
+use Juaniquillo\BackendComponents\Factories\ComponentFactory;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
@@ -14,7 +14,7 @@ class DialogTest extends TestCase
     #[Test]
     public function empty_dialog()
     {
-        $dialog = ComponentBuilder::make(ComponentEnum::DIALOG);
+        $dialog = ComponentFactory::make(ComponentEnum::DIALOG);
 
         $this->blade('{{ $dialog }}', [
             'dialog' => $dialog,
@@ -26,7 +26,7 @@ class DialogTest extends TestCase
     #[Test]
     public function dialog_accepts_content()
     {
-        $dialog = ComponentBuilder::make(ComponentEnum::DIALOG)
+        $dialog = ComponentFactory::make(ComponentEnum::DIALOG)
             ->setContent('Dialog content here');
 
         $this->blade('{{ $dialog }}', [
@@ -40,7 +40,7 @@ class DialogTest extends TestCase
     #[Test]
     public function dialog_accepts_attributes()
     {
-        $dialog = ComponentBuilder::make(ComponentEnum::DIALOG)
+        $dialog = ComponentFactory::make(ComponentEnum::DIALOG)
             ->setAttribute('id', 'my-dialog')
             ->setAttribute('open', 'open');
 

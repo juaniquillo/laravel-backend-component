@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Components\Form;
 
-use Juaniquillo\BackendComponents\Builders\ComponentBuilder;
 use Juaniquillo\BackendComponents\Enums\ComponentEnum;
+use Juaniquillo\BackendComponents\Factories\ComponentFactory;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
@@ -16,7 +16,7 @@ class TextareaTest extends TestCase
     #[Test]
     public function simple_textarea()
     {
-        $textarea = ComponentBuilder::make(ComponentEnum::TEXTAREA);
+        $textarea = ComponentFactory::make(ComponentEnum::TEXTAREA);
 
         $this->blade('{{ $textarea }}', [
             'textarea' => $textarea,
@@ -27,7 +27,7 @@ class TextareaTest extends TestCase
     #[Test]
     public function textarea_accepts_content()
     {
-        $textarea = ComponentBuilder::make(ComponentEnum::TEXTAREA)
+        $textarea = ComponentFactory::make(ComponentEnum::TEXTAREA)
             ->setContent('Textarea content');
 
         $this->blade('{{ $textarea }}', [
@@ -41,7 +41,7 @@ class TextareaTest extends TestCase
     #[Test]
     public function textarea_accepts_contents_array()
     {
-        $header = ComponentBuilder::make(ComponentEnum::TEXTAREA)
+        $header = ComponentFactory::make(ComponentEnum::TEXTAREA)
             ->setContents([
                 'content 1 ',
                 'content 2',
@@ -59,7 +59,7 @@ class TextareaTest extends TestCase
     #[Test]
     public function textarea_accepts_attributes()
     {
-        $textarea = ComponentBuilder::make(ComponentEnum::TEXTAREA)
+        $textarea = ComponentFactory::make(ComponentEnum::TEXTAREA)
             ->setAttribute('for', 'textarea_for');
 
         $this->blade('{{ $textarea }}', [
@@ -75,7 +75,7 @@ class TextareaTest extends TestCase
             'display' => 'block',
         ];
 
-        $textarea = ComponentBuilder::make(ComponentEnum::TEXTAREA)
+        $textarea = ComponentFactory::make(ComponentEnum::TEXTAREA)
             ->setThemes($theme);
 
         $this->blade('{{ $textarea }}', [

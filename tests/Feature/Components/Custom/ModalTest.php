@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Components\Custom;
 
-use Juaniquillo\BackendComponents\Builders\ComponentBuilder;
 use Juaniquillo\BackendComponents\Enums\ComponentEnum;
+use Juaniquillo\BackendComponents\Factories\ComponentFactory;
 use Juaniquillo\BackendComponents\Utils\ModalUtil;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
@@ -69,7 +69,7 @@ class ModalTest extends TestCase
     {
         $modal = ModalUtil::make(
             content: '',
-            button: ComponentBuilder::make(ComponentEnum::BUTTON)
+            button: ComponentFactory::make(ComponentEnum::BUTTON)
                 ->setContent('Open Modal')
                 ->setAttribute('type', 'button')
                 ->setAttribute('@click', 'showModal = true'),
@@ -90,7 +90,7 @@ class ModalTest extends TestCase
     {
         $modal = ModalUtil::make(
             content: '',
-            title: ComponentBuilder::make(ComponentEnum::DIV)
+            title: ComponentFactory::make(ComponentEnum::DIV)
                 ->setContent('This is the title')
                 ->setAttribute('id', 'modal_title'),
         )->getComponent();
@@ -107,7 +107,7 @@ class ModalTest extends TestCase
     {
         $modal = ModalUtil::make(
             content: '',
-            footer: ComponentBuilder::make(ComponentEnum::DIV)
+            footer: ComponentFactory::make(ComponentEnum::DIV)
                 ->setContent('This is the footer')
                 ->setAttribute('id', 'modal_footer'),
         )->getComponent();

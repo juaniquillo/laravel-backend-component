@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Components\Inline;
 
-use Juaniquillo\BackendComponents\Builders\ComponentBuilder;
 use Juaniquillo\BackendComponents\Enums\ComponentEnum;
+use Juaniquillo\BackendComponents\Factories\ComponentFactory;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
@@ -16,7 +16,7 @@ class LinkTest extends TestCase
     #[Test]
     public function simple_link()
     {
-        $link = ComponentBuilder::make(ComponentEnum::LINK);
+        $link = ComponentFactory::make(ComponentEnum::LINK);
 
         $this->blade('{{ $link }}', [
             'link' => $link,
@@ -28,9 +28,9 @@ class LinkTest extends TestCase
     #[Test]
     public function link_accepts_content()
     {
-        $link = ComponentBuilder::make(ComponentEnum::LINK)
+        $link = ComponentFactory::make(ComponentEnum::LINK)
             ->setContent(
-                ComponentBuilder::make(ComponentEnum::SPAN)
+                ComponentFactory::make(ComponentEnum::SPAN)
                     ->setContent('Span content')
             );
 
@@ -47,11 +47,11 @@ class LinkTest extends TestCase
     #[Test]
     public function link_accepts_contents_array()
     {
-        $link = ComponentBuilder::make(ComponentEnum::LINK)
+        $link = ComponentFactory::make(ComponentEnum::LINK)
             ->setContents([
-                ComponentBuilder::make(ComponentEnum::SPAN)
+                ComponentFactory::make(ComponentEnum::SPAN)
                     ->setContent('Span'),
-                ComponentBuilder::make(ComponentEnum::BOLD)
+                ComponentFactory::make(ComponentEnum::BOLD)
                     ->setContent('Bold'),
             ]);
 
@@ -71,7 +71,7 @@ class LinkTest extends TestCase
     #[Test]
     public function link_accepts_attributes()
     {
-        $link = ComponentBuilder::make(ComponentEnum::LINK)
+        $link = ComponentFactory::make(ComponentEnum::LINK)
             ->setContent('Nice link')
             ->setAttribute('target', '_blank');
 
@@ -90,7 +90,7 @@ class LinkTest extends TestCase
             'action' => 'default',
         ];
 
-        $link = ComponentBuilder::make(ComponentEnum::LINK)
+        $link = ComponentFactory::make(ComponentEnum::LINK)
             ->setContent('Nice link')
             ->setThemes($theme);
 
