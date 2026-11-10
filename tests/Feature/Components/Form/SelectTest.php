@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Components\Form;
 
-use Juaniquillo\BackendComponents\Builders\ComponentBuilder;
 use Juaniquillo\BackendComponents\Enums\ComponentEnum;
+use Juaniquillo\BackendComponents\Factories\ComponentFactory;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
@@ -16,7 +16,7 @@ class SelectTest extends TestCase
     #[Test]
     public function empty_select()
     {
-        $select = ComponentBuilder::make(ComponentEnum::SELECT);
+        $select = ComponentFactory::make(ComponentEnum::SELECT);
 
         $this->blade('{{ $select }}', [
             'select' => $select,
@@ -28,9 +28,9 @@ class SelectTest extends TestCase
     #[Test]
     public function select_accepts_content()
     {
-        $select = ComponentBuilder::make(ComponentEnum::SELECT)
+        $select = ComponentFactory::make(ComponentEnum::SELECT)
             ->setContent(
-                ComponentBuilder::make(ComponentEnum::OPTION)
+                ComponentFactory::make(ComponentEnum::OPTION)
                     ->setContent('Option content')
             );
 
@@ -45,11 +45,11 @@ class SelectTest extends TestCase
     #[Test]
     public function select_accepts_contents_array()
     {
-        $header = ComponentBuilder::make(ComponentEnum::SELECT)
+        $header = ComponentFactory::make(ComponentEnum::SELECT)
             ->setContents([
-                ComponentBuilder::make(ComponentEnum::OPTION)
+                ComponentFactory::make(ComponentEnum::OPTION)
                     ->setContent('Option 1'),
-                ComponentBuilder::make(ComponentEnum::OPTION)
+                ComponentFactory::make(ComponentEnum::OPTION)
                     ->setContent('Option 2'),
             ]);
 
@@ -67,7 +67,7 @@ class SelectTest extends TestCase
     #[Test]
     public function select_accepts_attributes()
     {
-        $select = ComponentBuilder::make(ComponentEnum::SELECT)
+        $select = ComponentFactory::make(ComponentEnum::SELECT)
             ->setAttribute('id', 'select_id');
 
         $this->blade('{{ $select }}', [
@@ -83,7 +83,7 @@ class SelectTest extends TestCase
             'display' => 'inline-block',
         ];
 
-        $select = ComponentBuilder::make(ComponentEnum::SELECT)
+        $select = ComponentFactory::make(ComponentEnum::SELECT)
             ->setThemes($theme);
 
         $this->blade('{{ $select }}', [

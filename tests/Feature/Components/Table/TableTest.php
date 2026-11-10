@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Components\Table;
 
-use Juaniquillo\BackendComponents\Builders\ComponentBuilder;
 use Juaniquillo\BackendComponents\Enums\ComponentEnum;
+use Juaniquillo\BackendComponents\Factories\ComponentFactory;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
@@ -16,7 +16,7 @@ class TableTest extends TestCase
     #[Test]
     public function empty_table()
     {
-        $table = ComponentBuilder::make(ComponentEnum::TABLE);
+        $table = ComponentFactory::make(ComponentEnum::TABLE);
 
         $this->blade('{{ $table }}', [
             'table' => $table,
@@ -28,9 +28,9 @@ class TableTest extends TestCase
     #[Test]
     public function table_accepts_content()
     {
-        $table = ComponentBuilder::make(ComponentEnum::TABLE)
+        $table = ComponentFactory::make(ComponentEnum::TABLE)
             ->setContent(
-                ComponentBuilder::make(ComponentEnum::TBODY)
+                ComponentFactory::make(ComponentEnum::TBODY)
             );
 
         $this->blade('{{ $table }}', [
@@ -43,10 +43,10 @@ class TableTest extends TestCase
     #[Test]
     public function table_accepts_contents_array()
     {
-        $table = ComponentBuilder::make(ComponentEnum::TABLE)
+        $table = ComponentFactory::make(ComponentEnum::TABLE)
             ->setContents([
-                ComponentBuilder::make(ComponentEnum::THEAD),
-                ComponentBuilder::make(ComponentEnum::TBODY),
+                ComponentFactory::make(ComponentEnum::THEAD),
+                ComponentFactory::make(ComponentEnum::TBODY),
             ]);
 
         $this->blade('{{ $table }}', [
@@ -61,7 +61,7 @@ class TableTest extends TestCase
     #[Test]
     public function table_accepts_attributes()
     {
-        $table = ComponentBuilder::make(ComponentEnum::TABLE)
+        $table = ComponentFactory::make(ComponentEnum::TABLE)
             ->setAttribute('id', 'table_id');
 
         $this->blade('{{ $table }}', [
@@ -77,7 +77,7 @@ class TableTest extends TestCase
             'size' => 'w-full',
         ];
 
-        $table = ComponentBuilder::make(ComponentEnum::TABLE)
+        $table = ComponentFactory::make(ComponentEnum::TABLE)
             ->setThemes($theme);
 
         $this->blade('{{ $table }}', [

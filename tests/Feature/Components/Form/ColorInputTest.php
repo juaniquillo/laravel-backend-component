@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Test\Feature\Components\Form;
 
-use Juaniquillo\BackendComponents\Builders\ComponentBuilder;
 use Juaniquillo\BackendComponents\Enums\ComponentEnum;
+use Juaniquillo\BackendComponents\Factories\ComponentFactory;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
@@ -16,7 +16,7 @@ class ColorInputTest extends TestCase
     #[Test]
     public function simple_color_input()
     {
-        $input = ComponentBuilder::make(ComponentEnum::COLOR_INPUT);
+        $input = ComponentFactory::make(ComponentEnum::COLOR_INPUT);
 
         $this->blade('{{ $input }}', [
             'input' => $input,
@@ -28,9 +28,9 @@ class ColorInputTest extends TestCase
     #[Test]
     public function color_input_does_not_accepts_content()
     {
-        $input = ComponentBuilder::make(ComponentEnum::COLOR_INPUT)
+        $input = ComponentFactory::make(ComponentEnum::COLOR_INPUT)
             ->setContent(
-                ComponentBuilder::make(ComponentEnum::SPAN)
+                ComponentFactory::make(ComponentEnum::SPAN)
                     ->setContent('This is a span')
             );
 
@@ -45,7 +45,7 @@ class ColorInputTest extends TestCase
     #[Test]
     public function color_input_accepts_attributes()
     {
-        $form = ComponentBuilder::make(ComponentEnum::COLOR_INPUT)
+        $form = ComponentFactory::make(ComponentEnum::COLOR_INPUT)
             ->setAttribute('id', 'input_id')
             ->setAttribute('value', 'Input');
 
@@ -63,7 +63,7 @@ class ColorInputTest extends TestCase
             'display' => 'inline-block',
         ];
 
-        $input = ComponentBuilder::make(ComponentEnum::COLOR_INPUT)
+        $input = ComponentFactory::make(ComponentEnum::COLOR_INPUT)
             ->setThemes($theme);
 
         $this->blade('{{ $input }}', [

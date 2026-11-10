@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Components;
 
-use Juaniquillo\BackendComponents\Builders\ComponentBuilder;
 use Juaniquillo\BackendComponents\Enums\ComponentEnum;
+use Juaniquillo\BackendComponents\Factories\ComponentFactory;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
@@ -16,7 +16,7 @@ class CollectionTest extends TestCase
     #[Test]
     public function empty_collection()
     {
-        $collection = ComponentBuilder::make(ComponentEnum::COLLECTION);
+        $collection = ComponentFactory::make(ComponentEnum::COLLECTION);
 
         $this->blade('{{ $collection }}', [
             'collection' => $collection,
@@ -27,9 +27,9 @@ class CollectionTest extends TestCase
     #[Test]
     public function collection_accepts_content()
     {
-        $collection = ComponentBuilder::make(ComponentEnum::COLLECTION)
+        $collection = ComponentFactory::make(ComponentEnum::COLLECTION)
             ->setContent(
-                ComponentBuilder::make(ComponentEnum::PARAGRAPH)
+                ComponentFactory::make(ComponentEnum::PARAGRAPH)
                     ->setContent('This is the content content')
             );
 
@@ -45,11 +45,11 @@ class CollectionTest extends TestCase
     #[Test]
     public function collection_accepts_contents_array()
     {
-        $collection = ComponentBuilder::make(ComponentEnum::COLLECTION)
+        $collection = ComponentFactory::make(ComponentEnum::COLLECTION)
             ->setContents([
-                ComponentBuilder::make(ComponentEnum::SPAN)
+                ComponentFactory::make(ComponentEnum::SPAN)
                     ->setContent('Span'),
-                ComponentBuilder::make(ComponentEnum::BOLD)
+                ComponentFactory::make(ComponentEnum::BOLD)
                     ->setContent('Bold'),
             ]);
 
@@ -67,7 +67,7 @@ class CollectionTest extends TestCase
     #[Test]
     public function collection_does_not_accept_attributes()
     {
-        $collection = ComponentBuilder::make(ComponentEnum::COLLECTION)
+        $collection = ComponentFactory::make(ComponentEnum::COLLECTION)
             ->setAttribute('id', 'collection_id');
 
         $this->blade('{{ $collection }}', [
@@ -83,7 +83,7 @@ class CollectionTest extends TestCase
             'color' => 'success',
         ];
 
-        $collection = ComponentBuilder::make(ComponentEnum::COLLECTION)
+        $collection = ComponentFactory::make(ComponentEnum::COLLECTION)
             ->setThemes($theme);
 
         $this->blade('{{ $collection }}', [

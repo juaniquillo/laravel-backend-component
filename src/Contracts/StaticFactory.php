@@ -7,7 +7,7 @@ namespace Juaniquillo\BackendComponents\Contracts;
 use Illuminate\Contracts\Support\Htmlable;
 use Juaniquillo\BackendComponents\Enums\ComponentEnum;
 
-interface StaticBuilder
+interface StaticFactory
 {
     public static function make(string|ComponentEnum $name): Htmlable|CompoundComponent;
 }

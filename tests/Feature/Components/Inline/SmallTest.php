@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Components\Inline;
 
-use Juaniquillo\BackendComponents\Builders\ComponentBuilder;
 use Juaniquillo\BackendComponents\Enums\ComponentEnum;
+use Juaniquillo\BackendComponents\Factories\ComponentFactory;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
@@ -16,7 +16,7 @@ class SmallTest extends TestCase
     #[Test]
     public function simple_empty_small()
     {
-        $small = ComponentBuilder::make(ComponentEnum::SMALL);
+        $small = ComponentFactory::make(ComponentEnum::SMALL);
 
         $this->blade('{{ $small }}', [
             'small' => $small,
@@ -28,7 +28,7 @@ class SmallTest extends TestCase
     #[Test]
     public function small_accepts_content()
     {
-        $small = ComponentBuilder::make(ComponentEnum::SMALL)
+        $small = ComponentFactory::make(ComponentEnum::SMALL)
             ->setContent('Nice b tag');
 
         $this->blade('{{ $small }}', [
@@ -40,7 +40,7 @@ class SmallTest extends TestCase
     #[Test]
     public function small_accepts_contents_array()
     {
-        $small = ComponentBuilder::make(ComponentEnum::SMALL)
+        $small = ComponentFactory::make(ComponentEnum::SMALL)
             ->setContents([
                 'content 1 ',
                 'content 2',
@@ -58,7 +58,7 @@ class SmallTest extends TestCase
     #[Test]
     public function small_accepts_attributes()
     {
-        $small = ComponentBuilder::make(ComponentEnum::SMALL)
+        $small = ComponentFactory::make(ComponentEnum::SMALL)
             ->setAttribute('id', 'nice_small');
 
         $this->blade('{{ $small }}', [
@@ -74,7 +74,7 @@ class SmallTest extends TestCase
             'display' => 'inline-block',
         ];
 
-        $small = ComponentBuilder::make(ComponentEnum::SMALL)
+        $small = ComponentFactory::make(ComponentEnum::SMALL)
             ->setThemes($theme);
 
         $this->blade('{{ $small }}', [

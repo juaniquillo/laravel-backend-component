@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Components\Inline;
 
-use Juaniquillo\BackendComponents\Builders\ComponentBuilder;
 use Juaniquillo\BackendComponents\Enums\ComponentEnum;
+use Juaniquillo\BackendComponents\Factories\ComponentFactory;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
@@ -16,7 +16,7 @@ class ButtonTest extends TestCase
     #[Test]
     public function simple_button()
     {
-        $button = ComponentBuilder::make(ComponentEnum::BUTTON);
+        $button = ComponentFactory::make(ComponentEnum::BUTTON);
 
         $this->blade('{{ $button }}', [
             'button' => $button,
@@ -28,9 +28,9 @@ class ButtonTest extends TestCase
     #[Test]
     public function button_accepts_content()
     {
-        $button = ComponentBuilder::make(ComponentEnum::BUTTON)
+        $button = ComponentFactory::make(ComponentEnum::BUTTON)
             ->setContent(
-                ComponentBuilder::make(ComponentEnum::SPAN)
+                ComponentFactory::make(ComponentEnum::SPAN)
                     ->setContent('Span content')
             );
 
@@ -47,11 +47,11 @@ class ButtonTest extends TestCase
     #[Test]
     public function button_accepts_contents_array()
     {
-        $button = ComponentBuilder::make(ComponentEnum::BUTTON)
+        $button = ComponentFactory::make(ComponentEnum::BUTTON)
             ->setContents([
-                ComponentBuilder::make(ComponentEnum::SPAN)
+                ComponentFactory::make(ComponentEnum::SPAN)
                     ->setContent('Span'),
-                ComponentBuilder::make(ComponentEnum::BOLD)
+                ComponentFactory::make(ComponentEnum::BOLD)
                     ->setContent('Bold'),
             ]);
 
@@ -71,7 +71,7 @@ class ButtonTest extends TestCase
     #[Test]
     public function button_accepts_attributes()
     {
-        $button = ComponentBuilder::make(ComponentEnum::BUTTON)
+        $button = ComponentFactory::make(ComponentEnum::BUTTON)
             ->setContent('Nice button')
             ->setAttribute('type', 'submit');
 
@@ -90,7 +90,7 @@ class ButtonTest extends TestCase
             'action' => 'default',
         ];
 
-        $button = ComponentBuilder::make(ComponentEnum::BUTTON)
+        $button = ComponentFactory::make(ComponentEnum::BUTTON)
             ->setContent('Nice button')
             ->setThemes($theme);
 

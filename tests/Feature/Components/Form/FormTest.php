@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Components\Form;
 
-use Juaniquillo\BackendComponents\Builders\ComponentBuilder;
 use Juaniquillo\BackendComponents\Enums\ComponentEnum;
+use Juaniquillo\BackendComponents\Factories\ComponentFactory;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
@@ -16,7 +16,7 @@ class FormTest extends TestCase
     #[Test]
     public function simple_form()
     {
-        $form = ComponentBuilder::make(ComponentEnum::FORM);
+        $form = ComponentFactory::make(ComponentEnum::FORM);
 
         $this->blade('{{ $form }}', [
             'form' => $form,
@@ -28,9 +28,9 @@ class FormTest extends TestCase
     #[Test]
     public function form_accepts_content()
     {
-        $form = ComponentBuilder::make(ComponentEnum::FORM)
+        $form = ComponentFactory::make(ComponentEnum::FORM)
             ->setContent(
-                ComponentBuilder::make(ComponentEnum::BUTTON)
+                ComponentFactory::make(ComponentEnum::BUTTON)
                     ->setContent('Send Form')
             );
 
@@ -45,11 +45,11 @@ class FormTest extends TestCase
     #[Test]
     public function form_accepts_contents_array()
     {
-        $header = ComponentBuilder::make(ComponentEnum::FORM)
+        $header = ComponentFactory::make(ComponentEnum::FORM)
             ->setContents([
-                ComponentBuilder::make(ComponentEnum::TEXT_INPUT),
-                ComponentBuilder::make(ComponentEnum::EMAIL_INPUT),
-                ComponentBuilder::make(ComponentEnum::BUTTON)
+                ComponentFactory::make(ComponentEnum::TEXT_INPUT),
+                ComponentFactory::make(ComponentEnum::EMAIL_INPUT),
+                ComponentFactory::make(ComponentEnum::BUTTON)
                     ->setContent('Send Form'),
             ]);
 
@@ -68,7 +68,7 @@ class FormTest extends TestCase
     #[Test]
     public function form_accepts_attributes()
     {
-        $form = ComponentBuilder::make(ComponentEnum::FORM)
+        $form = ComponentFactory::make(ComponentEnum::FORM)
             ->setAttribute('method', 'post')
             ->setAttribute('action', '/')
             ->setAttribute('enctype', 'multipart/form-data');
@@ -88,7 +88,7 @@ class FormTest extends TestCase
             'display' => 'flex',
         ];
 
-        $form = ComponentBuilder::make(ComponentEnum::FORM)
+        $form = ComponentFactory::make(ComponentEnum::FORM)
             ->setThemes($theme);
 
         $this->blade('{{ $form }}', [
@@ -103,7 +103,7 @@ class FormTest extends TestCase
     public function form_accepts_some_settings()
     {
 
-        $form = ComponentBuilder::make(ComponentEnum::FORM);
+        $form = ComponentFactory::make(ComponentEnum::FORM);
 
         $this->blade('{{ $form }}', [
             'form' => $form,

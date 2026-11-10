@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Components\Inline;
 
-use Juaniquillo\BackendComponents\Builders\ComponentBuilder;
 use Juaniquillo\BackendComponents\Enums\ComponentEnum;
+use Juaniquillo\BackendComponents\Factories\ComponentFactory;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
@@ -16,7 +16,7 @@ class StrongTest extends TestCase
     #[Test]
     public function simple_strong()
     {
-        $strong = ComponentBuilder::make(ComponentEnum::STRONG);
+        $strong = ComponentFactory::make(ComponentEnum::STRONG);
 
         $this->blade('{{ $strong }}', [
             'strong' => $strong,
@@ -28,7 +28,7 @@ class StrongTest extends TestCase
     #[Test]
     public function strong_accepts_content()
     {
-        $strong = ComponentBuilder::make(ComponentEnum::STRONG)
+        $strong = ComponentFactory::make(ComponentEnum::STRONG)
             ->setContent('Nice strong tag');
 
         $this->blade('{{ $strong }}', [
@@ -40,7 +40,7 @@ class StrongTest extends TestCase
     #[Test]
     public function strong_accepts_contents_array()
     {
-        $strong = ComponentBuilder::make(ComponentEnum::STRONG)
+        $strong = ComponentFactory::make(ComponentEnum::STRONG)
             ->setContents([
                 'content 1 ',
                 'content 2',
@@ -58,7 +58,7 @@ class StrongTest extends TestCase
     #[Test]
     public function strong_accepts_attributes()
     {
-        $strong = ComponentBuilder::make(ComponentEnum::STRONG)
+        $strong = ComponentFactory::make(ComponentEnum::STRONG)
             ->setAttribute('id', 'nice_strong');
 
         $this->blade('{{ $strong }}', [
@@ -74,7 +74,7 @@ class StrongTest extends TestCase
             'display' => 'inline-block',
         ];
 
-        $strong = ComponentBuilder::make(ComponentEnum::STRONG)
+        $strong = ComponentFactory::make(ComponentEnum::STRONG)
             ->setThemes($theme);
 
         $this->blade('{{ $strong }}', [

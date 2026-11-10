@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Components\Form;
 
-use Juaniquillo\BackendComponents\Builders\ComponentBuilder;
 use Juaniquillo\BackendComponents\Enums\ComponentEnum;
+use Juaniquillo\BackendComponents\Factories\ComponentFactory;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
@@ -16,7 +16,7 @@ class DataListTest extends TestCase
     #[Test]
     public function empty_datalist()
     {
-        $datalist = ComponentBuilder::make(ComponentEnum::DATALIST);
+        $datalist = ComponentFactory::make(ComponentEnum::DATALIST);
 
         $this->blade('{{ $datalist }}', [
             'datalist' => $datalist,
@@ -28,9 +28,9 @@ class DataListTest extends TestCase
     #[Test]
     public function datalist_accepts_content()
     {
-        $datalist = ComponentBuilder::make(ComponentEnum::DATALIST)
+        $datalist = ComponentFactory::make(ComponentEnum::DATALIST)
             ->setContent(
-                ComponentBuilder::make(ComponentEnum::OPTION)
+                ComponentFactory::make(ComponentEnum::OPTION)
                     ->setContent('Option content')
                     ->setAttribute('value', 'option_value')
             );
@@ -46,11 +46,11 @@ class DataListTest extends TestCase
     #[Test]
     public function datalist_accepts_contents_array()
     {
-        $datalist = ComponentBuilder::make(ComponentEnum::DATALIST)
+        $datalist = ComponentFactory::make(ComponentEnum::DATALIST)
             ->setContents([
-                ComponentBuilder::make(ComponentEnum::OPTION)
+                ComponentFactory::make(ComponentEnum::OPTION)
                     ->setAttribute('value', 'option_value'),
-                ComponentBuilder::make(ComponentEnum::OPTION)
+                ComponentFactory::make(ComponentEnum::OPTION)
                     ->setAttribute('value', 'option_value_2'),
             ]);
 
@@ -68,7 +68,7 @@ class DataListTest extends TestCase
     #[Test]
     public function datalist_accepts_attributes()
     {
-        $datalist = ComponentBuilder::make(ComponentEnum::DATALIST)
+        $datalist = ComponentFactory::make(ComponentEnum::DATALIST)
             ->setAttribute('id', 'browsers');
 
         $this->blade('{{ $datalist }}', [
@@ -84,7 +84,7 @@ class DataListTest extends TestCase
             'display' => 'inline-block',
         ];
 
-        $datalist = ComponentBuilder::make(ComponentEnum::DATALIST)
+        $datalist = ComponentFactory::make(ComponentEnum::DATALIST)
             ->setThemes($theme);
 
         $this->blade('{{ $datalist }}', [

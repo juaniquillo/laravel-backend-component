@@ -8,7 +8,7 @@ use Juaniquillo\BackendComponents\Contracts\BackendComponent;
 use Juaniquillo\BackendComponents\Contracts\CompoundComponent;
 use Juaniquillo\BackendComponents\Contracts\ThemeManager;
 
-trait isFactory
+trait DeserializesComponents
 {
     /**
      * @param array{

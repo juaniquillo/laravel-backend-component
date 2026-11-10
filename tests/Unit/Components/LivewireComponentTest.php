@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Unit\Components;
 
-use Juaniquillo\BackendComponents\Builders\ComponentBuilder;
+use Juaniquillo\BackendComponents\Factories\ComponentFactory;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
@@ -13,7 +13,7 @@ class LivewireComponentTest extends TestCase
     #[Test]
     public function a_livewire_component_can_be_created()
     {
-        $component = ComponentBuilder::make(LivewireComponent::class);
+        $component = ComponentFactory::make(LivewireComponent::class);
 
         $this->assertFalse($component->isLivewire());
         $this->assertNotEquals('livewire-key', $component->getLivewireKey());

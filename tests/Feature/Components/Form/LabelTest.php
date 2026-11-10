@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Components\Form;
 
-use Juaniquillo\BackendComponents\Builders\ComponentBuilder;
 use Juaniquillo\BackendComponents\Enums\ComponentEnum;
+use Juaniquillo\BackendComponents\Factories\ComponentFactory;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
@@ -16,7 +16,7 @@ class LabelTest extends TestCase
     #[Test]
     public function simple_label()
     {
-        $label = ComponentBuilder::make(ComponentEnum::LABEL);
+        $label = ComponentFactory::make(ComponentEnum::LABEL);
 
         $this->blade('{{ $label }}', [
             'label' => $label,
@@ -27,9 +27,9 @@ class LabelTest extends TestCase
     #[Test]
     public function label_accepts_content()
     {
-        $label = ComponentBuilder::make(ComponentEnum::LABEL)
+        $label = ComponentFactory::make(ComponentEnum::LABEL)
             ->setContent(
-                ComponentBuilder::make(ComponentEnum::PARAGRAPH)
+                ComponentFactory::make(ComponentEnum::PARAGRAPH)
                     ->setContent('Span content')
             );
 
@@ -44,7 +44,7 @@ class LabelTest extends TestCase
     #[Test]
     public function label_accepts_contents_array()
     {
-        $header = ComponentBuilder::make(ComponentEnum::LABEL)
+        $header = ComponentFactory::make(ComponentEnum::LABEL)
             ->setContents([
                 'content 1 ',
                 'content 2',
@@ -62,7 +62,7 @@ class LabelTest extends TestCase
     #[Test]
     public function label_accepts_attributes()
     {
-        $label = ComponentBuilder::make(ComponentEnum::LABEL)
+        $label = ComponentFactory::make(ComponentEnum::LABEL)
             ->setAttribute('for', 'label_for');
 
         $this->blade('{{ $label }}', [
@@ -78,7 +78,7 @@ class LabelTest extends TestCase
             'color' => 'default',
         ];
 
-        $label = ComponentBuilder::make(ComponentEnum::LABEL)
+        $label = ComponentFactory::make(ComponentEnum::LABEL)
             ->setThemes($theme);
 
         $this->blade('{{ $label }}', [

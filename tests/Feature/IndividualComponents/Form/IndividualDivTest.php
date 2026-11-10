@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Feature\IndividualComponents\Form;
 
-use Juaniquillo\BackendComponents\Builders\ComponentBuilder;
 use Juaniquillo\BackendComponents\Components\Individual\DivComponent;
+use Juaniquillo\BackendComponents\Deserializers\IndividualComponentDeserializer;
 use Juaniquillo\BackendComponents\Enums\ComponentEnum;
-use Juaniquillo\BackendComponents\Factories\IndividualComponentFactory;
+use Juaniquillo\BackendComponents\Factories\ComponentFactory;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
@@ -54,9 +54,9 @@ class IndividualDivTest extends TestCase
     {
         $div = (new DivComponent)
             ->setContents([
-                ComponentBuilder::make(ComponentEnum::SPAN)
+                ComponentFactory::make(ComponentEnum::SPAN)
                     ->setContent('Span'),
-                ComponentBuilder::make(ComponentEnum::BOLD)
+                ComponentFactory::make(ComponentEnum::BOLD)
                     ->setContent('Bold'),
             ]);
 
@@ -107,9 +107,9 @@ class IndividualDivTest extends TestCase
     {
         $div = (new DivComponent)
             ->setContents(contents: [
-                'span_1' => ComponentBuilder::make(ComponentEnum::SPAN)
+                'span_1' => ComponentFactory::make(ComponentEnum::SPAN)
                     ->setContent('Span'),
-                'bold_1' => ComponentBuilder::make(ComponentEnum::BOLD)
+                'bold_1' => ComponentFactory::make(ComponentEnum::BOLD)
                     ->setContent('Bold'),
             ], overwrite: true);
 
@@ -131,11 +131,11 @@ class IndividualDivTest extends TestCase
     {
         $component = DivComponent::make()
             ->setContents([
-                'span_1' => ComponentBuilder::make(ComponentEnum::SPAN)
+                'span_1' => ComponentFactory::make(ComponentEnum::SPAN)
                     ->setContent('inside a span'),
-                'span_2' => ComponentBuilder::make(ComponentEnum::SPAN)
+                'span_2' => ComponentFactory::make(ComponentEnum::SPAN)
                     ->setContent(
-                        ComponentBuilder::make(ComponentEnum::LINK)
+                        ComponentFactory::make(ComponentEnum::LINK)
                             ->setAttribute('href', 'https://google.com')
                             ->setContent('this is a link')
                             ->setTheme('action', 'success')
@@ -146,7 +146,7 @@ class IndividualDivTest extends TestCase
 
         $componentArray = $component->toArray();
 
-        $recreatedComponent = IndividualComponentFactory::fromArray($componentArray);
+        $recreatedComponent = IndividualComponentDeserializer::fromArray($componentArray);
 
         $this->assertEquals($componentArray, $recreatedComponent->toArray());
     }

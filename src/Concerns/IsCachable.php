@@ -60,7 +60,7 @@ trait IsCachable
      *
      * Last call wins: calling `setCacheDirectory()` afterwards resets the
      * store back to `FileCache`. The store is not serialized by `toArray()`,
-     * reattach it after `ComponentFactory::fromArray()`.
+     * reattach it after `ComponentDeserializer::fromArray()`.
      */
     public function setCacheStore(CacheInterface $cacheStore): static
     {

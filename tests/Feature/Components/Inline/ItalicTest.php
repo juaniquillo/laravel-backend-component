@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Components\Inline;
 
-use Juaniquillo\BackendComponents\Builders\ComponentBuilder;
 use Juaniquillo\BackendComponents\Enums\ComponentEnum;
+use Juaniquillo\BackendComponents\Factories\ComponentFactory;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
@@ -16,7 +16,7 @@ class ItalicTest extends TestCase
     #[Test]
     public function simple_italic()
     {
-        $italic = ComponentBuilder::make(ComponentEnum::ITALIC);
+        $italic = ComponentFactory::make(ComponentEnum::ITALIC);
 
         $this->blade('{{ $italic }}', [
             'italic' => $italic,
@@ -28,7 +28,7 @@ class ItalicTest extends TestCase
     #[Test]
     public function italic_accepts_content()
     {
-        $italic = ComponentBuilder::make(ComponentEnum::ITALIC)
+        $italic = ComponentFactory::make(ComponentEnum::ITALIC)
             ->setContent('Nice i tag');
 
         $this->blade('{{ $italic }}', [
@@ -40,7 +40,7 @@ class ItalicTest extends TestCase
     #[Test]
     public function italic_accepts_contents_array()
     {
-        $italic = ComponentBuilder::make(ComponentEnum::ITALIC)
+        $italic = ComponentFactory::make(ComponentEnum::ITALIC)
             ->setContents([
                 'content 1 ',
                 'content 2',
@@ -58,7 +58,7 @@ class ItalicTest extends TestCase
     #[Test]
     public function italic_accepts_attributes()
     {
-        $italic = ComponentBuilder::make(ComponentEnum::ITALIC)
+        $italic = ComponentFactory::make(ComponentEnum::ITALIC)
             ->setAttribute('id', 'nice_italic');
 
         $this->blade('{{ $italic }}', [
@@ -74,7 +74,7 @@ class ItalicTest extends TestCase
             'display' => 'inline-block',
         ];
 
-        $italic = ComponentBuilder::make(ComponentEnum::ITALIC)
+        $italic = ComponentFactory::make(ComponentEnum::ITALIC)
             ->setThemes($theme);
 
         $this->blade('{{ $italic }}', [

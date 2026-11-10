@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Concerns;
 
-use Juaniquillo\BackendComponents\Builders\ComponentBuilder;
 use Juaniquillo\BackendComponents\Components\Individual\DivComponent;
 use Juaniquillo\BackendComponents\Enums\ComponentEnum;
+use Juaniquillo\BackendComponents\Factories\ComponentFactory;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
@@ -17,7 +17,7 @@ class HasPathTest extends TestCase
     #[Test]
     public function view_path_points_to_the_package_view(): void
     {
-        $component = ComponentBuilder::make(ComponentEnum::DIV);
+        $component = ComponentFactory::make(ComponentEnum::DIV);
 
         $this->assertEquals(
             backendComponentNamespace().'components.div',
@@ -30,7 +30,7 @@ class HasPathTest extends TestCase
     #[Test]
     public function view_path_omits_the_namespace_for_local_components(): void
     {
-        $component = ComponentBuilder::make(ComponentEnum::DIV)
+        $component = ComponentFactory::make(ComponentEnum::DIV)
             ->useLocal();
 
         $this->assertEquals('components.div', $component->getViewPath());
@@ -39,7 +39,7 @@ class HasPathTest extends TestCase
     #[Test]
     public function view_path_includes_a_custom_path(): void
     {
-        $component = ComponentBuilder::make('img')
+        $component = ComponentFactory::make('img')
             ->setPath('inline');
 
         $this->assertEquals(

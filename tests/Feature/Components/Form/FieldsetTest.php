@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Components\Form;
 
-use Juaniquillo\BackendComponents\Builders\ComponentBuilder;
 use Juaniquillo\BackendComponents\Enums\ComponentEnum;
+use Juaniquillo\BackendComponents\Factories\ComponentFactory;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
@@ -16,7 +16,7 @@ class FieldsetTest extends TestCase
     #[Test]
     public function simple_fieldset()
     {
-        $fieldset = ComponentBuilder::make(ComponentEnum::FIELDSET);
+        $fieldset = ComponentFactory::make(ComponentEnum::FIELDSET);
 
         $this->blade('{{ $fieldset }}', [
             'fieldset' => $fieldset,
@@ -27,9 +27,9 @@ class FieldsetTest extends TestCase
     #[Test]
     public function fieldset_accepts_content()
     {
-        $fieldset = ComponentBuilder::make(ComponentEnum::FIELDSET)
+        $fieldset = ComponentFactory::make(ComponentEnum::FIELDSET)
             ->setContent(
-                ComponentBuilder::make(ComponentEnum::PARAGRAPH)
+                ComponentFactory::make(ComponentEnum::PARAGRAPH)
                     ->setContent('Span content')
             );
 
@@ -44,10 +44,10 @@ class FieldsetTest extends TestCase
     #[Test]
     public function fieldset_accepts_contents_array()
     {
-        $header = ComponentBuilder::make(ComponentEnum::FIELDSET)
+        $header = ComponentFactory::make(ComponentEnum::FIELDSET)
             ->setContents([
-                ComponentBuilder::make(ComponentEnum::TEXT_INPUT),
-                ComponentBuilder::make(ComponentEnum::EMAIL_INPUT),
+                ComponentFactory::make(ComponentEnum::TEXT_INPUT),
+                ComponentFactory::make(ComponentEnum::EMAIL_INPUT),
             ]);
 
         $this->blade('{{ $header }}', [
@@ -62,7 +62,7 @@ class FieldsetTest extends TestCase
     #[Test]
     public function fieldset_accepts_attributes()
     {
-        $fieldset = ComponentBuilder::make(ComponentEnum::FIELDSET)
+        $fieldset = ComponentFactory::make(ComponentEnum::FIELDSET)
             ->setAttribute('for', 'fieldset_for');
 
         $this->blade('{{ $fieldset }}', [
@@ -78,7 +78,7 @@ class FieldsetTest extends TestCase
             'color' => 'default',
         ];
 
-        $fieldset = ComponentBuilder::make(ComponentEnum::FIELDSET)
+        $fieldset = ComponentFactory::make(ComponentEnum::FIELDSET)
             ->setThemes($theme);
 
         $this->blade('{{ $fieldset }}', [
