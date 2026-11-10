@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Juaniquillo\BackendComponents\Factories;
+namespace Juaniquillo\BackendComponents\Deserializers;
 
-use Juaniquillo\BackendComponents\Concerns\isFactory;
+use Juaniquillo\BackendComponents\Concerns\DeserializesComponents;
 use Juaniquillo\BackendComponents\Contracts\BackendComponent;
 use Juaniquillo\BackendComponents\Contracts\CompoundComponent;
 use Juaniquillo\BackendComponents\Contracts\IndividualComponent;
 
-final class IndividualComponentFactory
+final class IndividualComponentDeserializer
 {
-    use isFactory;
+    use DeserializesComponents;
 
     /**
      * @param array{

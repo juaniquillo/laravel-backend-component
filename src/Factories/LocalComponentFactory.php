@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Juaniquillo\BackendComponents\Builders;
+namespace Juaniquillo\BackendComponents\Factories;
 
 use BackedEnum;
 use Illuminate\Contracts\Support\Htmlable;
 use Juaniquillo\BackendComponents\Contracts\CompoundComponent;
-use Juaniquillo\BackendComponents\Contracts\StaticBuilder;
+use Juaniquillo\BackendComponents\Contracts\StaticFactory;
 use Juaniquillo\BackendComponents\MainBackendComponent;
 use Juaniquillo\BackendComponents\Themes\LocalThemeManager;
 
@@ -18,7 +18,7 @@ use Juaniquillo\BackendComponents\Themes\LocalThemeManager;
  * component - resource/views/components
  * themes - resource/views/_themes
  */
-class LocalComponentBuilder implements StaticBuilder
+class LocalComponentFactory implements StaticFactory
 {
     public static function make(string|BackedEnum $name): Htmlable|CompoundComponent
     {
