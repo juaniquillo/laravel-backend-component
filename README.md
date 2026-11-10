@@ -62,13 +62,13 @@ use Juaniquillo\BackendComponents\MainBackendComponent;
 
 $button = new MainBackendComponent('inline.button');
 ```
-Alternatively, builders and an enum are available to streamline instance creation:
+Alternatively, factories and an enum are available to streamline instance creation:
 
 ```php
-use Juaniquillo\BackendComponents\Builders\ComponentBuilder;
+use Juaniquillo\BackendComponents\Factories\ComponentFactory;
 use Juaniquillo\BackendComponents\Enums\ComponentEnum;
 
-$button = ComponentBuilder::make(ComponentEnum::BUTTON);
+$button = ComponentFactory::make(ComponentEnum::BUTTON);
 ```
 Since the main component class implements Laravel’s [Htmlable](https://laravel.com/api/8.x/Illuminate/Contracts/Support/Htmlable.html) interface, you can output the component using simple Blade syntax, no escaping needed:
 
@@ -80,12 +80,12 @@ Since the main component class implements Laravel’s [Htmlable](https://laravel
 Components can be composed with other components:
 
 ```php
-use Juaniquillo\BackendComponents\Builders\ComponentBuilder;
+use Juaniquillo\BackendComponents\Factories\ComponentFactory;
 use Juaniquillo\BackendComponents\Enums\ComponentEnum;
 
-$divWithButton = ComponentBuilder::make(ComponentEnum::DIV)
+$divWithButton = ComponentFactory::make(ComponentEnum::DIV)
     ->setContent(
-        ComponentBuilder::make(ComponentEnum::BUTTON)
+        ComponentFactory::make(ComponentEnum::BUTTON)
             ->setContent('Click me!')
     );
 ```
@@ -111,17 +111,17 @@ The package supports theming, primarily designed for use with Tailwind CSS class
 You can apply a theme using the `setTheme` method:
 
 ```php
-use Juaniquillo\BackendComponents\Builders\ComponentBuilder;
+use Juaniquillo\BackendComponents\Factories\ComponentFactory;
 use Juaniquillo\BackendComponents\Enums\ComponentEnum;
 
-$button = ComponentBuilder::make(ComponentEnum::BUTTON)
+$button = ComponentFactory::make(ComponentEnum::BUTTON)
     ->setTheme('theme_file', 'theme_name');
 ```
 
 Themes accumulate by default, calling `setTheme` with the same name appends rather than replaces. Use `overwrite: true` to replace:
 
 ```php
-$button = ComponentBuilder::make(ComponentEnum::BUTTON)
+$button = ComponentFactory::make(ComponentEnum::BUTTON)
     ->setTheme('action', 'success')
     ->setTheme('action', 'error');      // theme['action'] = ['success', 'error']
 
@@ -133,13 +133,13 @@ $button->setTheme('action', 'link', overwrite: true); // theme['action'] = 'link
 Component trees can be serialized to arrays and restored, preserving attributes, content, themes, and Livewire state:
 
 ```php
-use Juaniquillo\BackendComponents\Factories\ComponentFactory;
+use Juaniquillo\BackendComponents\Deserializers\ComponentDeserializer;
 
 // Serialize the entire component tree
 $array = $component->toArray();
 
 // Restore it later
-$restored = ComponentFactory::fromArray($array);
+$restored = ComponentDeserializer::fromArray($array);
 ```
 
 This works recursively for nested content, making it useful for caching, session storage, or API responses.

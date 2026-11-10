@@ -2,6 +2,32 @@
 
 ## [Unreleased]
 
+### Changed (breaking)
+
+- `Builders\ComponentBuilder` is now `Factories\ComponentFactory`.
+- `Builders\LocalComponentBuilder` is now `Factories\LocalComponentFactory`.
+- `Builders\LocalThemeComponentBuilder` is now `Factories\LocalThemeComponentFactory`.
+- `Factories\ComponentFactory` is now `Deserializers\ComponentDeserializer`.
+- `Factories\IndividualComponentFactory` is now `Deserializers\IndividualComponentDeserializer`.
+- `Concerns\isFactory` is now `Concerns\DeserializesComponents`.
+- `Contracts\StaticBuilder` is now `Contracts\StaticFactory`.
+
+### Migration
+
+| Old | New |
+|---|---|
+| `Juaniquillo\BackendComponents\Builders\ComponentBuilder` | `Juaniquillo\BackendComponents\Factories\ComponentFactory` |
+| `Juaniquillo\BackendComponents\Builders\LocalComponentBuilder` | `Juaniquillo\BackendComponents\Factories\LocalComponentFactory` |
+| `Juaniquillo\BackendComponents\Builders\LocalThemeComponentBuilder` | `Juaniquillo\BackendComponents\Factories\LocalThemeComponentFactory` |
+| `Juaniquillo\BackendComponents\Factories\ComponentFactory` | `Juaniquillo\BackendComponents\Deserializers\ComponentDeserializer` |
+| `Juaniquillo\BackendComponents\Factories\IndividualComponentFactory` | `Juaniquillo\BackendComponents\Deserializers\IndividualComponentDeserializer` |
+| `Juaniquillo\BackendComponents\Concerns\isFactory` | `Juaniquillo\BackendComponents\Concerns\DeserializesComponents` |
+| `Juaniquillo\BackendComponents\Contracts\StaticBuilder` | `Juaniquillo\BackendComponents\Contracts\StaticFactory` |
+
+`make()` and `fromArray()` are unchanged, update only the class names and imports.
+
+## [0.10.1] - 2026-11-10
+
 ### Added
 
 - `IsCachable::setCacheStore(CacheInterface $store)` injects a custom PSR-16 store per instance (e.g. `Cache::store('redis')`).
