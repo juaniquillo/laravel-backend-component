@@ -250,6 +250,7 @@ $html = $button->getCachedHtml();   // served from cache
 $button->clearCache();              // invalidates
 
 $button->setCacheDirectory('/custom/path'); // override default
+$button->setCacheStore(Cache::store('redis')); // inject any PSR-16 store
 $button->disableCache();                    // bypass cache
 ```
 

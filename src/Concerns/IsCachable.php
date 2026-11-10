@@ -55,6 +55,20 @@ trait IsCachable
         return $this;
     }
 
+    /**
+     * Inject a custom PSR-16 cache store (e.g. `Cache::store('redis')`).
+     *
+     * Last call wins: calling `setCacheDirectory()` afterwards resets the
+     * store back to `FileCache`. The store is not serialized by `toArray()`,
+     * reattach it after `ComponentFactory::fromArray()`.
+     */
+    public function setCacheStore(CacheInterface $cacheStore): static
+    {
+        $this->cacheStore = $cacheStore;
+
+        return $this;
+    }
+
     public function getCacheDirectory(): ?string
     {
         return $this->cacheDirectory;
@@ -79,7 +93,7 @@ trait IsCachable
         return $this->cacheEnabled;
     }
 
-    private function getCacheStore(): CacheInterface
+    public function getCacheStore(): CacheInterface
     {
         if ($this->cacheStore === null) {
             $dir = $this->cacheDirectory ?? \base_path('cache/backend-components');

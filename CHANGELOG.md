@@ -1,5 +1,12 @@
 # Changelog
 
+## [Unreleased]
+
+### Added
+
+- `IsCachable::setCacheStore(CacheInterface $store)` injects a custom PSR-16 store per instance (e.g. `Cache::store('redis')`).
+- `IsCachable::getCacheStore()` is now public.
+
 ## [0.10.0] - 2026-10-22
 
 ### Added
