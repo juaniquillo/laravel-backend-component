@@ -230,11 +230,14 @@ Cache components that are expensive to render and whose content doesn't change p
 ```php
 $component = new CachedBackendComponent(ComponentEnum::DIV);
 $component->setCacheDirectory('/custom/path'); // override default
+$component->setCacheStore(Cache::store('redis')); // inject any PSR-16 store
 $component->disableCache();                    // bypass cache entirely
 $component->enableCache();                     // re-enable after disabling
 $component->isCacheEnabled();                  // check current state
 $component->getCacheKey();                     // get the md5 hash key
 ```
+
+Last call wins: `setCacheDirectory()` resets a previously injected store. The store is not serialized by `toArray()`, reattach it after `ComponentFactory::fromArray()`.
 
 ### Using the IsCachable trait directly
 

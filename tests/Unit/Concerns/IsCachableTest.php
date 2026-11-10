@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Concerns;
 
+use Illuminate\Cache\ArrayStore;
+use Illuminate\Cache\Repository;
 use Juaniquillo\BackendComponents\Builders\ComponentBuilder;
+use Juaniquillo\BackendComponents\Cache\FileCache;
 use Juaniquillo\BackendComponents\Components\CachedBackendComponent;
 use Juaniquillo\BackendComponents\Enums\ComponentEnum;
 use PHPUnit\Framework\Attributes\Test;
@@ -253,6 +256,71 @@ class IsCachableTest extends TestCase
 
         $this->assertIsString($key);
         $this->assertMatchesRegularExpression('/^[a-f0-9]+$/', $key);
+    }
+
+    #[Test]
+    public function set_cache_store_uses_injected_store(): void
+    {
+        $store = new Repository(new ArrayStore);
+        $component = new CachedBackendComponent(ComponentEnum::DIV);
+        $component->setContent('Hello');
+        $component->setCacheStore($store);
+
+        $this->assertSame($store, $component->getCacheStore());
+
+        $html = $component->getCachedHtml();
+
+        $this->assertSame($html, $store->get($component->getCacheKey()));
+        $this->assertDirectoryDoesNotExist($this->cacheDir);
+    }
+
+    #[Test]
+    public function clear_cache_deletes_from_injected_store(): void
+    {
+        $store = new Repository(new ArrayStore);
+        $component = new CachedBackendComponent(ComponentEnum::DIV);
+        $component->setCacheStore($store);
+
+        $component->getCachedHtml();
+        $this->assertTrue($store->has($component->getCacheKey()));
+
+        $component->clearCache();
+        $this->assertFalse($store->has($component->getCacheKey()));
+    }
+
+    #[Test]
+    public function default_cache_store_is_file_cache(): void
+    {
+        $component = new CachedBackendComponent(ComponentEnum::DIV);
+        $component->setCacheDirectory($this->cacheDir);
+
+        $this->assertInstanceOf(FileCache::class, $component->getCacheStore());
+    }
+
+    #[Test]
+    public function set_cache_directory_resets_injected_store(): void
+    {
+        $store = new Repository(new ArrayStore);
+        $component = new CachedBackendComponent(ComponentEnum::DIV);
+        $component->setCacheStore($store);
+        $component->setCacheDirectory($this->cacheDir);
+
+        $this->assertInstanceOf(FileCache::class, $component->getCacheStore());
+    }
+
+    #[Test]
+    public function set_cache_store_after_directory_wins(): void
+    {
+        $store = new Repository(new ArrayStore);
+        $component = new CachedBackendComponent(ComponentEnum::DIV);
+        $component->setCacheDirectory($this->cacheDir);
+        $component->setCacheStore($store);
+
+        $component->getCachedHtml();
+
+        $this->assertSame($store, $component->getCacheStore());
+        $this->assertTrue($store->has($component->getCacheKey()));
+        $this->assertDirectoryDoesNotExist($this->cacheDir);
     }
 
     private function deleteDirectory(string $dir): void

@@ -303,9 +303,12 @@ The cache key is `md5(json_encode($toArray()))`, same component state always pro
 ```php
 $component = new CachedBackendComponent(ComponentEnum::DIV);
 $component->setCacheDirectory('/custom/path'); // override default
+$component->setCacheStore(Cache::store('redis')); // inject any PSR-16 store
 $component->disableCache();                    // bypass cache entirely
 $component->enableCache();                     // re-enable
 ```
+
+Last call wins: `setCacheDirectory()` resets a previously injected store. The store is not serialized by `toArray()`, reattach it after `ComponentFactory::fromArray()`.
 
 ### Using the IsCachable trait
 
