@@ -26,6 +26,7 @@
 - Render components via `$this->blade('{{ $component }}', ['component' => $component])` with `assertSee`/`assertDontSee`
 - Standard test method names: `empty_{component}`, `{component}_accepts_content`, `{component}_accepts_contents_array`, `{component}_accepts_attributes`, `{component}_accepts_theme`
 - Nested content tests use `ComponentFactory::make(ComponentEnum::OPTION)`
+- Don't re-test base-package state; this suite covers Blade rendering, Livewire, caching, path resolution, factories and utils
 
 ## Creating components
 
