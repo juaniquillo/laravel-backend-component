@@ -167,7 +167,7 @@ Currently only `DivComponent` exists in this category, add more as needed. `DivC
 
 ## Third-party components
 
-Third-party packages can implement `Contracts\BackendComponent` in their own namespace and choose their own view and rendering strategy. The package's concerns (`HasContent`, `HasPath`, `HasProps`, `HasSettings`, `IsBackendComponent`, `IsThemeable`) are opt-in traits.
+Third-party packages can implement `Juaniquillo\BaseBackendComponent\Contracts\BackendComponent` in their own namespace and choose their own view and rendering strategy. This package's Blade concerns (`HasContent`, `HasPath`, `IsBackendComponent`, `IsCachable`, `IsLivewireComponent`) plus the base package's state traits are opt-in.
 
 `PropsComponent` in this package is only a reference implementation of those contracts, not a required base class.
 
@@ -281,11 +281,11 @@ $array = $component->toArray();
 $restored = ComponentDeserializer::fromArray($array);
 ```
 
-This works recursively for nested content, themes, settings, and Livewire state.
+This works recursively for nested content, themes and settings. Livewire state is runtime-only and is not serialized.
 
 ## Cached Components
 
-`CachedBackendComponent` caches its rendered HTML output to disk. Uses PSR-16 (`Psr\SimpleCache\CacheInterface`) via `FileCache`.
+`CachedBackendComponent` caches its rendered HTML output to disk. Uses PSR-16 (`Psr\SimpleCache\CacheInterface`) via `Juaniquillo\BaseBackendComponent\Cache\FileCache` by default.
 
 ```php
 use Juaniquillo\BackendComponents\Components\CachedBackendComponent;
@@ -322,6 +322,8 @@ class MyCustomComponent implements BackendComponent {
     // ...
 }
 ```
+
+`BackendComponent` is `Juaniquillo\BaseBackendComponent\Contracts\BackendComponent`; `IsBackendComponent` adds the `__toString()` JSON helper on top of the base state trait.
 
 ## Guardrails
 

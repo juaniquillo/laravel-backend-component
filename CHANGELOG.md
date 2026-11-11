@@ -4,6 +4,12 @@
 
 ### Changed (breaking)
 
+- Requires `juaniquillo/base-backend-component: ^0.1.0`. Framework-agnostic state (attributes, contents, settings, themes, paths, serialization) now lives in the base package; this package keeps only the Laravel Blade rendering layer.
+- Deleted duplicated contracts, use the base package instead: `Contracts\AttributeBag`, `Contracts\BackendComponent`, `Contracts\Cache`, `Contracts\ComponentFromArray`, `Contracts\CompoundComponent`, `Contracts\ContentComponent`, `Contracts\ContentsComponent`, `Contracts\IndividualComponent`, `Contracts\PathComponent`, `Contracts\PropsComponent`, `Contracts\SettingsComponent`, `Contracts\ThemeComponent`, `Contracts\ThemeManager` are gone. Only `Contracts\LivewireComponent` and `Contracts\StaticFactory` remain.
+- Deleted duplicated concerns, the base trait is composed instead: `Concerns\DeserializesComponents`, `Concerns\HasProps`, `Concerns\HasSettings`, `Concerns\IsThemeable`, `Concerns\IsThemeManager` are gone.
+- Deleted `Cache\DefaultCache`, `Cache\FileCache`, `Cache\InvalidCacheArgumentException`, `Exceptions\IncorrectThemePathException`, `Exceptions\ThemeDoesNotExistsException`, `Utils\ThemeList`; use `Juaniquillo\BaseBackendComponent\Cache\*`, `Juaniquillo\BaseBackendComponent\Exceptions\*`, `Juaniquillo\BaseBackendComponent\Utils\ThemeList` instead.
+- Deleted helpers `cache()`, `isComponent()`, `isBackedEnum()`; use `Juaniquillo\BaseBackendComponent\cache()`, `Juaniquillo\BaseBackendComponent\isComponent()`, `Juaniquillo\BaseBackendComponent\isBackedEnum()` instead.
+- `toArray()` no longer serializes Livewire state (`isLivewire`, `livewireKey`, `livewireParams` are runtime-only, like props). Restored components are never Livewire; reapply `setLivewire*()` after `fromArray()` when needed.
 - `Builders\ComponentBuilder` is now `Factories\ComponentFactory`.
 - `Builders\LocalComponentBuilder` is now `Factories\LocalComponentFactory`.
 - `Builders\LocalThemeComponentBuilder` is now `Factories\LocalThemeComponentFactory`.

@@ -130,7 +130,7 @@ $button->setTheme('action', 'link', overwrite: true); // theme['action'] = 'link
 
 ## Serialization
 
-Component trees can be serialized to arrays and restored, preserving attributes, content, themes, and Livewire state:
+Component trees can be serialized to arrays and restored, preserving attributes, content, themes, paths and settings:
 
 ```php
 use Juaniquillo\BackendComponents\Deserializers\ComponentDeserializer;
@@ -142,7 +142,7 @@ $array = $component->toArray();
 $restored = ComponentDeserializer::fromArray($array);
 ```
 
-This works recursively for nested content, making it useful for caching, session storage, or API responses.
+This works recursively for nested content, making it useful for caching, session storage, or API responses. Livewire state is runtime-only and is not serialized.
 
 # Tests
 
