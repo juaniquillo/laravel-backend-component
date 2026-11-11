@@ -5,7 +5,7 @@
 - `composer test`, Run PHPUnit (Orchestra Testbench)
 - `composer qa`, Run format (Pint) + typecheck (PHPStan) + tests in sequence
 - `vendor/bin/pint`, Fix code style (enforces `declare_strict_types`)
-- `vendor/bin/phpstan`, Static analysis at level 8 (memory limit: 1G)
+- `vendor/bin/phpstan`, Static analysis at level 9 (memory limit: 1G)
 
 **Order matters**: `qa` runs `format → analyse → test`. Run them in this order before committing.
 
@@ -16,7 +16,8 @@
 - Prefix global PHP functions with `\` (e.g., `\is_array()`, `\count()`, `\trim()`)
 - Fluent return types (`: static`) on all setters
 - Namespaced helpers in `src/helpers.php`; import with `use function Juaniquillo\BackendComponents\processThemes;`
-- Trait-per-concern pattern: 8 traits in `src/Concerns/`
+- Framework-agnostic state lives in `juaniquillo/base-backend-component` (`^0.1.0`); this package composes its traits/contracts and adds only Blade rendering. State helpers (`cache`, `isComponent`, `isBackedEnum`) come from `Juaniquillo\BaseBackendComponent`.
+- Trait-per-concern pattern: 5 Blade-specific traits in `src/Concerns/` (`HasContent`, `HasPath`, `IsBackendComponent`, `IsCachable`, `IsLivewireComponent`); framework-agnostic state traits (`HasSettings`, `HasProps`, `IsThemeable`, `IsThemeManager`) come from the base package
 
 ## Testing
 
@@ -25,6 +26,7 @@
 - Render components via `$this->blade('{{ $component }}', ['component' => $component])` with `assertSee`/`assertDontSee`
 - Standard test method names: `empty_{component}`, `{component}_accepts_content`, `{component}_accepts_contents_array`, `{component}_accepts_attributes`, `{component}_accepts_theme`
 - Nested content tests use `ComponentFactory::make(ComponentEnum::OPTION)`
+- Don't re-test base-package state; this suite covers Blade rendering, Livewire, caching, path resolution, factories and utils
 
 ## Creating components
 
@@ -79,6 +81,8 @@ $livewire = ComponentFactory::make(ComponentEnum::DIV)
     ->setLivewireParams(['param' => 'value']);
 ```
 
+Livewire state is runtime-only and is not serialized by `toArray()` (params may hold non-scalar values). Reapply `setLivewire*()` after `ComponentDeserializer::fromArray()` when needed.
+
 ## Settings
 
 ```php
@@ -127,8 +131,8 @@ return [
 `DivComponent` is both a utility **and** a blueprint for creating new targeted component classes that bypass the enum/factory entirely. To create a new individual component, duplicate the `DivComponent` pattern:
 
 1. Put the class in `src/Components/Individual/`
-2. Implement `BackendComponent`, `IndividualComponent`, `ThemeComponent`, `Htmlable` (omit `ContentsComponent`+`HasContent` for self-closing elements)
-3. Use traits `IsBackendComponent`, `IsThemeable` (add `HasContent` only if the component can hold children)
+2. Implement base `BackendComponent`, `IndividualComponent`, `ThemeComponent` plus `ContentsComponent` and `Htmlable` (omit `ContentsComponent`+`HasContent` for self-closing elements)
+3. Use traits `IsBackendComponent`, base `IsThemeable` (add `HasContent` only if the component can hold children)
 4. Define `getName()` to return the `ComponentEnum` value (or any dotted view path)
 5. Define `getComponentPath()`, `getPathOnly()` and `getViewPath()` following the existing convention
 6. Wire up `getAttributeBag()`, `toHtml()`, `toArray()`, and a static `make()` factory
@@ -146,7 +150,7 @@ Currently only `DivComponent` exists in this category, add more as needed. `DivC
 
 ## Third-party components
 
-Third-party packages can implement `Contracts\BackendComponent` in their own namespace and choose their own view and rendering strategy. The package's concerns (`HasContent`, `HasPath`, `HasProps`, `HasSettings`, `IsBackendComponent`, `IsThemeable`) are opt-in traits.
+Third-party packages can implement `Juaniquillo\BaseBackendComponent\Contracts\BackendComponent` in their own namespace and choose their own view and rendering strategy. This package's Blade concerns (`HasContent`, `HasPath`, `IsBackendComponent`, `IsCachable`, `IsLivewireComponent`) plus the base package's state traits are opt-in.
 
 `PropsComponent` in this package is only a reference implementation of those contracts, not a required base class.
 
@@ -206,9 +210,11 @@ $array = $component->toArray();
 $restored = ComponentDeserializer::fromArray($array);
 ```
 
+Serialization preserves attributes, content, themes, paths and settings recursively. Livewire state and the cache store are runtime-only and are not serialized.
+
 ## Cached components
 
-`CachedBackendComponent` is a standalone component class that caches its rendered HTML output. It uses the `IsCachable` trait and stores cached HTML to disk via PSR-16 (`Psr\SimpleCache\CacheInterface`).
+`CachedBackendComponent` is a standalone component class that caches its rendered HTML output. It uses the `IsCachable` trait and stores cached HTML to disk via PSR-16 (`Psr\SimpleCache\CacheInterface`, default store `Juaniquillo\BaseBackendComponent\Cache\FileCache`).
 
 ```php
 use Juaniquillo\BackendComponents\Components\CachedBackendComponent;
@@ -254,12 +260,14 @@ class MyCustomComponent implements BackendComponent {
 }
 ```
 
+`BackendComponent` here is `Juaniquillo\BaseBackendComponent\Contracts\BackendComponent`; `IsBackendComponent` adds the `__toString()` JSON helper on top of the base state trait.
+
 ## Available component enums
 
 **Template:** `TEMPLATE`
 **Collection:** `COLLECTION`
 **Block:** `DIV`, `PARAGRAPH`
-**Inline:** `BUTTON`, `LINK`, `IMG`, `SPAN`, `BOLD`, `EM`, `ITALIC`, `STRONG`, `SMALL`
+**Inline:** `BUTTON`, `LINK`, `IMG`, `SPAN`, `BOLD`, `EM`, `ITALIC`, `STRONG`, `SMALL`, `IFRAME`
 **Headers:** `H1`, `H2`, `H3`, `H4`, `H5`, `H6`
 **Form:** `FORM`, `LABEL`, `LEGEND`, `FIELDSET`, `TEXT_INPUT`, `FILE_INPUT`, `EMAIL_INPUT`, `SEARCH_INPUT`, `PASSWORD_INPUT`, `CHECKBOX_INPUT`, `HIDDEN_INPUT`, `RADIO_INPUT`, `NUMBER_INPUT`, `URL_INPUT`, `TEL_INPUT`, `DATE_INPUT`, `TIME_INPUT`, `COLOR_INPUT`, `RANGE_INPUT`, `DATALIST`, `TEXTAREA`, `SELECT`, `OPTGROUP`, `OPTION`
 **Table:** `TABLE`, `THEAD`, `TBODY`, `TFOOT`, `TR`, `TH`, `TD`, `CAPTION`, `COLGROUP`, `COL`
@@ -299,8 +307,8 @@ $component = ComponentFactory::make(ComponentEnum::BUTTON)
 - **MainBackendComponent** (`src/MainBackendComponent.php`), implements `Htmlable`; renders via `{{ $component }}` in Blade.
 - **View resolution**: templates are included via `getViewPath()` (namespace + `components/` + optional `setPath()` subdirectory + name). `getComponentPath()` is the `x-dynamic-component` form and must not be used with `view()`/`@include`.
 - **Themes** live in `resources/views/_themes/tailwind/`. Each file returns a PHP array keyed by variant name.
-- **Serialization**: `$component->toArray()` / `ComponentDeserializer::fromArray($array)` preserves full component tree recursively.
-- **Livewire**: Use `->setLivewire()`, `->setLivewireKey('key')`, `->setLivewireParams(['param' => 'value'])`.
+- **Serialization**: `$component->toArray()` / `ComponentDeserializer::fromArray($array)` preserves attributes, content, themes, paths and settings recursively. Livewire state is runtime-only.
+- **Livewire**: Use `->setLivewire()`, `->setLivewireKey('key')`, `->setLivewireParams(['param' => 'value'])`. Runtime-only, never serialized.
 - **Themes accumulate by default**: `->setTheme('action', 'success')` then `->setTheme('action', 'error')` produces `['success', 'error']`. Use `->setTheme('action', 'error', overwrite: true)` to replace.
 
 ## Factories & local resolution

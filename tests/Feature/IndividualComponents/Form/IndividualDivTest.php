@@ -42,14 +42,6 @@ class IndividualDivTest extends TestCase
     }
 
     #[Test]
-    public function a_div_accepts_content_and_can_be_accessed_using_a_key()
-    {
-        $div = (new DivComponent)->setContent('Nice content', 1);
-
-        $this->assertEquals('Nice content', $div->getContent(1));
-    }
-
-    #[Test]
     public function individual_div_accepts_contents_array()
     {
         $div = (new DivComponent)
@@ -100,30 +92,6 @@ class IndividualDivTest extends TestCase
         ])
             ->assertSee('class="'.processThemes($theme), false);
 
-    }
-
-    #[Test]
-    public function the_component_can_return_an_array_representation()
-    {
-        $div = (new DivComponent)
-            ->setContents(contents: [
-                'span_1' => ComponentFactory::make(ComponentEnum::SPAN)
-                    ->setContent('Span'),
-                'bold_1' => ComponentFactory::make(ComponentEnum::BOLD)
-                    ->setContent('Bold'),
-            ], overwrite: true);
-
-        $divArray = $div->toArray();
-
-        $this->assertIsArray($divArray);
-        $this->assertIsArray($divArray['contents']);
-        $this->assertIsArray($divArray['attributes']);
-
-        $this->assertIsArray($divArray['contents']['span_1']);
-        $this->assertIsArray($divArray['contents']['bold_1']);
-
-        $this->assertIsArray($divArray['contents']['span_1']['contents']);
-        $this->assertEquals('Span', $divArray['contents']['span_1']['contents'][0]);
     }
 
     #[Test]

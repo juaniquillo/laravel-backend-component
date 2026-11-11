@@ -4,7 +4,7 @@
 @endphp
 ## Laravel Backend Component
 
-This package lets you build dynamic, dynamic HTML components in PHP. Instead of writing Blade HTML directly, you compose component trees via PHP objects and render them with:
+This package lets you build dynamic HTML components in PHP. Instead of writing Blade HTML directly, you compose component trees via PHP objects and render them with:
 
 ```php
 @{{ $component }}
@@ -112,7 +112,7 @@ Currently only `DivComponent` exists in this category, add more as needed. `DivC
 
 ### Third-party components
 
-Third-party packages can implement `Contracts\BackendComponent` in their own namespace and choose their own view and rendering strategy. The package's concerns (`HasContent`, `HasPath`, `HasProps`, `HasSettings`, `IsBackendComponent`, `IsThemeable`) are opt-in traits.
+Third-party packages can implement `Juaniquillo\BaseBackendComponent\Contracts\BackendComponent` in their own namespace and choose their own view and rendering strategy. This package's Blade concerns (`HasContent`, `HasPath`, `IsBackendComponent`, `IsCachable`, `IsLivewireComponent`) plus the base package's state traits are opt-in.
 
 `PropsComponent` in this package is only a reference implementation of those contracts, not a required base class.
 
@@ -179,7 +179,7 @@ ComponentFactory::make('my-livewire-component')
 - **Template:** `TEMPLATE`
 - **Collection:** `COLLECTION`
 - **Block:** `DIV`, `PARAGRAPH`
-- **Inline:** `BUTTON`, `LINK`, `IMG`, `SPAN`, `BOLD`, `EM`, `ITALIC`, `STRONG`, `SMALL`
+- **Inline:** `BUTTON`, `LINK`, `IMG`, `SPAN`, `BOLD`, `EM`, `ITALIC`, `STRONG`, `SMALL`, `IFRAME`
 - **Headers:** `H1`, `H2`, `H3`, `H4`, `H5`, `H6`
 - **Form:** `FORM`, `LABEL`, `LEGEND`, `FIELDSET`, `TEXT_INPUT`, `FILE_INPUT`, `EMAIL_INPUT`, `SEARCH_INPUT`, `PASSWORD_INPUT`, `CHECKBOX_INPUT`, `HIDDEN_INPUT`, `RADIO_INPUT`, `DATALIST`, `TEXTAREA`, `SELECT`, `OPTGROUP`, `OPTION`
 - **Table:** `TABLE`, `THEAD`, `TBODY`, `TFOOT`, `TR`, `TH`, `TD`, `CAPTION`, `COLGROUP`, `COL`
@@ -236,6 +236,8 @@ $component   = ComponentFactory::make(ComponentEnum::BUTTON)->useLocal();
 $array = $component->toArray();
 $restored = ComponentDeserializer::fromArray($array);
 ```
+
+Serialization preserves attributes, content, themes, paths and settings recursively. Livewire state is runtime-only and is not serialized.
 
 ### Cached components
 

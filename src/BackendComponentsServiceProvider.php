@@ -22,7 +22,7 @@ class BackendComponentsServiceProvider extends PackageServiceProvider
             ->name($namespace)
             ->hasViews($namespace);
 
-        include_once 'helpers.php';
+        include_once __DIR__.'/helpers.php';
     }
 
     public static function namespace(): string

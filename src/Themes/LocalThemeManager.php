@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Juaniquillo\BackendComponents\Themes;
 
-use Juaniquillo\BackendComponents\Concerns\IsThemeManager;
-use Juaniquillo\BackendComponents\Contracts\ThemeManager;
+use Juaniquillo\BaseBackendComponent\Concerns\IsThemeManager;
+use Juaniquillo\BaseBackendComponent\Contracts\ThemeManager;
 
 final class LocalThemeManager implements ThemeManager
 {
@@ -13,9 +13,10 @@ final class LocalThemeManager implements ThemeManager
 
     public function __construct()
     {
-        $path = __DIR__.'/../../../../../resources/views/_themes/tailwind/';
+        $path = \base_path('resources/views/_themes/tailwind/');
 
         $this->setDefaultPath($path);
+        $this->setThemeExtension('.blade.php');
 
     }
 }

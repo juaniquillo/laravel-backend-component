@@ -4,17 +4,19 @@ declare(strict_types=1);
 
 namespace Juaniquillo\BackendComponents\Concerns;
 
+use Juaniquillo\BaseBackendComponent\Concerns\HasPath as BaseHasPath;
+
 use function Juaniquillo\BackendComponents\backendComponentNamespace;
-use function Juaniquillo\BackendComponents\isBackedEnum;
+use function Juaniquillo\BaseBackendComponent\isBackedEnum;
 
 trait HasPath
 {
+    use BaseHasPath;
+
     /**
      * Package namespace
      */
     private ?string $namespace = null;
-
-    private ?string $path = null;
 
     private bool $useLocal = false;
 
@@ -53,11 +55,6 @@ trait HasPath
         return $this->getNamespace().$this->getPathOnly();
     }
 
-    public function getPathOnly(): ?string
-    {
-        return $this->path;
-    }
-
     public function getComponentPath(): string
     {
         return \trim(
@@ -90,13 +87,6 @@ trait HasPath
     public function setNamespace(string $namespace): static
     {
         $this->namespace = $namespace;
-
-        return $this;
-    }
-
-    public function setPath(string $path): static
-    {
-        $this->path = $path;
 
         return $this;
     }

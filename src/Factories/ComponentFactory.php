@@ -6,9 +6,9 @@ namespace Juaniquillo\BackendComponents\Factories;
 
 use BackedEnum;
 use Illuminate\Contracts\Support\Htmlable;
-use Juaniquillo\BackendComponents\Contracts\CompoundComponent;
 use Juaniquillo\BackendComponents\Contracts\StaticFactory;
 use Juaniquillo\BackendComponents\MainBackendComponent;
+use Juaniquillo\BaseBackendComponent\Contracts\CompoundComponent;
 
 class ComponentFactory implements StaticFactory
 {

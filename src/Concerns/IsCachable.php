@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Juaniquillo\BackendComponents\Concerns;
 
-use Juaniquillo\BackendComponents\Cache\FileCache;
+use Juaniquillo\BackendComponents\Contracts\LivewireComponent;
+use Juaniquillo\BaseBackendComponent\Cache\FileCache;
 use Psr\SimpleCache\CacheInterface;
 
 trait IsCachable
@@ -17,7 +18,7 @@ trait IsCachable
 
     public function getCachedHtml(): string
     {
-        if (! $this->cacheEnabled || $this->isLivewire()) {
+        if (! $this->cacheEnabled || ($this instanceof LivewireComponent && $this->isLivewire())) {
             return $this->toHtml();
         }
 

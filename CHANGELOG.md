@@ -2,14 +2,24 @@
 
 ## [Unreleased]
 
+### Added
+
+- `ComponentEnum::IFRAME` (`inline.iframe`) renders an `<iframe>` element with attributes and fallback content.
+
 ### Changed (breaking)
 
+- Requires `juaniquillo/base-backend-component: ^0.1.0`. Framework-agnostic state (attributes, contents, settings, themes, paths, serialization) now lives in the base package; this package keeps only the Laravel Blade rendering layer.
+- Deleted duplicated contracts, use the base package instead: `Contracts\AttributeBag`, `Contracts\BackendComponent`, `Contracts\Cache`, `Contracts\ComponentFromArray`, `Contracts\CompoundComponent`, `Contracts\ContentComponent`, `Contracts\ContentsComponent`, `Contracts\IndividualComponent`, `Contracts\PathComponent`, `Contracts\PropsComponent`, `Contracts\SettingsComponent`, `Contracts\ThemeComponent`, `Contracts\ThemeManager` are gone. Only `Contracts\LivewireComponent` and `Contracts\StaticFactory` remain.
+- Deleted duplicated concerns, the base trait is composed instead: `Concerns\DeserializesComponents`, `Concerns\HasProps`, `Concerns\HasSettings`, `Concerns\IsThemeable`, `Concerns\IsThemeManager` are gone.
+- Deleted `Cache\DefaultCache`, `Cache\FileCache`, `Cache\InvalidCacheArgumentException`, `Exceptions\IncorrectThemePathException`, `Exceptions\ThemeDoesNotExistsException`, `Utils\ThemeList`; use `Juaniquillo\BaseBackendComponent\Cache\*`, `Juaniquillo\BaseBackendComponent\Exceptions\*`, `Juaniquillo\BaseBackendComponent\Utils\ThemeList` instead.
+- Deleted helpers `cache()`, `isComponent()`, `isBackedEnum()`; use `Juaniquillo\BaseBackendComponent\cache()`, `Juaniquillo\BaseBackendComponent\isComponent()`, `Juaniquillo\BaseBackendComponent\isBackedEnum()` instead.
+- `toArray()` no longer serializes Livewire state (`isLivewire`, `livewireKey`, `livewireParams` are runtime-only, like props). Restored components are never Livewire; reapply `setLivewire*()` after `fromArray()` when needed.
 - `Builders\ComponentBuilder` is now `Factories\ComponentFactory`.
 - `Builders\LocalComponentBuilder` is now `Factories\LocalComponentFactory`.
 - `Builders\LocalThemeComponentBuilder` is now `Factories\LocalThemeComponentFactory`.
 - `Factories\ComponentFactory` is now `Deserializers\ComponentDeserializer`.
 - `Factories\IndividualComponentFactory` is now `Deserializers\IndividualComponentDeserializer`.
-- `Concerns\isFactory` is now `Concerns\DeserializesComponents`.
+- `Concerns\isFactory` (renamed to `Concerns\DeserializesComponents` in v0.11.0) is now `Juaniquillo\BaseBackendComponent\Concerns\DeserializesComponents`.
 - `Contracts\StaticBuilder` is now `Contracts\StaticFactory`.
 
 ### Migration
@@ -21,7 +31,7 @@
 | `Juaniquillo\BackendComponents\Builders\LocalThemeComponentBuilder` | `Juaniquillo\BackendComponents\Factories\LocalThemeComponentFactory` |
 | `Juaniquillo\BackendComponents\Factories\ComponentFactory` | `Juaniquillo\BackendComponents\Deserializers\ComponentDeserializer` |
 | `Juaniquillo\BackendComponents\Factories\IndividualComponentFactory` | `Juaniquillo\BackendComponents\Deserializers\IndividualComponentDeserializer` |
-| `Juaniquillo\BackendComponents\Concerns\isFactory` | `Juaniquillo\BackendComponents\Concerns\DeserializesComponents` |
+| `Juaniquillo\BackendComponents\Concerns\isFactory` | `Juaniquillo\BaseBackendComponent\Concerns\DeserializesComponents` |
 | `Juaniquillo\BackendComponents\Contracts\StaticBuilder` | `Juaniquillo\BackendComponents\Contracts\StaticFactory` |
 
 `make()` and `fromArray()` are unchanged, update only the class names and imports.

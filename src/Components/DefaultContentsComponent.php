@@ -5,15 +5,17 @@ declare(strict_types=1);
 namespace Juaniquillo\BackendComponents\Components;
 
 use Illuminate\Contracts\Support\Htmlable;
-use Juaniquillo\BackendComponents\Contracts\BackendComponent;
-use Juaniquillo\BackendComponents\Contracts\CompoundComponent;
-use Juaniquillo\BackendComponents\Contracts\ContentsComponent;
+use Juaniquillo\BaseBackendComponent\Concerns\SerializesContents;
+use Juaniquillo\BaseBackendComponent\Contracts\BackendComponent;
+use Juaniquillo\BaseBackendComponent\Contracts\CompoundComponent;
+use Juaniquillo\BaseBackendComponent\Contracts\ContentsComponent;
 
 use function Juaniquillo\BackendComponents\backendComponentNamespace;
-use function Juaniquillo\BackendComponents\isComponent;
 
 final class DefaultContentsComponent implements ContentsComponent, Htmlable
 {
+    use SerializesContents;
+
     /**
      * @param  array<string|int, int|string|CompoundComponent|BackendComponent>  $contents
      */
@@ -21,7 +23,15 @@ final class DefaultContentsComponent implements ContentsComponent, Htmlable
         private array $contents
     ) {}
 
-    public function toHtml()
+    /**
+     * @return array<string|int, string|int|CompoundComponent|BackendComponent>
+     */
+    public function getContents(): array
+    {
+        return $this->contents;
+    }
+
+    public function toHtml(): string
     {
         /** @var non-falsy-string $view */
         $view = backendComponentNamespace().'_utilities.resolve-content';
@@ -36,19 +46,5 @@ final class DefaultContentsComponent implements ContentsComponent, Htmlable
             ->with('contents', $this->contents)
             ->render();
 
-    }
-
-    /**
-     * @return array<int|string, array<string, array<string, mixed>|bool|int|string|null>|int|string>
-     */
-    public function toArray(): array
-    {
-        $contentArray = [];
-
-        foreach ($this->contents as $key => $content) {
-            $contentArray[$key] = isComponent($content) ? $content->toArray() : $content;
-        }
-
-        return $contentArray;
     }
 }

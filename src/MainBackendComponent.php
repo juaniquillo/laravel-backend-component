@@ -9,17 +9,21 @@ use Illuminate\Contracts\Support\Htmlable;
 use Juaniquillo\BackendComponents\Components\DefaultAttributeBag;
 use Juaniquillo\BackendComponents\Concerns\HasContent;
 use Juaniquillo\BackendComponents\Concerns\HasPath;
-use Juaniquillo\BackendComponents\Concerns\HasSettings;
 use Juaniquillo\BackendComponents\Concerns\IsBackendComponent;
 use Juaniquillo\BackendComponents\Concerns\IsLivewireComponent;
-use Juaniquillo\BackendComponents\Concerns\IsThemeable;
-use Juaniquillo\BackendComponents\Contracts\AttributeBag;
-use Juaniquillo\BackendComponents\Contracts\BackendComponent;
-use Juaniquillo\BackendComponents\Contracts\CompoundComponent;
-use Juaniquillo\BackendComponents\Contracts\ThemeManager;
+use Juaniquillo\BackendComponents\Contracts\LivewireComponent;
 use Juaniquillo\BackendComponents\Themes\DefaultThemeManager;
+use Juaniquillo\BaseBackendComponent\Concerns\HasSettings;
+use Juaniquillo\BaseBackendComponent\Concerns\IsThemeable;
+use Juaniquillo\BaseBackendComponent\Contracts\AttributeBag;
+use Juaniquillo\BaseBackendComponent\Contracts\BackendComponent;
+use Juaniquillo\BaseBackendComponent\Contracts\CompoundComponent;
+use Juaniquillo\BaseBackendComponent\Contracts\ThemeManager;
 
-final class MainBackendComponent implements CompoundComponent, Htmlable
+/**
+ * @phpstan-import-type ComponentArray from BackendComponent
+ */
+final class MainBackendComponent implements CompoundComponent, Htmlable, LivewireComponent
 {
     use HasContent,
         HasPath,
@@ -50,23 +54,7 @@ final class MainBackendComponent implements CompoundComponent, Htmlable
     }
 
     /**
-     * @return array{
-     *  name:  int|string,
-     *  component: class-string<BackendComponent|CompoundComponent>,
-     *  attributes: array<string, int|string|null>,
-     *  contents: array<string,array<string, int|string>|int|string>,
-     *  theme: array{
-     *   manager: class-string<ThemeManager>,
-     *   themes: array<string, array<int|string, string>|string>,
-     *   path: string,
-     *   realPath: string,
-     *  },
-     *  path: string|null,
-     *  settings: array<string, bool|string>,
-     *  isLivewire: bool,
-     *  livewireKey: string|null,
-     *  livewireParams: array<string, mixed>
-     * }
+     * @return ComponentArray
      */
     public function toArray(): array
     {
@@ -83,18 +71,10 @@ final class MainBackendComponent implements CompoundComponent, Htmlable
             ],
             'path' => $this->getPathOnly(),
             'settings' => $this->getSettings(),
-            'isLivewire' => $this->isLivewire(),
-            'livewireKey' => $this->getLivewireKey(),
-            'livewireParams' => $this->getLivewireParams(),
         ];
     }
 
-    /**
-     * Get content as a string of HTML.
-     *
-     * @return string
-     */
-    public function toHtml()
+    public function toHtml(): string
     {
         /**
          * PHPStan bug

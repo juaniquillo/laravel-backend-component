@@ -1,5 +1,5 @@
 @php
-    /** @var \Juaniquillo\BackendComponents\Contracts\CompoundComponent $component */
+    /** @var \Juaniquillo\BaseBackendComponent\Contracts\CompoundComponent $component */
     $attributes = new \Illuminate\View\ComponentAttributeBag($component->getAttributeBag()->getAttributes());
     $slot = $component->processContent();
     $settings = $component->getSettings();

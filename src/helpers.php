@@ -5,12 +5,10 @@ declare(strict_types=1);
 namespace Juaniquillo\BackendComponents {
 
     use BackedEnum;
-    use Juaniquillo\BackendComponents\Cache\DefaultCache;
-    use Juaniquillo\BackendComponents\Contracts\BackendComponent;
-    use Juaniquillo\BackendComponents\Contracts\ThemeManager;
     use Juaniquillo\BackendComponents\Themes\DefaultThemeManager;
     use Juaniquillo\BackendComponents\Themes\LocalThemeManager;
     use Juaniquillo\BackendComponents\Utils\CellBag;
+    use Juaniquillo\BaseBackendComponent\Contracts\ThemeManager;
 
     function backendComponentNamespace(): string
     {
@@ -38,36 +36,6 @@ namespace Juaniquillo\BackendComponents {
         $manager = new LocalThemeManager;
 
         return $manager->processThemes(themes: $themes);
-    }
-
-    /**
-     * @return DefaultCache<mixed>
-     */
-    function cache(string $name): DefaultCache
-    {
-        /**
-         * @var array<string, DefaultCache<mixed>>
-         */
-        static $cache = [];
-
-        if (! isset($cache[$name])) {
-            $cache[$name] = new DefaultCache;
-        }
-
-        return $cache[$name];
-
-    }
-
-    /** @phpstan-assert-if-true BackendComponent $component */
-    function isComponent(mixed $component): bool
-    {
-        return $component instanceof BackendComponent;
-    }
-
-    /** @phpstan-assert-if-true BackedEnum $enum */
-    function isBackedEnum(mixed $enum): bool
-    {
-        return $enum instanceof BackedEnum;
     }
 
     /** @phpstan-assert-if-true CellBag $bag */

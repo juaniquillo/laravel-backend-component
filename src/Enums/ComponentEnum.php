@@ -32,6 +32,7 @@ enum ComponentEnum: string
     case ITALIC = 'inline.italic';
     case STRONG = 'inline.strong';
     case SMALL = 'inline.small';
+    case IFRAME = 'inline.iframe';
 
     /**
      * Headers
