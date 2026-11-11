@@ -13,7 +13,7 @@ final class LocalThemeManager implements ThemeManager
 
     public function __construct()
     {
-        $path = __DIR__.'/../../../../../resources/views/_themes/tailwind/';
+        $path = \base_path('resources/views/_themes/tailwind/');
 
         $this->setDefaultPath($path);
         $this->setThemeExtension('.blade.php');

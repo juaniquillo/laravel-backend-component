@@ -1,1 +1,1 @@
-<x-backend-component::form.text {{ $attributes->merge(['type' => 'password']) }} />
+<input {{ $attributes->merge(['type' => 'password']) }} />

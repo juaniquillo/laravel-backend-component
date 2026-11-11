@@ -17,7 +17,7 @@
 - Fluent return types (`: static`) on all setters
 - Namespaced helpers in `src/helpers.php`; import with `use function Juaniquillo\BackendComponents\processThemes;`
 - Framework-agnostic state lives in `juaniquillo/base-backend-component` (`^0.1.0`); this package composes its traits/contracts and adds only Blade rendering. State helpers (`cache`, `isComponent`, `isBackedEnum`) come from `Juaniquillo\BaseBackendComponent`.
-- Trait-per-concern pattern: 6 traits in `src/Concerns/` (`HasContent`, `HasPath`, `IsBackendComponent`, `IsCachable`, `IsLivewireComponent` are Laravel/Blade-specific; `HasSettings`, `HasProps`, `IsThemeable`, `IsThemeManager` come from the base package)
+- Trait-per-concern pattern: 5 Blade-specific traits in `src/Concerns/` (`HasContent`, `HasPath`, `IsBackendComponent`, `IsCachable`, `IsLivewireComponent`); framework-agnostic state traits (`HasSettings`, `HasProps`, `IsThemeable`, `IsThemeManager`) come from the base package
 
 ## Testing
 

@@ -15,7 +15,7 @@
 - `Builders\LocalThemeComponentBuilder` is now `Factories\LocalThemeComponentFactory`.
 - `Factories\ComponentFactory` is now `Deserializers\ComponentDeserializer`.
 - `Factories\IndividualComponentFactory` is now `Deserializers\IndividualComponentDeserializer`.
-- `Concerns\isFactory` is now `Concerns\DeserializesComponents`.
+- `Concerns\isFactory` (renamed to `Concerns\DeserializesComponents` in v0.11.0) is now `Juaniquillo\BaseBackendComponent\Concerns\DeserializesComponents`.
 - `Contracts\StaticBuilder` is now `Contracts\StaticFactory`.
 
 ### Migration
@@ -27,7 +27,7 @@
 | `Juaniquillo\BackendComponents\Builders\LocalThemeComponentBuilder` | `Juaniquillo\BackendComponents\Factories\LocalThemeComponentFactory` |
 | `Juaniquillo\BackendComponents\Factories\ComponentFactory` | `Juaniquillo\BackendComponents\Deserializers\ComponentDeserializer` |
 | `Juaniquillo\BackendComponents\Factories\IndividualComponentFactory` | `Juaniquillo\BackendComponents\Deserializers\IndividualComponentDeserializer` |
-| `Juaniquillo\BackendComponents\Concerns\isFactory` | `Juaniquillo\BackendComponents\Concerns\DeserializesComponents` |
+| `Juaniquillo\BackendComponents\Concerns\isFactory` | `Juaniquillo\BaseBackendComponent\Concerns\DeserializesComponents` |
 | `Juaniquillo\BackendComponents\Contracts\StaticBuilder` | `Juaniquillo\BackendComponents\Contracts\StaticFactory` |
 
 `make()` and `fromArray()` are unchanged, update only the class names and imports.

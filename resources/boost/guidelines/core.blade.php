@@ -4,7 +4,7 @@
 @endphp
 ## Laravel Backend Component
 
-This package lets you build dynamic, dynamic HTML components in PHP. Instead of writing Blade HTML directly, you compose component trees via PHP objects and render them with:
+This package lets you build dynamic HTML components in PHP. Instead of writing Blade HTML directly, you compose component trees via PHP objects and render them with:
 
 ```php
 @{{ $component }}

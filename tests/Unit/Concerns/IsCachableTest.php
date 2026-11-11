@@ -7,6 +7,7 @@ namespace Tests\Unit\Concerns;
 use Illuminate\Cache\ArrayStore;
 use Illuminate\Cache\Repository;
 use Juaniquillo\BackendComponents\Components\CachedBackendComponent;
+use Juaniquillo\BackendComponents\Concerns\IsCachable;
 use Juaniquillo\BackendComponents\Enums\ComponentEnum;
 use Juaniquillo\BackendComponents\Factories\ComponentFactory;
 use Juaniquillo\BaseBackendComponent\Cache\FileCache;
@@ -323,6 +324,20 @@ class IsCachableTest extends TestCase
         $this->assertDirectoryDoesNotExist($this->cacheDir);
     }
 
+    #[Test]
+    public function cachable_trait_works_without_a_livewire_method(): void
+    {
+        $component = new CachableWithoutLivewire;
+        $component->setCacheDirectory($this->cacheDir);
+
+        $html = $component->getCachedHtml();
+
+        $this->assertSame('<div>plain</div>', $html);
+
+        $cacheFile = $this->cacheDir.'/'.$component->getCacheKey().'.cache';
+        $this->assertFileExists($cacheFile);
+    }
+
     private function deleteDirectory(string $dir): void
     {
         if (! \is_dir($dir)) {
@@ -342,5 +357,23 @@ class IsCachableTest extends TestCase
         }
 
         \rmdir($dir);
+    }
+}
+
+final class CachableWithoutLivewire
+{
+    use IsCachable;
+
+    public function toHtml(): string
+    {
+        return '<div>plain</div>';
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    public function toArray(): array
+    {
+        return ['name' => 'div'];
     }
 }
