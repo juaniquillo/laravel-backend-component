@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Tests\Unit\Themes;
 
 use Exception;
-use Juaniquillo\BackendComponents\Exceptions\IncorrectThemePathException;
-use Juaniquillo\BackendComponents\Exceptions\ThemeDoesNotExistsException;
 use Juaniquillo\BackendComponents\Themes\DefaultThemeManager;
+use Juaniquillo\BaseBackendComponent\Exceptions\IncorrectThemePathException;
+use Juaniquillo\BaseBackendComponent\Exceptions\ThemeDoesNotExistsException;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 use Tests\Themes\Managers\TestThemeManager;

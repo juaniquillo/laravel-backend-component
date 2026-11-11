@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Utils;
 
-use Juaniquillo\BackendComponents\Contracts\CompoundComponent;
 use Juaniquillo\BackendComponents\Enums\ComponentEnum;
 use Juaniquillo\BackendComponents\Factories\ComponentFactory;
 use Juaniquillo\BackendComponents\Utils\CellBag;
 use Juaniquillo\BackendComponents\Utils\TableUtil;
+use Juaniquillo\BaseBackendComponent\Contracts\CompoundComponent;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 

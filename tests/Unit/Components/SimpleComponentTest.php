@@ -334,16 +334,21 @@ class SimpleComponentTest extends TestCase
     }
 
     #[Test]
-    public function a_livewire_component_with_can_be_recreated_from_an_array()
+    public function livewire_state_is_not_serialized()
     {
         $component = ComponentFactory::make(LivewireComponent::class)
             ->setLivewire()
             ->setLivewireKey('livewire-key')
             ->setLivewireParams([
-                'first_param' => 'First',
+                'callback' => static fn (): string => 'not serializable',
             ]);
 
         $componentArray = $component->toArray();
+
+        $this->assertArrayNotHasKey('isLivewire', $componentArray);
+        $this->assertArrayNotHasKey('livewireKey', $componentArray);
+        $this->assertArrayNotHasKey('livewireParams', $componentArray);
+        $this->assertNotFalse(\json_encode($componentArray));
 
         $recreatedComponent = ComponentDeserializer::fromArray($componentArray);
 

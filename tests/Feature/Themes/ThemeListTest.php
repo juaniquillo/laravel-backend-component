@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Feature\Themes;
 
 use Exception;
-use Juaniquillo\BackendComponents\Utils\ThemeList;
+use Juaniquillo\BaseBackendComponent\Utils\ThemeList;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
@@ -14,7 +14,7 @@ class ThemeListTest extends TestCase
     #[Test]
     public function all_themes_are_valid_arrays()
     {
-        $list = ThemeList::make();
+        $list = ThemeList::make(__DIR__.'/../../../resources/views/_themes/tailwind');
 
         $this->assertIsArray($list->scanFiles());
     }
@@ -47,7 +47,7 @@ class ThemeListTest extends TestCase
     #[Test]
     public function if_the_file_does_not_exist_an_exception_is_thrown()
     {
-        $list = new ThemeList;
+        $list = new ThemeList(__DIR__.'/../../Themes/');
 
         $this->expectException(Exception::class);
 

@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Feature\Utils;
 
-use Juaniquillo\BackendComponents\Contracts\Cache as ContractsCache;
 use Juaniquillo\BackendComponents\Themes\DefaultThemeManager;
+use Juaniquillo\BaseBackendComponent\Contracts\Cache as ContractsCache;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
-use function Juaniquillo\BackendComponents\cache;
+use function Juaniquillo\BaseBackendComponent\cache;
 
 class CacheTest extends TestCase
 {

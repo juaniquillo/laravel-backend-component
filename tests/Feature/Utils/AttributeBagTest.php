@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Feature\Utils;
 
 use Juaniquillo\BackendComponents\Components\DefaultAttributeBag;
-use Juaniquillo\BackendComponents\Contracts\AttributeBag;
+use Juaniquillo\BaseBackendComponent\Contracts\AttributeBag;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 

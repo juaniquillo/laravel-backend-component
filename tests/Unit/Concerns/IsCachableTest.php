@@ -6,10 +6,10 @@ namespace Tests\Unit\Concerns;
 
 use Illuminate\Cache\ArrayStore;
 use Illuminate\Cache\Repository;
-use Juaniquillo\BackendComponents\Cache\FileCache;
 use Juaniquillo\BackendComponents\Components\CachedBackendComponent;
 use Juaniquillo\BackendComponents\Enums\ComponentEnum;
 use Juaniquillo\BackendComponents\Factories\ComponentFactory;
+use Juaniquillo\BaseBackendComponent\Cache\FileCache;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
