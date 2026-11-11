@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Added
+
+- `ComponentEnum::IFRAME` (`inline.iframe`) renders an `<iframe>` element with attributes and fallback content.
+
 ### Changed (breaking)
 
 - Requires `juaniquillo/base-backend-component: ^0.1.0`. Framework-agnostic state (attributes, contents, settings, themes, paths, serialization) now lives in the base package; this package keeps only the Laravel Blade rendering layer.
