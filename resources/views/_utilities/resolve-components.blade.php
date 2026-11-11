@@ -1,5 +1,5 @@
 @php
-    /** @var \Juaniquillo\BackendComponents\Contracts\CompoundComponent $component */
+    /** @var \Juaniquillo\BaseBackendComponent\Contracts\CompoundComponent $component */
     /** @var string|null $namespace */
 @endphp
 
