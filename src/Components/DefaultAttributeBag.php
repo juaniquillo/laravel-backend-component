@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace Juaniquillo\BackendComponents\Components;
 
-use Juaniquillo\BackendComponents\Contracts\AttributeBag;
-use Juaniquillo\BackendComponents\Contracts\ContentsComponent;
+use Juaniquillo\BaseBackendComponent\Concerns\MergesAttributeClasses;
+use Juaniquillo\BaseBackendComponent\Contracts\AttributeBag;
+use Juaniquillo\BaseBackendComponent\Contracts\ContentsComponent;
 
 readonly class DefaultAttributeBag implements AttributeBag
 {
+    use MergesAttributeClasses;
+
     public function __construct(
         /** @var array<string, int|string|null> $attributes */
         private array $attributes,
@@ -28,15 +31,7 @@ readonly class DefaultAttributeBag implements AttributeBag
     /** @return  array<string, int|string|null> */
     public function getAttributes(): array
     {
-        $attrs = $this->attributes;
-
-        $mergedClasses = $this->mergeClasses();
-
-        if ($mergedClasses) {
-            $attrs['class'] = $mergedClasses;
-        }
-
-        return $attrs;
+        return $this->mergeThemeClasses($this->attributes, $this->themes);
     }
 
     /** @return array<string, mixed> */
@@ -49,12 +44,5 @@ readonly class DefaultAttributeBag implements AttributeBag
     public function getAttributesAndProps(): array
     {
         return array_merge($this->getAttributes(), $this->props);
-    }
-
-    private function mergeClasses(): string
-    {
-        $class = $this->attributes['class'] ?? null ? $this->attributes['class'].' ' : null;
-
-        return \trim($class.$this->themes);
     }
 }

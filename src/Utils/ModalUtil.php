@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Juaniquillo\BackendComponents\Utils;
 
-use Juaniquillo\BackendComponents\Contracts\CompoundComponent;
-use Juaniquillo\BackendComponents\Contracts\ThemeManager;
 use Juaniquillo\BackendComponents\Enums\ComponentEnum;
 use Juaniquillo\BackendComponents\MainBackendComponent;
 use Juaniquillo\BackendComponents\Themes\DefaultThemeManager;
+use Juaniquillo\BaseBackendComponent\Contracts\CompoundComponent;
+use Juaniquillo\BaseBackendComponent\Contracts\ThemeManager;
 
 final class ModalUtil
 {

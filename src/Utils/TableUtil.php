@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace Juaniquillo\BackendComponents\Utils;
 
 use BackedEnum;
-use Juaniquillo\BackendComponents\Contracts\BackendComponent;
-use Juaniquillo\BackendComponents\Contracts\ThemeManager;
 use Juaniquillo\BackendComponents\Enums\ComponentEnum;
 use Juaniquillo\BackendComponents\MainBackendComponent;
 use Juaniquillo\BackendComponents\Themes\DefaultThemeManager;
+use Juaniquillo\BaseBackendComponent\Contracts\BackendComponent;
+use Juaniquillo\BaseBackendComponent\Contracts\ThemeManager;
 
 use function Juaniquillo\BackendComponents\isCellBag;
-use function Juaniquillo\BackendComponents\isComponent;
+use function Juaniquillo\BaseBackendComponent\isComponent;
 
 final class TableUtil
 {

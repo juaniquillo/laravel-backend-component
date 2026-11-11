@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Juaniquillo\BackendComponents\Concerns;
 
-use Juaniquillo\BackendComponents\Cache\FileCache;
+use Juaniquillo\BaseBackendComponent\Cache\FileCache;
 use Psr\SimpleCache\CacheInterface;
 
 trait IsCachable

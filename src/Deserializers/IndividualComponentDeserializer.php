@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Juaniquillo\BackendComponents\Deserializers;
 
-use Juaniquillo\BackendComponents\Concerns\DeserializesComponents;
-use Juaniquillo\BackendComponents\Contracts\BackendComponent;
-use Juaniquillo\BackendComponents\Contracts\CompoundComponent;
-use Juaniquillo\BackendComponents\Contracts\IndividualComponent;
+use Juaniquillo\BaseBackendComponent\Concerns\DeserializesComponents;
+use Juaniquillo\BaseBackendComponent\Contracts\BackendComponent;
+use Juaniquillo\BaseBackendComponent\Contracts\CompoundComponent;
+use Juaniquillo\BaseBackendComponent\Contracts\IndividualComponent;
 
 final class IndividualComponentDeserializer
 {

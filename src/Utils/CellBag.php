@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Juaniquillo\BackendComponents\Utils;
 
-use Juaniquillo\BackendComponents\Contracts\BackendComponent;
+use Juaniquillo\BaseBackendComponent\Contracts\BackendComponent;
 
 final readonly class CellBag
 {

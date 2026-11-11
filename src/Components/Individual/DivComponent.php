@@ -9,15 +9,15 @@ use Illuminate\View\ComponentAttributeBag;
 use Juaniquillo\BackendComponents\Components\DefaultAttributeBag;
 use Juaniquillo\BackendComponents\Concerns\HasContent;
 use Juaniquillo\BackendComponents\Concerns\IsBackendComponent;
-use Juaniquillo\BackendComponents\Concerns\IsThemeable;
-use Juaniquillo\BackendComponents\Contracts\AttributeBag;
-use Juaniquillo\BackendComponents\Contracts\BackendComponent;
-use Juaniquillo\BackendComponents\Contracts\ContentsComponent;
-use Juaniquillo\BackendComponents\Contracts\IndividualComponent;
-use Juaniquillo\BackendComponents\Contracts\ThemeComponent;
-use Juaniquillo\BackendComponents\Contracts\ThemeManager;
 use Juaniquillo\BackendComponents\Enums\ComponentEnum;
 use Juaniquillo\BackendComponents\Themes\DefaultThemeManager;
+use Juaniquillo\BaseBackendComponent\Concerns\IsThemeable;
+use Juaniquillo\BaseBackendComponent\Contracts\AttributeBag;
+use Juaniquillo\BaseBackendComponent\Contracts\BackendComponent;
+use Juaniquillo\BaseBackendComponent\Contracts\ContentsComponent;
+use Juaniquillo\BaseBackendComponent\Contracts\IndividualComponent;
+use Juaniquillo\BaseBackendComponent\Contracts\ThemeComponent;
+use Juaniquillo\BaseBackendComponent\Contracts\ThemeManager;
 
 use function Juaniquillo\BackendComponents\backendComponentNamespace;
 
@@ -56,7 +56,7 @@ final class DivComponent implements BackendComponent, ContentsComponent, Htmlabl
         ];
     }
 
-    public function toHtml()
+    public function toHtml(): string
     {
         /**
          * PHPStan bug

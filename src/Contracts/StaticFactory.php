@@ -6,6 +6,7 @@ namespace Juaniquillo\BackendComponents\Contracts;
 
 use Illuminate\Contracts\Support\Htmlable;
 use Juaniquillo\BackendComponents\Enums\ComponentEnum;
+use Juaniquillo\BaseBackendComponent\Contracts\CompoundComponent;
 
 interface StaticFactory
 {

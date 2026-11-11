@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Juaniquillo\BackendComponents\Deserializers;
 
-use Juaniquillo\BackendComponents\Concerns\DeserializesComponents;
+use Juaniquillo\BaseBackendComponent\Concerns\DeserializesComponents;
 
 final class ComponentDeserializer
 {
